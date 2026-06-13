@@ -1,0 +1,68 @@
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+    background-color: #12121a; color: white;
+    display: flex; flex-direction: column;
+    height: 100vh; overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overscroll-behavior-y: contain; 
+}
+
+#game-container {
+    flex-grow: 1;
+    position: relative;
+    width: 100%;
+    display: flex; justify-content: center; align-items: center;
+}
+
+canvas {
+    background-color: #1c1c28;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,255,255,0.02);
+    border-radius: 16px;
+    width: 95vmin; height: 95vmin;
+    max-width: 600px; max-height: 600px;
+    cursor: pointer; touch-action: none;
+}
+
+#ui-top {
+    width: 100%; padding: 15px 20px;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    z-index: 10;
+}
+
+#ui-bottom {
+    width: 100%; padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    z-index: 10;
+}
+
+.gen-buttons { display: flex; gap: 8px; }
+.setting-row { display: flex; align-items: center; margin-bottom: 10px; gap: 15px; }
+.buttons-row { justify-content: space-between; margin-bottom: 0; }
+
+button, .btn {
+    pointer-events: auto; 
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white; padding: 8px 14px;
+    border-radius: 20px; font-size: 14px; font-weight: bold;
+    cursor: pointer; backdrop-filter: blur(5px);
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+button:hover, .btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
+button:active, .btn:active { transform: scale(0.95); }
+
+#btn-undo { background: rgba(255, 68, 68, 0.15); border-color: rgba(255, 68, 68, 0.4); }
+.btn-primary { background: rgba(68, 255, 68, 0.15); border-color: rgba(68, 255, 68, 0.4); }
+.btn-secondary { background: rgba(68, 170, 255, 0.15); border-color: rgba(68, 170, 255, 0.4); }
+
+#status-text {
+    position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%);
+    font-size: 40px; font-weight: 900; color: #ffdd44;
+    text-shadow: 0 2px 20px rgba(255, 221, 68, 0.8); z-index: 5; pointer-events: none;
+}
+
+input[type=range] { flex-grow: 1; accent-color: #ffdd44; }

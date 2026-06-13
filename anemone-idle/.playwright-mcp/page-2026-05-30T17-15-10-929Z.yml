@@ -1,0 +1,127 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - article [ref=e5]:
+      - generic [ref=e6]: 🫧
+      - generic [ref=e7]:
+        - strong [ref=e8]: "14"
+        - generic [ref=e9]: Wiggle Food · +0.2/s
+    - article [ref=e10]:
+      - generic [ref=e11]: ⚪
+      - generic [ref=e12]:
+        - strong [ref=e13]: "0.0"
+        - generic [ref=e14]: Drama Pearls · +0.0/s
+    - article [ref=e15]:
+      - generic [ref=e16]: 🌊
+      - generic [ref=e17]:
+        - strong [ref=e18]: "0.0"
+        - generic [ref=e19]: Bloop Power · +0.0/s
+  - generic [ref=e20]:
+    - generic [ref=e25]: "3"
+    - generic [ref=e29]:
+      - paragraph [ref=e30]: Totally Legal Reef Startup
+      - 'heading "Anemone Idle: Bloop Office" [level=1] [ref=e31]'
+      - paragraph [ref=e32]: Mash the boss blob, hire underpaid tentacles, and turn ocean nonsense into quarterly wiggle profit.
+    - text: BLOOP
+  - generic [ref=e33]:
+    - article [ref=e34]:
+      - generic [ref=e35]:
+        - paragraph [ref=e36]: Corporate Dare
+        - heading "Staff the noodle pit" [level=2] [ref=e37]
+        - paragraph [ref=e38]: Own 5 Intern Tentacles before they unionize.
+      - generic "Staff the noodle pit progress" [ref=e39]
+      - button "1 / 5" [disabled] [ref=e41] [cursor=pointer]
+    - article [ref=e42]:
+      - generic [ref=e43]:
+        - paragraph [ref=e44]: Corporate Dare
+        - heading "Invent management" [level=2] [ref=e45]
+        - paragraph [ref=e46]: Own 3 Shrimp Middle Managers with tiny clipboards.
+      - generic "Invent management progress" [ref=e47]
+      - button "0 / 3" [disabled] [ref=e48] [cursor=pointer]
+    - article [ref=e49]:
+      - generic [ref=e50]:
+        - paragraph [ref=e51]: Corporate Dare
+        - heading "Become mildly famous" [level=2] [ref=e52]
+        - paragraph [ref=e53]: Collect 25 lifetime Drama Pearls from clam clout.
+      - generic "Become mildly famous progress" [ref=e54]
+      - button "0 / 25" [disabled] [ref=e55] [cursor=pointer]
+  - generic [ref=e56]: While you vanished for 0 minutes, the reef held a productivity karaoke night.
+  - generic [ref=e57]:
+    - generic [ref=e58]:
+      - paragraph [ref=e59]: Profit Aquarium
+      - heading "Make the office wiggle" [level=2] [ref=e60]
+    - generic [ref=e61]:
+      - generic [ref=e66]: O
+      - generic [ref=e67]:
+        - paragraph [ref=e68]: Main Character Button
+        - heading "SLAP THE ANEMONE CEO" [level=2] [ref=e69]
+        - paragraph [ref=e70]: Every tap converts confidence, bubbles, and mild panic into Wiggle Food. Middle management keeps pretending to help.
+      - button "BLOOP! +3.0 🫧" [ref=e71] [cursor=pointer]
+      - text: CEO
+    - generic [ref=e72]:
+      - article [ref=e73]:
+        - generic [ref=e74]: 🪸
+        - generic [ref=e75]:
+          - generic [ref=e76]:
+            - heading "Intern Tentacles" [level=3] [ref=e77]
+            - strong [ref=e78]: "1"
+          - paragraph [ref=e79]: Tiny unpaid arms wave spreadsheets until snacks fall out of the sea.
+          - text: +0.2/s Wiggle Food
+        - button "Hire · 14 🫧" [ref=e80] [cursor=pointer]
+      - article [ref=e81]:
+        - generic [ref=e82]: 🦐
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - heading "Shrimp Middle Managers" [level=3] [ref=e85]
+            - strong [ref=e86]: "0"
+          - paragraph [ref=e87]: They point at bubbles, skim Wiggle Food, and automatically hire Intern Tentacles.
+          - text: +0.0/s Intern Tentacles
+        - button "Hire · 95 🫧" [ref=e88] [cursor=pointer]
+      - article [ref=e89]:
+        - generic [ref=e90]: 🦀
+        - generic [ref=e91]:
+          - generic [ref=e92]:
+            - heading "Crab Branch Bosses" [level=3] [ref=e93]
+            - strong [ref=e94]: "0"
+          - paragraph [ref=e95]: Regional claw executives stamp paperwork until Shrimp Middle Managers appear.
+          - text: +0.0/s Shrimp Middle Managers
+        - button "Hire · 1,350 🫧" [ref=e96] [cursor=pointer]
+      - article [ref=e97]:
+        - generic [ref=e98]: 🐋
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - heading "Whale Shareholders" [level=3] [ref=e101]
+            - strong [ref=e102]: "0"
+          - paragraph [ref=e103]: Boardroom whales inhale Drama Pearls and exhale Crab Branch Bosses.
+          - text: +0.0/s Crab Branch Bosses
+        - button "Hire · 24.0k ⚪" [ref=e104] [cursor=pointer]
+      - article [ref=e105]:
+        - generic [ref=e106]: 🐚
+        - generic [ref=e107]:
+          - generic [ref=e108]:
+            - heading "Clam Influencer Farm" [level=3] [ref=e109]
+            - strong [ref=e110]: "0"
+          - paragraph [ref=e111]: Glossy clams post thirst traps until Drama Pearls appear from pure cringe.
+          - text: +0.0/s Drama Pearls
+        - button "Hire · 720 🫧" [ref=e112] [cursor=pointer]
+      - article [ref=e113]:
+        - generic [ref=e114]: 🌙
+        - generic [ref=e115]:
+          - generic [ref=e116]:
+            - heading "Suspicious Moon Hose" [level=3] [ref=e117]
+            - strong [ref=e118]: "0"
+          - paragraph [ref=e119]: A hose from the moon drips Bloop Power. Legal asked us not to explain.
+          - text: +0.0/s Bloop Power
+        - button "Hire · 28 ⚪" [ref=e120] [cursor=pointer]
+  - navigation "Game tabs" [ref=e121]:
+    - button "🪸 Grind Reef" [ref=e122] [cursor=pointer]:
+      - text: 🪸
+      - generic [ref=e123]: Grind Reef
+    - button "🫧 Loot Clam" [ref=e124] [cursor=pointer]:
+      - text: 🫧
+      - generic [ref=e125]: Loot Clam
+    - button "⚪ Drama Pearls" [ref=e126] [cursor=pointer]:
+      - text: ⚪
+      - generic [ref=e127]: Drama Pearls
+    - button "⚙ Language Goblin" [ref=e128] [cursor=pointer]:
+      - text: ⚙
+      - generic [ref=e129]: Language Goblin

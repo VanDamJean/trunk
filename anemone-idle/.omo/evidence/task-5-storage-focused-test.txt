@@ -1,0 +1,19 @@
+Command: npm test -- tests/storage.test.js
+Started: 2026-06-03T12:31:54Z
+
+
+> anemone-idle@0.1.0 test
+> vitest run tests/storage.test.js
+
+
+ RUN  v4.1.7 /Users/a1/Desktop/manus/anemone-idle
+
+
+ Test Files  1 passed (1)
+      Tests  11 passed (11)
+   Start at  21:31:54
+   Duration  153ms (transform 37ms, setup 0ms, import 49ms, tests 4ms, environment 0ms)
+
+
+Exit code: 0
+Finished: 2026-06-03T12:31:55Z

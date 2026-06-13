@@ -1,0 +1,6 @@
+scorePanel=true
+dicePanel=true
+diceCount=5
+cubeCount=5
+pipCount=105
+overflowOk=true

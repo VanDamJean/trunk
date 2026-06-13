@@ -1,0 +1,33 @@
+Task: task-2-combat-category-selection-general
+Date: 2026-06-04
+
+Command: npm run build
+Result: exits 0
+
+Output:
+> yacoo-rpg@0.1.0 build
+> tsc -b && vite build
+
+vite v7.3.5 building client environment for production...
+transforming...
+✓ 44 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.39 kB │ gzip:  0.27 kB
+dist/assets/index-B6lLjYE0.css   15.68 kB │ gzip:  4.06 kB
+dist/assets/index-DLnyPoeQ.js   213.76 kB │ gzip: 66.72 kB
+✓ built in 338ms
+
+Command: npm test -- --run
+Result: exits 0
+
+Output:
+> yacoo-rpg@0.1.0 test
+> vitest --run
+
+RUN  v4.1.8 /Users/a1/Desktop/manus/yacoo_rpg
+
+Test Files  6 passed (6)
+Tests  29 passed (29)
+Start at  03:37:37
+Duration  622ms (transform 215ms, setup 259ms, import 217ms, tests 143ms, environment 1.41s)

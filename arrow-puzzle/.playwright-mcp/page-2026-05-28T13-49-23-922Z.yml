@@ -1,0 +1,79 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - article [ref=e376]:
+      - generic [ref=e377]: 🫧
+      - generic [ref=e378]:
+        - strong [ref=e379]: "13"
+        - generic [ref=e380]: Plankton · +0.2/s
+    - article [ref=e381]:
+      - generic [ref=e382]: ⚪
+      - generic [ref=e383]:
+        - strong [ref=e384]: "0.0"
+        - generic [ref=e385]: Pearls · +0.0/s
+    - article [ref=e386]:
+      - generic [ref=e387]: 🌊
+      - generic [ref=e388]:
+        - strong [ref=e389]: "0.0"
+        - generic [ref=e390]: Tide Energy · +0.0/s
+  - generic [ref=e20]:
+    - generic [ref=e22]: ✺
+    - generic [ref=e26]:
+      - paragraph [ref=e27]: Abyss Garden 01
+      - heading "Anemone Idle" [level=1] [ref=e28]
+      - paragraph [ref=e29]: Grow a moonlit reef colony, call helpers from the tide, and open drifting capsules.
+  - generic [ref=e30]:
+    - article [ref=e391]:
+      - generic [ref=e392]:
+        - paragraph [ref=e393]: Mission
+        - heading "Wake the colony" [level=2] [ref=e394]
+        - paragraph [ref=e395]: Own 5 Drift Polyps.
+      - generic "Wake the colony progress" [ref=e396]
+      - button "1 / 5" [disabled] [ref=e398]
+    - article [ref=e399]:
+      - generic [ref=e400]:
+        - paragraph [ref=e401]: Mission
+        - heading "Recruit reef helpers" [level=2] [ref=e402]
+        - paragraph [ref=e403]: Own 3 Cleaner Shrimp.
+      - generic "Recruit reef helpers progress" [ref=e404]
+      - button "0 / 3" [disabled] [ref=e405]
+    - article [ref=e406]:
+      - generic [ref=e407]:
+        - paragraph [ref=e408]: Mission
+        - heading "Polish a cache" [level=2] [ref=e409]
+        - paragraph [ref=e410]: Collect 25 lifetime pearls.
+      - generic "Polish a cache progress" [ref=e411]
+      - button "0 / 25" [disabled] [ref=e412]
+  - generic [ref=e52]: A reef capsule begins to glow.
+  - generic [ref=e53]:
+    - generic [ref=e413]:
+      - paragraph [ref=e414]: Pearl upgrades
+      - heading "Mutate the colony" [level=2] [ref=e415]
+    - generic [ref=e416]:
+      - article [ref=e417]:
+        - generic [ref=e418]:
+          - heading "Silk Tentacles" [level=3] [ref=e419]
+          - paragraph [ref=e420]: All producers breathe 25% faster.
+          - text: 18 ⚪
+        - button "Buy" [ref=e421] [cursor=pointer]
+      - article [ref=e422]:
+        - generic [ref=e423]:
+          - heading "Prism Reef" [level=3] [ref=e424]
+          - paragraph [ref=e425]: All producers breathe 50% faster.
+          - text: 90 ⚪ + 8.0 🌊
+        - button "Buy" [ref=e426] [cursor=pointer]
+      - article [ref=e427]:
+        - generic [ref=e428]:
+          - heading "Deep Bloom" [level=3] [ref=e429]
+          - paragraph [ref=e430]: Capsules ripen 35% sooner.
+          - text: 35 🌊
+        - button "Buy" [ref=e431] [cursor=pointer]
+  - navigation "Game tabs" [ref=e90]:
+    - button "🪸 Reef" [ref=e91] [cursor=pointer]:
+      - text: 🪸
+      - generic [ref=e92]: Reef
+    - button "🫧 Capsule" [ref=e93] [cursor=pointer]:
+      - text: 🫧
+      - generic [ref=e94]: Capsule
+    - button "⚪ Pearls" [active] [ref=e95] [cursor=pointer]:
+      - text: ⚪
+      - generic [ref=e96]: Pearls

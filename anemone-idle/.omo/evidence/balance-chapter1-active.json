@@ -1,0 +1,184 @@
+{
+  "scenario": "chapter1-active",
+  "passed": false,
+  "failedTargets": [
+    {
+      "id": "target-180s-shrimp-max",
+      "metric": "producer.cleanerShrimp",
+      "expected": {
+        "max": 4
+      },
+      "actual": 21
+    },
+    {
+      "id": "target-900s-production-cap",
+      "metric": "rate.plankton",
+      "expected": {
+        "max": 20000
+      },
+      "actual": 638363455659.6691
+    }
+  ],
+  "checkpoints": [
+    {
+      "seconds": 60,
+      "resources": {
+        "plankton": 148.96999999999994,
+        "pearls": 8,
+        "tideEnergy": 0
+      },
+      "producers": {
+        "driftPolyps": 24,
+        "cleanerShrimp": 8,
+        "crabBranchBoss": 0,
+        "whaleShareholder": 0,
+        "shellNursery": 0,
+        "moonCurrent": 0
+      },
+      "rates": {
+        "plankton": 5.5600000000000005,
+        "pearls": 0,
+        "tideEnergy": 0
+      },
+      "crabCost": 1350,
+      "activeQuests": [
+        "quest-first-capsule",
+        "quest-first-upgrade",
+        "quest-first-crab"
+      ],
+      "completedQuests": [],
+      "failedTargets": []
+    },
+    {
+      "seconds": 180,
+      "resources": {
+        "plankton": 338.18125,
+        "pearls": 0.2600000000000051,
+        "tideEnergy": 5
+      },
+      "producers": {
+        "driftPolyps": 94,
+        "cleanerShrimp": 21,
+        "crabBranchBoss": 1,
+        "whaleShareholder": 0,
+        "shellNursery": 6,
+        "moonCurrent": 1
+      },
+      "rates": {
+        "plankton": 26.76875,
+        "pearls": 0.6,
+        "tideEnergy": 0.043750000000000004
+      },
+      "crabCost": 1553,
+      "activeQuests": [
+        "quest-first-capsule"
+      ],
+      "completedQuests": [],
+      "failedTargets": [
+        "target-180s-shrimp-max"
+      ]
+    },
+    {
+      "seconds": 300,
+      "resources": {
+        "plankton": 7082.6078125,
+        "pearls": 33.93499999999999,
+        "tideEnergy": 35.65312500000001
+      },
+      "producers": {
+        "driftPolyps": 266,
+        "cleanerShrimp": 39,
+        "crabBranchBoss": 12,
+        "whaleShareholder": 0,
+        "shellNursery": 16,
+        "moonCurrent": 5
+      },
+      "rates": {
+        "plankton": 93.5703125,
+        "pearls": 2,
+        "tideEnergy": 0.2734375
+      },
+      "crabCost": 7223,
+      "activeQuests": [],
+      "completedQuests": [],
+      "failedTargets": []
+    },
+    {
+      "seconds": 420,
+      "resources": {
+        "plankton": 2840.5692382812485,
+        "pearls": 36.33343749999999,
+        "tideEnergy": 1.28837890625001
+      },
+      "producers": {
+        "driftPolyps": 845,
+        "cleanerShrimp": 103,
+        "crabBranchBoss": 23,
+        "whaleShareholder": 0,
+        "shellNursery": 26,
+        "moonCurrent": 9
+      },
+      "rates": {
+        "plankton": 462.65869140625,
+        "pearls": 5.078125,
+        "tideEnergy": 0.7690429687500001
+      },
+      "crabCost": 33604,
+      "activeQuests": [],
+      "completedQuests": [],
+      "failedTargets": []
+    },
+    {
+      "seconds": 720,
+      "resources": {
+        "plankton": 798304.761569336,
+        "pearls": 522.7174296546214,
+        "tideEnergy": 279.6187724156076
+      },
+      "producers": {
+        "driftPolyps": 227282,
+        "cleanerShrimp": 3613,
+        "crabBranchBoss": 77,
+        "whaleShareholder": 0,
+        "shellNursery": 79,
+        "moonCurrent": 31
+      },
+      "rates": {
+        "plankton": 2826099.2324407655,
+        "pearls": 356.3032791833395,
+        "tideEnergy": 61.16915473321573
+      },
+      "crabCost": 63689447,
+      "activeQuests": [],
+      "completedQuests": [],
+      "failedTargets": []
+    },
+    {
+      "seconds": 900,
+      "resources": {
+        "plankton": 9183361949293.14,
+        "pearls": 69003.20302346992,
+        "tideEnergy": 57675.85130617328
+      },
+      "producers": {
+        "driftPolyps": 978240974,
+        "cleanerShrimp": 800100,
+        "crabBranchBoss": 1237,
+        "whaleShareholder": 9,
+        "shellNursery": 167,
+        "moonCurrent": 59
+      },
+      "rates": {
+        "plankton": 638363455659.6691,
+        "pearls": 39623.19011300291,
+        "tideEnergy": 6124.392783184956
+      },
+      "crabCost": 1.6351676477913676e+78,
+      "activeQuests": [],
+      "completedQuests": [],
+      "failedTargets": [
+        "target-900s-production-cap"
+      ]
+    }
+  ]
+}

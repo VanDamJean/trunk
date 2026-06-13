@@ -1,0 +1,13 @@
+
+> yacoo-rpg@0.1.0 test
+> vitest --run src/game/yahtzee.test.ts src/game/combat.test.ts
+
+
+ RUN  v4.1.8 /Users/a1/Desktop/manus/yacoo_rpg
+
+
+ Test Files  2 passed (2)
+      Tests  18 passed (18)
+   Start at  03:33:36
+   Duration  455ms (transform 73ms, setup 113ms, import 43ms, tests 6ms, environment 519ms)
+

@@ -1,0 +1,71 @@
+# Task 7 Full Regression Evidence
+
+## npm test -- --run
+
+> yacoo-rpg@0.1.0 test
+> vitest --run
+
+
+ RUN  v4.1.8 /Users/a1/Desktop/manus/yacoo_rpg
+
+
+ Test Files  6 passed (6)
+      Tests  38 passed (38)
+   Start at  14:37:31
+   Duration  1.06s (transform 229ms, setup 260ms, import 230ms, tests 581ms, environment 1.41s)
+
+
+[test exit code: 0]
+
+## npm run build
+
+> yacoo-rpg@0.1.0 build
+> tsc -b && vite build
+
+vite v7.3.5 building client environment for production...
+transforming...
+✓ 44 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.39 kB │ gzip:  0.27 kB
+dist/assets/index-DICpTyQq.css   21.23 kB │ gzip:  4.85 kB
+dist/assets/index-RKIrbI0Y.js   218.00 kB │ gzip: 67.69 kB
+✓ built in 364ms
+
+[build exit code: 0]
+
+## npm run dev -- --host 127.0.0.1 + npm run qa
+[dev server pid: 48125]
+
+> yacoo-rpg@0.1.0 qa
+> node scripts/qa.mjs
+
+
+[qa exit code: 0]
+
+[dev server stopped]
+
+## Clean rerun: npm run dev -- --host 127.0.0.1 + npm run qa
+[dev server pid: 48364]
+
+Dev server log showed clean 5173 bind:
+
+```text
+> yacoo-rpg@0.1.0 dev
+> vite --host 127.0.0.1
+
+VITE v7.3.5  ready in 101 ms
+Local:   http://127.0.0.1:5173/
+```
+
+> yacoo-rpg@0.1.0 qa
+> node scripts/qa.mjs
+
+
+[qa exit code: 0]
+
+[dev server stopped]
+
+## Post-QA Server Check
+
+`lsof -nP -iTCP:5173 -sTCP:LISTEN || true` produced no output after cleanup, confirming no dev server remains running.

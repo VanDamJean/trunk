@@ -1,0 +1,28 @@
+Command: node scripts/balance-report.mjs --scenario chapter1-active
+Started: 2026-06-03T11:28:17Z
+
+{
+  "scenario": "chapter1-active",
+  "passed": false,
+  "failedTargets": [
+    {
+      "id": "target-180s-shrimp-max",
+      "metric": "producer.cleanerShrimp",
+      "expected": {
+        "max": 4
+      },
+      "actual": 21
+    },
+    {
+      "id": "target-900s-production-cap",
+      "metric": "rate.plankton",
+      "expected": {
+        "max": 20000
+      },
+      "actual": 638363455659.6691
+    }
+  ]
+}
+
+Exit code: 1
+Finished: 2026-06-03T11:28:17Z

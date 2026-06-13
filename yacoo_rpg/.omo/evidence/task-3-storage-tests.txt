@@ -1,0 +1,14 @@
+Task 3 storage/reward verification
+
+Command:
+- npm test -- --run
+
+Result:
+- 6 test files passed.
+- 24 tests passed.
+
+Covered checks:
+- Missing/invalid saves load defaults.
+- saveGame persists stage/coins/equipment.
+- resetSave removes yacoo-rpg-save-v1.
+- Win/loss rewards are deterministic with injected RNG.

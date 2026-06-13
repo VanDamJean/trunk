@@ -1,0 +1,1 @@
+CombatScreen.kt compiles, preserves onFinish and combat logic files; language labels added without game logic changes.

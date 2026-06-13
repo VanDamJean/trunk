@@ -1,0 +1,12 @@
+
+Running 7 tests using 7 workers
+
+  ✓  5 [chromium] › tests/e2e/yachoo.spec.ts:3:1 › renders Yachoo starter page (398ms)
+  ✓  2 [chromium] › tests/e2e/yachoo.spec.ts:80:1 › keyboard can focus controls and toggle held state (490ms)
+  ✓  1 [chromium] › tests/e2e/yachoo.spec.ts:65:1 › reduced motion keeps dice static while rolling state is accessible (475ms)
+  ✓  4 [chromium] › tests/e2e/yachoo.spec.ts:51:1 › mobile layout keeps main controls visible (505ms)
+  ✓  6 [chromium] › tests/e2e/yachoo.spec.ts:40:1 › reset clears an active match (540ms)
+  ✓  7 [chromium] › tests/e2e/yachoo.spec.ts:95:1 › near-game-over state can finish and reset (570ms)
+  ✓  3 [chromium] › tests/e2e/yachoo.spec.ts:9:1 › human can roll, hold, score, and trigger bot turn (1.4s)
+
+  7 passed (2.5s)

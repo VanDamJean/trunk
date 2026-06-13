@@ -1,0 +1,35 @@
+{
+  "schema_version": 2,
+  "active_work_id": "yacoo-3d-dice-8eef8237",
+  "works": {
+    "yacoo-3d-dice-8eef8237": {
+      "work_id": "yacoo-3d-dice-8eef8237",
+      "active_plan": "/Users/a1/Desktop/manus/yacoo/.omo/plans/yacoo-3d-dice.md",
+      "plan_name": "yacoo-3d-dice",
+      "status": "active",
+      "started_at": "2026-06-04T16:49:56.811Z",
+      "updated_at": "2026-06-04T16:53:04.251Z",
+      "session_ids": [
+        "opencode:ses_16c85c888ffe2cnboMwFaGCJi1"
+      ],
+      "session_origins": {
+        "opencode:ses_16c85c888ffe2cnboMwFaGCJi1": "direct"
+      },
+      "agent": "atlas",
+      "task_sessions": {}
+    }
+  },
+  "active_plan": "/Users/a1/Desktop/manus/yacoo/.omo/plans/yacoo-3d-dice.md",
+  "started_at": "2026-06-04T16:49:56.811Z",
+  "status": "active",
+  "updated_at": "2026-06-04T16:53:04.251Z",
+  "session_ids": [
+    "opencode:ses_16c85c888ffe2cnboMwFaGCJi1"
+  ],
+  "session_origins": {
+    "opencode:ses_16c85c888ffe2cnboMwFaGCJi1": "direct"
+  },
+  "plan_name": "yacoo-3d-dice",
+  "task_sessions": {},
+  "agent": "atlas"
+}

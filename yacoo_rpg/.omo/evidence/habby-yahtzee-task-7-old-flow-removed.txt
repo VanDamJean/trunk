@@ -1,0 +1,84 @@
+# Task 7 Old-Flow Removal Evidence
+
+## Required Source Inspections
+
+- `scripts/qa.mjs` uses selected category buttons: `Pair attack x1.2`, disabled `Full House attack x2.5 Not matched`, and enabled `Full House attack x2.5` from fixtures. It does not use an auto-best `Best hand` flow.
+- `docs/README.ko.md` explains direct category selection, selected-category damage, disabled `Not matched` categories, reusable categories, and original CSS/SVG visuals with no copied external game assets.
+- `src/screens/CombatScreen.tsx` renders `Choose Attack Hand` and category buttons from `ATTACK_CATEGORIES`; resolution calls `calculateSelectedCategoryDamage(equipment, category)`.
+- `src/screens/ResultScreen.tsx` renders `Selected attack:` and does not render old `Best hand` runtime copy.
+- Task 6 QA evidence still documents selected `Pair x1.2` and selected `Full House x2.5` paths in `.omo/evidence/habby-yahtzee-task-6-browser-qa.md`.
+
+## Search Results
+
+### Runtime copied brand terms in `src`
+
+Command equivalent: search `src` for `Habby|Capybara Go`.
+
+Result: no matches.
+
+### Runtime external image refs/assets in `src`
+
+Command equivalent: search `src` for `https?://.*\.(png|jpg|jpeg|webp)|\.(png|jpg|jpeg|webp)`.
+
+Result: no matches.
+
+### Old combat flow in `src`
+
+Command equivalent: search `src` for `Best hand|Resolve Attack`.
+
+Result:
+
+```text
+/Users/a1/Desktop/manus/yacoo_rpg/src/App.test.tsx
+  47: expect(screen.queryByRole('button', { name: /Resolve Attack/i })).not.toBeInTheDocument();
+  70: expect(screen.queryByRole('button', { name: /Resolve Attack/i })).not.toBeInTheDocument();
+```
+
+Interpretation: `Resolve Attack` appears only in negative absence assertions in tests. There is no runtime button path and no success-path test using `Resolve Attack`.
+
+### Product-system leftovers in `src`
+
+Command equivalent: search `src` for `shop|gacha|IAP|\bad\b`.
+
+Result: no matches.
+
+### Broad required search across `src`, `scripts/qa.mjs`, and docs
+
+Patterns: `Best hand`, `Resolve Attack`, `Habby`, `Capybara Go`, `http`, `.png`, `.jpg`, `.webp`, `shop`, `gacha`, `IAP`, runtime `ad` copy.
+
+Results:
+
+```text
+src/App.test.tsx
+  47: expect(screen.queryByRole('button', { name: /Resolve Attack/i })).not.toBeInTheDocument();
+  70: expect(screen.queryByRole('button', { name: /Resolve Attack/i })).not.toBeInTheDocument();
+
+scripts/qa.mjs
+  19: await page.goto('http://127.0.0.1:5173', { waitUntil: 'networkidle' });
+  21: await page.screenshot({ path: new URL('task-5-mobile-frame.png', evidenceDir).pathname, fullPage: true });
+  33: await page.screenshot({ path: new URL('habby-yahtzee-task-6-pair-category.png', evidenceDir).pathname, fullPage: true });
+  41: await page.screenshot({ path: new URL('habby-yahtzee-task-6-full-house-category.png', evidenceDir).pathname, fullPage: true });
+  44: await page.screenshot({ path: new URL('task-7-dice-resolve.png', evidenceDir).pathname, fullPage: true });
+  55: await page.screenshot({ path: new URL('task-8-upgrade-success.png', evidenceDir).pathname, fullPage: true });
+  59: await page.screenshot({ path: new URL('task-9-persistence.png', evidenceDir).pathname, fullPage: true });
+  62: await page.screenshot({ path: new URL('f3-manual-qa.png', evidenceDir).pathname, fullPage: true });
+
+docs/README.ko.md
+  40: http://127.0.0.1:5173
+```
+
+Interpretation: script/doc `http` is the local dev-server URL, and script `.png` strings are local evidence screenshot filenames. No runtime external image URL/assets were found in `src`.
+
+## Evidence Presence Check
+
+- Task 1 evidence exists: `.omo/evidence/habby-yahtzee-task-1-category-tests.txt`, `.omo/evidence/habby-yahtzee-task-1-damage-tests.txt`.
+- Task 2 evidence exists: `.omo/evidence/habby-yahtzee-task-2-build.txt`, `.omo/evidence/habby-yahtzee-task-2-selected-flow.txt`, `.omo/evidence/habby-yahtzee-task-2-selected-pair.png`, `.omo/evidence/habby-yahtzee-task-2-invalid-disabled.png`.
+- Task 3 evidence exists: `.omo/evidence/habby-yahtzee-task-3-build.txt`, `.omo/evidence/habby-yahtzee-task-3-no-external-assets.txt`, `.omo/evidence/habby-yahtzee-task-3-manual-qa.txt`, `.omo/evidence/habby-yahtzee-task-3-manual-qa-server.txt`.
+- Task 4 evidence exists: `.omo/evidence/habby-yahtzee-task-4-hub.png`, `.omo/evidence/habby-yahtzee-task-4-result.png`, `.omo/evidence/habby-yahtzee-task-4-hub-verified.png`, `.omo/evidence/habby-yahtzee-task-4-result-verified.png`.
+- Task 5 evidence exists: `.omo/evidence/habby-yahtzee-task-5-tests.txt`, `.omo/evidence/habby-yahtzee-task-5-no-old-flow.txt`.
+- Task 6 evidence exists: `.omo/evidence/habby-yahtzee-task-6-browser-qa.md`, `.omo/evidence/habby-yahtzee-task-6-docs.txt`, `.omo/evidence/habby-yahtzee-task-6-pair-category.png`, `.omo/evidence/habby-yahtzee-task-6-full-house-category.png`.
+- Task 7 evidence exists: `.omo/evidence/habby-yahtzee-task-7-full-regression.txt`, `.omo/evidence/habby-yahtzee-task-7-old-flow-removed.txt`.
+
+## Cleanup Result
+
+No source cleanup was required. No broad app source files were modified.

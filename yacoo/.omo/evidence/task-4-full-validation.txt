@@ -1,0 +1,38 @@
+
+> yacoo@0.0.0 test /Users/a1/Desktop/manus/yacoo
+> vitest -- --run
+
+
+ RUN  v4.1.8 /Users/a1/Desktop/manus/yacoo
+
+
+ Test Files  5 passed (5)
+      Tests  32 passed (32)
+   Start at  02:26:17
+   Duration  697ms (transform 169ms, setup 210ms, import 189ms, tests 142ms, environment 1.66s)
+
+
+> yacoo@0.0.0 build /Users/a1/Desktop/manus/yacoo
+> tsc -b && vite build
+
+vite v8.0.16 building client environment for production...
+[2Ktransforming...✓ 27 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.56 kB │ gzip:  0.39 kB
+dist/assets/index-BqicW8H6.css    8.22 kB │ gzip:  2.40 kB
+dist/assets/index-z2HhNasC.js   205.32 kB │ gzip: 64.85 kB
+
+✓ built in 58ms
+
+Running 7 tests using 7 workers
+
+  ✓  2 [chromium] › tests/e2e/yachoo.spec.ts:3:1 › renders Yachoo starter page (255ms)
+  ✓  6 [chromium] › tests/e2e/yachoo.spec.ts:80:1 › keyboard can focus controls and toggle held state (302ms)
+  ✓  4 [chromium] › tests/e2e/yachoo.spec.ts:65:1 › reduced motion keeps dice static while rolling state is accessible (337ms)
+  ✓  1 [chromium] › tests/e2e/yachoo.spec.ts:40:1 › reset clears an active match (354ms)
+  ✓  3 [chromium] › tests/e2e/yachoo.spec.ts:51:1 › mobile layout keeps main controls visible (363ms)
+  ✓  5 [chromium] › tests/e2e/yachoo.spec.ts:95:1 › near-game-over state can finish and reset (394ms)
+  ✓  7 [chromium] › tests/e2e/yachoo.spec.ts:9:1 › human can roll, hold, score, and trigger bot turn (1.2s)
+
+  7 passed (2.1s)

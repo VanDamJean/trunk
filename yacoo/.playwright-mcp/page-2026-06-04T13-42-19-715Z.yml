@@ -1,0 +1,146 @@
+- main [ref=e3]:
+  - region "야추" [ref=e4]:
+    - paragraph [ref=e5]: Human vs Bot
+    - heading "야추" [level=1] [ref=e6]
+    - paragraph [ref=e7]: 주사위를 굴리고, 필요한 눈을 고정한 뒤, 점수 칸을 골라 기록하세요.
+  - generic [ref=e8]:
+    - generic [ref=e9]:
+      - region "진행" [ref=e10]:
+        - generic [ref=e11]:
+          - paragraph [ref=e12]: Turn
+          - heading "진행" [level=2] [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]:
+            - term [ref=e16]: 현재 차례
+            - definition [ref=e17]: 나
+          - generic [ref=e18]:
+            - term [ref=e19]: 굴림
+            - definition [ref=e20]: 1 / 3
+        - generic [ref=e21]:
+          - button "굴리기" [active] [ref=e22] [cursor=pointer]
+          - button "새 게임" [ref=e23] [cursor=pointer]
+      - region "주사위" [ref=e24]:
+        - generic [ref=e25]:
+          - paragraph [ref=e26]: Dice
+          - heading "주사위" [level=2] [ref=e27]
+        - group "주사위 고정 선택" [ref=e28]:
+          - button "1번 주사위 1" [ref=e148] [cursor=pointer]:
+            - generic [ref=e30]: "1"
+            - generic [ref=e31]: 선택
+          - button "2번 주사위 1" [ref=e149] [cursor=pointer]:
+            - generic [ref=e33]: "1"
+            - generic [ref=e34]: 선택
+          - button "3번 주사위 6" [ref=e150] [cursor=pointer]:
+            - generic [ref=e36]: "6"
+            - generic [ref=e37]: 선택
+          - button "4번 주사위 4" [ref=e151] [cursor=pointer]:
+            - generic [ref=e39]: "4"
+            - generic [ref=e40]: 선택
+          - button "5번 주사위 6" [ref=e152] [cursor=pointer]:
+            - generic [ref=e42]: "6"
+            - generic [ref=e43]: 선택
+      - region "기록" [ref=e44]:
+        - generic [ref=e45]:
+          - paragraph [ref=e46]: Log
+          - heading "기록" [level=2] [ref=e47]
+        - list [ref=e48]:
+          - listitem [ref=e49]: 새 게임을 시작했습니다.
+          - listitem [ref=e153]: "나 1번째 굴림: 1, 1, 6, 4, 6"
+    - region "점수판" [ref=e50]:
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - paragraph [ref=e53]: Score
+          - heading "점수판" [level=2] [ref=e54]
+        - generic "현재 총점" [ref=e55]:
+          - generic [ref=e56]: 나 0점
+          - generic [ref=e57]: 봇 0점
+      - table "야추 점수판" [ref=e58]:
+        - row "칸 나 봇 선택" [ref=e59]:
+          - columnheader "칸" [ref=e60]
+          - columnheader "나" [ref=e61]
+          - columnheader "봇" [ref=e62]
+          - columnheader "선택" [ref=e63]
+        - row "에이스 1 눈의 합 - - 2점 기록" [ref=e154]:
+          - cell "에이스 1 눈의 합" [ref=e65]:
+            - strong [ref=e66]: 에이스
+            - generic [ref=e67]: 1 눈의 합
+          - cell "-" [ref=e68]
+          - cell "-" [ref=e69]
+          - button "2점 기록" [ref=e155] [cursor=pointer]
+        - row "듀스 2 눈의 합 - - 0점 기록" [ref=e156]:
+          - cell "듀스 2 눈의 합" [ref=e72]:
+            - strong [ref=e73]: 듀스
+            - generic [ref=e74]: 2 눈의 합
+          - cell "-" [ref=e75]
+          - cell "-" [ref=e76]
+          - button "0점 기록" [ref=e157] [cursor=pointer]
+        - row "트레이 3 눈의 합 - - 0점 기록" [ref=e158]:
+          - cell "트레이 3 눈의 합" [ref=e79]:
+            - strong [ref=e80]: 트레이
+            - generic [ref=e81]: 3 눈의 합
+          - cell "-" [ref=e82]
+          - cell "-" [ref=e83]
+          - button "0점 기록" [ref=e159] [cursor=pointer]
+        - row "포스 4 눈의 합 - - 4점 기록" [ref=e160]:
+          - cell "포스 4 눈의 합" [ref=e86]:
+            - strong [ref=e87]: 포스
+            - generic [ref=e88]: 4 눈의 합
+          - cell "-" [ref=e89]
+          - cell "-" [ref=e90]
+          - button "4점 기록" [ref=e161] [cursor=pointer]
+        - row "파이브 5 눈의 합 - - 0점 기록" [ref=e162]:
+          - cell "파이브 5 눈의 합" [ref=e93]:
+            - strong [ref=e94]: 파이브
+            - generic [ref=e95]: 5 눈의 합
+          - cell "-" [ref=e96]
+          - cell "-" [ref=e97]
+          - button "0점 기록" [ref=e163] [cursor=pointer]
+        - row "식스 6 눈의 합 - - 12점 기록" [ref=e164]:
+          - cell "식스 6 눈의 합" [ref=e100]:
+            - strong [ref=e101]: 식스
+            - generic [ref=e102]: 6 눈의 합
+          - cell "-" [ref=e103]
+          - cell "-" [ref=e104]
+          - button "12점 기록" [ref=e165] [cursor=pointer]
+        - row "초이스 모든 주사위 눈의 합 - - 18점 기록" [ref=e166]:
+          - cell "초이스 모든 주사위 눈의 합" [ref=e107]:
+            - strong [ref=e108]: 초이스
+            - generic [ref=e109]: 모든 주사위 눈의 합
+          - cell "-" [ref=e110]
+          - cell "-" [ref=e111]
+          - button "18점 기록" [ref=e167] [cursor=pointer]
+        - row "포카인드 같은 눈 4개 이상이면 모든 눈의 합 - - 0점 기록" [ref=e168]:
+          - cell "포카인드 같은 눈 4개 이상이면 모든 눈의 합" [ref=e114]:
+            - strong [ref=e115]: 포카인드
+            - generic [ref=e116]: 같은 눈 4개 이상이면 모든 눈의 합
+          - cell "-" [ref=e117]
+          - cell "-" [ref=e118]
+          - button "0점 기록" [ref=e169] [cursor=pointer]
+        - row "풀하우스 정확히 3개와 2개 조합이면 모든 눈의 합 - - 0점 기록" [ref=e170]:
+          - cell "풀하우스 정확히 3개와 2개 조합이면 모든 눈의 합" [ref=e121]:
+            - strong [ref=e122]: 풀하우스
+            - generic [ref=e123]: 정확히 3개와 2개 조합이면 모든 눈의 합
+          - cell "-" [ref=e124]
+          - cell "-" [ref=e125]
+          - button "0점 기록" [ref=e171] [cursor=pointer]
+        - row "스몰 스트레이트 연속된 눈 4개면 15점 - - 0점 기록" [ref=e172]:
+          - cell "스몰 스트레이트 연속된 눈 4개면 15점" [ref=e128]:
+            - strong [ref=e129]: 스몰 스트레이트
+            - generic [ref=e130]: 연속된 눈 4개면 15점
+          - cell "-" [ref=e131]
+          - cell "-" [ref=e132]
+          - button "0점 기록" [ref=e173] [cursor=pointer]
+        - row "라지 스트레이트 1-5 또는 2-6이면 30점 - - 0점 기록" [ref=e174]:
+          - cell "라지 스트레이트 1-5 또는 2-6이면 30점" [ref=e135]:
+            - strong [ref=e136]: 라지 스트레이트
+            - generic [ref=e137]: 1-5 또는 2-6이면 30점
+          - cell "-" [ref=e138]
+          - cell "-" [ref=e139]
+          - button "0점 기록" [ref=e175] [cursor=pointer]
+        - row "요트 같은 눈 5개면 50점 - - 0점 기록" [ref=e176]:
+          - cell "요트 같은 눈 5개면 50점" [ref=e142]:
+            - strong [ref=e143]: 요트
+            - generic [ref=e144]: 같은 눈 5개면 50점
+          - cell "-" [ref=e145]
+          - cell "-" [ref=e146]
+          - button "0점 기록" [ref=e177] [cursor=pointer]

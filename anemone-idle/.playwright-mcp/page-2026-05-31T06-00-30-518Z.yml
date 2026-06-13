@@ -1,0 +1,59 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - article [ref=e135]:
+      - generic [ref=e136]: 🫧
+      - generic [ref=e137]:
+        - strong [ref=e138]: "20"
+        - generic [ref=e139]: Wiggle Food · +0.0/s
+    - article [ref=e140]:
+      - generic [ref=e141]: ⚪
+      - generic [ref=e142]:
+        - strong [ref=e143]: "0.0"
+        - generic [ref=e144]: Drama Pearls · +0.0/s
+    - article [ref=e145]:
+      - generic [ref=e146]: 🌊
+      - generic [ref=e147]:
+        - strong [ref=e148]: "0.0"
+        - generic [ref=e149]: Bloop Power · +0.0/s
+  - generic [ref=e20]:
+    - generic [ref=e25]: "3"
+    - generic [ref=e29]:
+      - paragraph [ref=e30]: Totally Legal Reef Startup
+      - 'heading "Anemone Idle: Bloop Office" [level=1] [ref=e31]'
+      - paragraph [ref=e32]: Mash the boss blob, hire underpaid tentacles, and turn ocean nonsense into quarterly wiggle profit.
+    - text: BLOOP
+  - article [ref=e150]:
+    - generic [ref=e151]:
+      - paragraph [ref=e152]: Chapter Objective
+      - heading "Staff the noodle pit" [level=2] [ref=e153]
+      - paragraph [ref=e154]: Own 5 Intern Tentacles and prove the company has arms.
+      - text: In progress
+    - generic "Staff the noodle pit progress" [ref=e155]
+    - button "Employees · 0 / 5" [disabled] [ref=e156] [cursor=pointer]
+  - generic [ref=e41]: A tiny anemone opens a basement company with zero permits.
+  - generic [ref=e157]:
+    - paragraph [ref=e158]: Options Basement
+    - heading "Choose your nonsense language" [level=2] [ref=e159]
+    - paragraph [ref=e160]: Flip every label between English and Korean. The tiny reef goblin remembers your choice on this device.
+    - generic [ref=e161]:
+      - button "English Currently yelling" [ref=e162] [cursor=pointer]:
+        - strong [ref=e163]: English
+        - generic [ref=e164]: Currently yelling
+      - button "한국어" [ref=e165] [cursor=pointer]:
+        - strong [ref=e166]: 한국어
+    - article [ref=e168]:
+      - heading "How the scam earns" [level=3] [ref=e169]
+      - paragraph [ref=e170]: Idle income starts after you hire producers. The giant bloop button is still the fastest way to feel powerful and damp.
+  - navigation "Game tabs" [ref=e126]:
+    - button "🪸 Grind Reef" [ref=e127] [cursor=pointer]:
+      - text: 🪸
+      - generic [ref=e128]: Grind Reef
+    - button "🫧 Loot Clam" [ref=e129] [cursor=pointer]:
+      - text: 🫧
+      - generic [ref=e130]: Loot Clam
+    - button "⚪ Drama Pearls" [ref=e131] [cursor=pointer]:
+      - text: ⚪
+      - generic [ref=e132]: Drama Pearls
+    - button "⚙ Language Goblin" [active] [ref=e133] [cursor=pointer]:
+      - text: ⚙
+      - generic [ref=e134]: Language Goblin

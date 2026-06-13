@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /Users/a1/Desktop/manus/gemsin-android/app/src/main/java/com/gemsin/app/ui/screens)",
+      "Bash(mkdir -p /Users/a1/Desktop/manus/gemsin-android/app/src/main/java/com/gemsin/app/ui/theme)",
+      "Bash(mkdir -p /Users/a1/Desktop/manus/gemsin-android/app/src/main/java/com/gemsin/app/ui/components)",
+      "Bash(mkdir -p /Users/a1/Desktop/manus/gemsin-android/app/src/main/java/com/gemsin/app/data)",
+      "Bash(mkdir -p /Users/a1/Desktop/manus/gemsin-android/app/src/main/java/com/gemsin/app/navigation)",
+      "Bash(npm run *)",
+      "Bash(file /Users/a1/Desktop/manus/medi/silent_moon/public/*.wav)",
+      "mcp__claude_ai_Figma__get_design_context",
+      "mcp__claude_ai_Figma__get_metadata",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e ' *)",
+      "Bash(chmod +x /Users/a1/Desktop/manus/island-android/gradlew)",
+      "Read(//Users/a1/Library/Android/sdk/**)",
+      "Bash(./gradlew assembleDebug)",
+      "Read(//Users/a1/**)",
+      "Read(//Users/a1/.gradle/wrapper/dists/**)",
+      "Bash(/Users/a1/.gradle/wrapper/dists/gradle-9.4.1-bin/arn2x92ynaizyzdaamcbpbhtj/gradle-9.4.1/bin/gradle assembleDebug -p /Users/a1/Desktop/manus/island-android)",
+      "Bash(/usr/libexec/java_home)",
+      "Bash(java -version)",
+      "Read(//Library/Java/JavaVirtualMachines/**)",
+      "Read(//Applications/**)",
+      "Bash(JAVA_HOME=\"/Applications/Android Studio.app/Contents/jbr/Contents/Home\" /Users/a1/.gradle/wrapper/dists/gradle-9.4.1-bin/arn2x92ynaizyzdaamcbpbhtj/gradle-9.4.1/bin/gradle assembleDebug -p /Users/a1/Desktop/manus/island-android)",
+      "Bash(JAVA_HOME=\"/Applications/Android Studio.app/Contents/jbr/Contents/Home\" /Users/a1/.gradle/wrapper/dists/gradle-9.4.1-bin/arn2x92ynaizyzdaamcbpbhtj/gradle-9.4.1/bin/gradle compileDebugKotlin -p /Users/a1/Desktop/manus/island-android)"
+    ]
+  }
+}

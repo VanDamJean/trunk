@@ -1,0 +1,1 @@
+GachaScreen.kt compiles, remains placeholder-only; no probability/purchase/backend logic added.

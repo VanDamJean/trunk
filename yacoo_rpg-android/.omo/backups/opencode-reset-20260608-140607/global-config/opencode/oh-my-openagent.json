@@ -1,0 +1,184 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "agents": {
+    "sisyphus": {
+      "model": "zai-coding-plan/glm-5.1",
+      "variant": "medium",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "high" },
+        { "model": "google/antigravity-gemini-3-pro", "variant": "high" },
+        { "model": "google/antigravity-gemini-3-flash", "variant": "medium" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "hephaestus": {
+      "model": "google/antigravity-gemini-3-pro",
+      "variant": "high",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "high" },
+        { "model": "zai-coding-plan/glm-5.1", "variant": "high" },
+        { "model": "google/antigravity-gemini-3-flash", "variant": "medium" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "oracle": {
+      "model": "openai/gpt-5.5",
+      "variant": "high",
+      "fallback_models": [
+        { "model": "google/antigravity-gemini-3-pro", "variant": "high" },
+        { "model": "zai-coding-plan/glm-5.1", "variant": "high" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "librarian": {
+      "model": "zai-coding-plan/glm-5.1",
+      "variant": "medium",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "medium" },
+        { "model": "google/antigravity-gemini-3-flash", "variant": "medium" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "explore": {
+      "model": "zai-coding-plan/glm-5.1",
+      "variant": "medium",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "medium" },
+        { "model": "google/antigravity-gemini-3-flash", "variant": "medium" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "multimodal-looker": {
+      "model": "google/antigravity-gemini-3-pro",
+      "variant": "high",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "high" },
+        { "model": "zai-coding-plan/glm-5.1", "variant": "medium" },
+        { "model": "google/antigravity-gemini-3-flash", "variant": "medium" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "prometheus": {
+      "model": "zai-coding-plan/glm-5.1",
+      "variant": "high",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "high" },
+        { "model": "google/antigravity-gemini-3-pro", "variant": "high" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "metis": {
+      "model": "openai/gpt-5.5",
+      "variant": "high",
+      "fallback_models": [
+        { "model": "google/antigravity-gemini-3-pro", "variant": "high" },
+        { "model": "zai-coding-plan/glm-5.1", "variant": "high" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "momus": {
+      "model": "google/antigravity-gemini-3-pro",
+      "variant": "high",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "high" },
+        { "model": "zai-coding-plan/glm-5.1", "variant": "high" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "atlas": {
+      "model": "zai-coding-plan/glm-5.1",
+      "variant": "medium",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "high" },
+        { "model": "google/antigravity-gemini-3-pro", "variant": "high" },
+        { "model": "google/antigravity-gemini-3-flash", "variant": "medium" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "sisyphus-junior": {
+      "model": "zai-coding-plan/glm-5.1",
+      "variant": "medium",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "medium" },
+        { "model": "google/antigravity-gemini-3-flash", "variant": "medium" },
+        { "model": "google/antigravity-gemini-3-pro", "variant": "high" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    }
+  },
+  "categories": {
+    "visual-engineering": {
+      "model": "google/antigravity-gemini-3-pro",
+      "variant": "high",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "high" },
+        { "model": "zai-coding-plan/glm-5.1", "variant": "medium" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "ultrabrain": {
+      "model": "openai/gpt-5.5",
+      "variant": "high",
+      "fallback_models": [
+        { "model": "google/antigravity-gemini-3-pro", "variant": "high" },
+        { "model": "zai-coding-plan/glm-5.1", "variant": "high" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "deep": {
+      "model": "zai-coding-plan/glm-5.1",
+      "variant": "high",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "high" },
+        { "model": "google/antigravity-gemini-3-pro", "variant": "high" },
+        { "model": "google/antigravity-gemini-3-flash", "variant": "medium" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "artistry": {
+      "model": "openai/gpt-5.5",
+      "variant": "high",
+      "fallback_models": [
+        { "model": "google/antigravity-gemini-3-pro", "variant": "high" },
+        { "model": "zai-coding-plan/glm-5.1", "variant": "high" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "quick": {
+      "model": "zai-coding-plan/glm-5.1",
+      "variant": "medium",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "medium" },
+        { "model": "google/antigravity-gemini-3-flash", "variant": "medium" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "unspecified-low": {
+      "model": "zai-coding-plan/glm-5.1",
+      "variant": "medium",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "medium" },
+        { "model": "google/antigravity-gemini-3-flash", "variant": "medium" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "unspecified-high": {
+      "model": "openai/gpt-5.5",
+      "variant": "high",
+      "fallback_models": [
+        { "model": "google/antigravity-gemini-3-pro", "variant": "high" },
+        { "model": "zai-coding-plan/glm-5.1", "variant": "high" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    },
+    "writing": {
+      "model": "zai-coding-plan/glm-5.1",
+      "variant": "medium",
+      "fallback_models": [
+        { "model": "openai/gpt-5.5", "variant": "medium" },
+        { "model": "google/antigravity-gemini-3-flash", "variant": "medium" },
+        { "model": "openrouter/qwen/qwen3.6-plus" }
+      ]
+    }
+  }
+}

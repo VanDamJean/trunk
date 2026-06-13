@@ -1,0 +1,9 @@
+{
+  "appId": "com.bloopoffice.anemoneidle",
+  "appName": "Anemone Idle Bloop Office",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}

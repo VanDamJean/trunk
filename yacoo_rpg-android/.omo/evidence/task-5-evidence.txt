@@ -1,0 +1,1 @@
+Shell.kt uses ColorHudBg/ColorNavBg/GameTypography/GameIconRole and preserves WindowInsets.safeDrawing top/bottom.

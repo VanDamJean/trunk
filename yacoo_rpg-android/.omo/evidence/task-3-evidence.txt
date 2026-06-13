@@ -1,0 +1,1 @@
+GameIcons.kt defines semantic icon fallback map; direct emoji literals now isolated to GameIcons.kt.

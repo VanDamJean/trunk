@@ -1,0 +1,72 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - article [ref=e183]:
+      - generic [ref=e184]: 🫧
+      - generic [ref=e185]:
+        - strong [ref=e186]: "20"
+        - generic [ref=e187]: Plankton · +0.0/s
+    - article [ref=e188]:
+      - generic [ref=e189]: ⚪
+      - generic [ref=e190]:
+        - strong [ref=e191]: "0.0"
+        - generic [ref=e192]: Pearls · +0.0/s
+    - article [ref=e193]:
+      - generic [ref=e194]: 🌊
+      - generic [ref=e195]:
+        - strong [ref=e196]: "0.0"
+        - generic [ref=e197]: Tide Energy · +0.0/s
+  - generic [ref=e20]:
+    - generic [ref=e22]: ✺
+    - generic [ref=e26]:
+      - paragraph [ref=e27]: Abyss Garden 01
+      - heading "Anemone Idle" [level=1] [ref=e28]
+      - paragraph [ref=e29]: Grow a moonlit reef colony, call helpers from the tide, and open drifting capsules.
+  - generic [ref=e30]:
+    - article [ref=e198]:
+      - generic [ref=e199]:
+        - paragraph [ref=e200]: Mission
+        - heading "Wake the colony" [level=2] [ref=e201]
+        - paragraph [ref=e202]: Own 5 Drift Polyps.
+      - generic "Wake the colony progress" [ref=e203]
+      - button "0 / 5" [disabled] [ref=e204]
+    - article [ref=e205]:
+      - generic [ref=e206]:
+        - paragraph [ref=e207]: Mission
+        - heading "Recruit reef helpers" [level=2] [ref=e208]
+        - paragraph [ref=e209]: Own 3 Cleaner Shrimp.
+      - generic "Recruit reef helpers progress" [ref=e210]
+      - button "0 / 3" [disabled] [ref=e211]
+    - article [ref=e212]:
+      - generic [ref=e213]:
+        - paragraph [ref=e214]: Mission
+        - heading "Polish a cache" [level=2] [ref=e215]
+        - paragraph [ref=e216]: Collect 25 lifetime pearls.
+      - generic "Polish a cache progress" [ref=e217]
+      - button "0 / 25" [disabled] [ref=e218]
+  - generic [ref=e52]: A young reef anemone opens to the current.
+  - generic [ref=e219]:
+    - paragraph [ref=e220]: Options
+    - heading "Language" [level=2] [ref=e221]
+    - paragraph [ref=e222]: Switch every game label between English and Korean. Your choice is saved on this device.
+    - generic [ref=e223]:
+      - button "English Active" [ref=e224] [cursor=pointer]:
+        - strong [ref=e225]: English
+        - generic [ref=e226]: Active
+      - button "한국어" [ref=e227] [cursor=pointer]:
+        - strong [ref=e228]: 한국어
+    - article [ref=e230]:
+      - heading "How it earns" [level=3] [ref=e231]
+      - paragraph [ref=e232]: The game earns passively only after you buy producers. The pulse button is the manual tap income.
+  - navigation "Game tabs" [ref=e96]:
+    - button "🪸 Reef" [ref=e97] [cursor=pointer]:
+      - text: 🪸
+      - generic [ref=e98]: Reef
+    - button "🫧 Capsule" [ref=e99] [cursor=pointer]:
+      - text: 🫧
+      - generic [ref=e100]: Capsule
+    - button "⚪ Pearls" [ref=e101] [cursor=pointer]:
+      - text: ⚪
+      - generic [ref=e102]: Pearls
+    - button "⚙ Options" [active] [ref=e103] [cursor=pointer]:
+      - text: ⚙
+      - generic [ref=e104]: Options

@@ -1,0 +1,12 @@
+Task 5 component accessibility verification
+
+Checks:
+- Main navigation uses aria-label="Main navigation".
+- Active navigation item uses aria-current="page".
+- Dice controls expose aria-label and aria-pressed.
+- Buttons are real button elements with visible text.
+- CSS defines button:focus-visible outline.
+
+Result:
+- npm test -- --run passed.
+- npm run build passed.

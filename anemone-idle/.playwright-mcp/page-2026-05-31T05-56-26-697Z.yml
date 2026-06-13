@@ -1,0 +1,141 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - article [ref=e142]:
+      - generic [ref=e143]: 🫧
+      - generic [ref=e144]:
+        - strong [ref=e145]: "141"
+        - generic [ref=e146]: 꿈틀밥 · +1.1/초
+    - article [ref=e147]:
+      - generic [ref=e148]: ⚪
+      - generic [ref=e149]:
+        - strong [ref=e150]: "0.0"
+        - generic [ref=e151]: 허세 진주 · +0.0/초
+    - article [ref=e152]:
+      - generic [ref=e153]: 🌊
+      - generic [ref=e154]:
+        - strong [ref=e155]: "0.0"
+        - generic [ref=e156]: 뿅 파워 · +0.0/초
+  - generic [ref=e20]:
+    - generic [ref=e25]: "3"
+    - generic [ref=e29]:
+      - paragraph [ref=e30]: 합법인 척하는 산호초 스타트업
+      - 'heading "말미잘 방치형: 뿅 회사" [level=1] [ref=e31]'
+      - paragraph [ref=e32]: 사장 말미잘을 두들기고, 촉수 알바를 고용하고, 바다 헛소리를 분기별 꿈틀 수익으로 바꾸세요.
+    - text: BLOOP
+  - generic [ref=e33]:
+    - article [ref=e157]:
+      - generic [ref=e158]:
+        - paragraph [ref=e159]: 장 목표
+        - heading "관리직 발명" [level=2] [ref=e160]
+        - paragraph [ref=e161]: 새우 중간관리자 3마리를 보유해서 회의가 번식하게 하세요.
+        - text: 진행 중
+      - generic "관리직 발명 진행도" [ref=e162]
+      - button "직원 수 · 0 / 3" [disabled] [ref=e163] [cursor=pointer]
+    - article [ref=e164]:
+      - generic [ref=e165]:
+        - paragraph [ref=e166]: 장 목표
+        - heading "이상한 조개 믿기" [level=2] [ref=e167]
+        - paragraph [ref=e168]: 법무팀에 묻지 말고 전리품 조개 보상 1회를 받으세요.
+        - text: 진행 중
+      - generic "이상한 조개 믿기 진행도" [ref=e169]
+      - button "기록 · 0 / 1" [disabled] [ref=e170] [cursor=pointer]
+  - generic [ref=e48]: 0분 동안 사라진 사이 산호초가 생산성 노래방을 열었습니다.
+  - generic [ref=e49]:
+    - generic [ref=e171]:
+      - paragraph [ref=e172]: 수익 수족관
+      - heading "사무실을 꿈틀거리게 하라" [level=2] [ref=e173]
+    - generic [ref=e174]:
+      - generic [ref=e179]: O
+      - generic [ref=e180]:
+        - paragraph [ref=e181]: 주인공 버튼
+        - heading "사장 말미잘 찰싹!" [level=2] [ref=e182]
+        - paragraph [ref=e183]: 누를 때마다 자신감, 거품, 약간의 공포가 꿈틀밥으로 변합니다. 중간관리자는 계속 바쁜 척합니다.
+      - button "뿅! +3.0 🫧" [ref=e184] [cursor=pointer]
+      - text: CEO
+    - generic [ref=e185]:
+      - generic [ref=e186]:
+        - paragraph [ref=e187]: 장 업무판
+        - 'heading "1장: 업무 산호초 창업" [level=2] [ref=e188]'
+        - paragraph [ref=e189]: 지하 말미잘 회사를 직원이 자동 증식하는 작은 조직도로 키우세요.
+      - 'generic "1장: 업무 산호초 창업" [ref=e190]'
+      - generic [ref=e192]:
+        - generic [ref=e193]:
+          - term [ref=e194]: 17% 완료
+          - definition [ref=e195]: 17%
+        - generic [ref=e196]:
+          - term [ref=e197]: 다음 해금
+          - definition [ref=e198]: 전리품 조개와 첫 업그레이드 루트
+        - generic [ref=e199]:
+          - term [ref=e200]: 현재 병목
+          - definition [ref=e201]: 꿈틀밥
+        - generic [ref=e202]:
+          - term [ref=e203]: 생산량
+          - definition [ref=e204]: 꿈틀밥 +1.1/초
+    - generic [ref=e205]:
+      - article [ref=e206]:
+        - generic [ref=e207]: 🪸
+        - generic [ref=e208]:
+          - generic [ref=e209]:
+            - heading "인턴 촉수" [level=3] [ref=e210]
+            - strong [ref=e211]: "5"
+          - paragraph [ref=e212]: 작은 무급 팔들이 바다에서 간식이 떨어질 때까지 스프레드시트를 흔듭니다.
+          - text: +1.1/초 꿈틀밥
+        - button "고용 · 25 🫧" [ref=e213] [cursor=pointer]
+      - article [ref=e214]:
+        - generic [ref=e215]: 🦐
+        - generic [ref=e216]:
+          - generic [ref=e217]:
+            - heading "새우 중간관리자" [level=3] [ref=e218]
+            - strong [ref=e219]: "0"
+          - paragraph [ref=e220]: 거품을 가리키고 꿈틀밥을 삥뜯고 인턴 촉수를 자동으로 고용합니다.
+          - text: +0.0/초 인턴 촉수
+        - button "고용 · 95 🫧" [ref=e221] [cursor=pointer]
+      - article [ref=e222]:
+        - generic [ref=e223]: 🦀
+        - generic [ref=e224]:
+          - generic [ref=e225]:
+            - heading "대게 지사장" [level=3] [ref=e226]
+            - strong [ref=e227]: "0"
+          - paragraph [ref=e228]: 지역본부 집게로 결재도장을 찍어 새우 중간관리자를 자동 증식합니다.
+          - text: +0.0/초 새우 중간관리자
+        - button "고용 · 1,350 🫧" [ref=e229] [cursor=pointer]
+      - article [ref=e230]:
+        - generic [ref=e231]: 🐋
+        - generic [ref=e232]:
+          - generic [ref=e233]:
+            - heading "고래 대주주" [level=3] [ref=e234]
+            - strong [ref=e235]: "0"
+          - paragraph [ref=e236]: 허세 진주를 들이마시고 대게 지사장을 물보라처럼 뿜는 바다 재벌입니다.
+          - text: +0.0/초 대게 지사장
+        - button "고용 · 24.0k ⚪" [ref=e237] [cursor=pointer]
+      - article [ref=e238]:
+        - generic [ref=e239]: 🐚
+        - generic [ref=e240]:
+          - generic [ref=e241]:
+            - heading "조개 인플루언서 농장" [level=3] [ref=e242]
+            - strong [ref=e243]: "0"
+          - paragraph [ref=e244]: 윤기 나는 조개들이 관종 포즈를 올리면 민망함에서 허세 진주가 생깁니다.
+          - text: +0.0/초 허세 진주
+        - button "고용 · 720 🫧" [ref=e245] [cursor=pointer]
+      - article [ref=e246]:
+        - generic [ref=e247]: 🌙
+        - generic [ref=e248]:
+          - generic [ref=e249]:
+            - heading "수상한 달빛 호스" [level=3] [ref=e250]
+            - strong [ref=e251]: "0"
+          - paragraph [ref=e252]: 달에서 온 호스가 뿅 파워를 흘립니다. 법무팀은 설명하지 말랬습니다.
+          - text: +0.0/초 뿅 파워
+        - button "고용 · 28 ⚪" [ref=e253] [cursor=pointer]
+  - navigation "Game tabs" [ref=e133]:
+    - button "🪸 노동 산호초" [ref=e134] [cursor=pointer]:
+      - text: 🪸
+      - generic [ref=e135]: 노동 산호초
+    - button "🫧 전리품 조개" [ref=e136] [cursor=pointer]:
+      - text: 🫧
+      - generic [ref=e137]: 전리품 조개
+    - button "⚪ 허세 진주" [ref=e138] [cursor=pointer]:
+      - text: ⚪
+      - generic [ref=e139]: 허세 진주
+    - button "⚙ 언어 도깨비" [ref=e140] [cursor=pointer]:
+      - text: ⚙
+      - generic [ref=e141]: 언어 도깨비

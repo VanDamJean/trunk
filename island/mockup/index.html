@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Island — Mockup</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Arial Black', Arial, sans-serif;
+}
+
+/* ─── Phone shell ─── */
+.phone {
+  width: 360px;
+  height: 800px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 3px solid #333;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.7);
+  background: #000;
+}
+
+/* ─── Screens ─── */
+.screen {
+  width: 360px;
+  height: 800px;
+  position: absolute;
+  top: 0; left: 0;
+  display: none;
+}
+.screen.active { display: block; }
+
+/* ════════════════════════════════════
+   SHARED COMPONENTS
+════════════════════════════════════ */
+
+/* Top Bar — 360×56 */
+.top-bar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 360px; height: 56px;
+  background: linear-gradient(180deg, #6B3A20 0%, #4A2810 100%);
+  border-bottom: 2px solid #2A1408;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 0;
+  z-index: 10;
+}
+.tb-gem {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #43A047, #2E7D32);
+  border-radius: 6px;
+  border: 2px solid #1B5E20;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.tb-coins {
+  display: flex; align-items: center; gap: 4px;
+  margin-left: 10px;
+}
+.coin-circle {
+  width: 24px; height: 24px;
+  background: radial-gradient(circle at 35% 35%, #FFE082, #F5A623, #D4860A);
+  border-radius: 50%;
+  border: 2px solid #B8780A;
+  flex-shrink: 0;
+}
+.tb-amount {
+  color: #fff;
+  font-weight: 900;
+  font-size: 17px;
+  text-shadow: 1px 1px 2px #000;
+}
+.tb-plus {
+  width: 22px; height: 22px;
+  background: #43A047;
+  border-radius: 50%;
+  border: 2px solid #1B5E20;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.tb-keys {
+  display: flex; align-items: center; gap: 4px;
+  margin-left: auto;
+}
+.key-pip {
+  width: 18px; height: 18px;
+  background: radial-gradient(circle at 40% 40%, #ef5350, #C62828);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 2px solid #8B1A1A;
+}
+
+/* Bottom Nav — 360×70, bottom:0 */
+.bottom-nav {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 360px; height: 70px;
+  background: linear-gradient(180deg, #5C3A20 0%, #4A2810 100%);
+  border-top: 2px solid #2A1408;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 40px;
+  z-index: 10;
+}
+.nav-btn {
+  width: 48px; height: 48px;
+  background: radial-gradient(circle at 35% 35%, #FFE082, #F5A623, #D4860A);
+  border-radius: 50%;
+  border: 3px solid #B8780A;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #7A5000, 0 4px 8px rgba(0,0,0,0.4);
+  transition: transform .1s;
+  user-select: none;
+}
+.nav-btn:active { transform: scale(.92); box-shadow: 0 1px 0 #7A5000; }
+
+/* Green button */
+.btn-green {
+  width: 100%;
+  height: 44px;
+  background: linear-gradient(180deg, #66BB6A 0%, #43A047 60%, #2E7D32 100%);
+  border-radius: 8px;
+  border: 3px solid #1B5E20;
+  box-shadow: 0 4px 0 #1B5E20;
+  color: #fff;
+  font-weight: 900;
+  font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.4);
+  transition: transform .1s;
+  user-select: none;
+}
+.btn-green:active { transform: translateY(3px); box-shadow: none; }
+
+/* Modal overlay */
+.modal-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 360px; height: 800px;
+  background: rgba(0,0,0,.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+.modal-overlay.active { display: flex; }
+
+/* Modal card */
+.modal {
+  width: 300px;
+  background: #F5E6C8;
+  border-radius: 14px;
+  border: 3px solid #C4A47C;
+  overflow: visible;
+  box-shadow: 0 12px 32px rgba(0,0,0,.6);
+  position: relative;
+}
+
+/* Ribbon header */
+.modal-ribbon {
+  width: 100%;
+  height: 52px;
+  background: linear-gradient(180deg, #4CAF50 0%, #2E7D32 100%);
+  border-radius: 11px 11px 0 0;
+  border-bottom: 3px solid #1B5E20;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: visible;
+}
+.modal-ribbon::before, .modal-ribbon::after {
+  content: '';
+  position: absolute;
+  top: 7px;
+  width: 18px; height: 36px;
+  background: linear-gradient(180deg, #43A047, #2E7D32);
+  border: 2px solid #1B5E20;
+  border-radius: 3px;
+}
+.modal-ribbon::before { left: -7px; transform: rotate(-4deg); }
+.modal-ribbon::after  { right: -7px; transform: rotate(4deg); }
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0,0,0,.5);
+  letter-spacing: 0.5px;
+}
+.modal-x {
+  position: absolute;
+  right: 10px; top: 50%;
+  transform: translateY(-50%);
+  width: 26px; height: 26px;
+  background: radial-gradient(circle at 35% 35%, #FFE082, #F5A623);
+  border-radius: 50%;
+  border: 2px solid #B8780A;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+  color: #4A2810;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.modal-body { padding: 16px; }
+
+/* Stars */
+.stars-row {
+  display: flex; justify-content: center; gap: 10px;
+  margin: 10px 0;
+}
+.star-lg { font-size: 38px; }
+
+/* Section label */
+.sec-label {
+  font-size: 13px;
+  color: #7B4423;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* ════════════════════════════════════
+   1. HOME
+════════════════════════════════════ */
+#screen-home {
+  background: linear-gradient(180deg,
+    #87CEEB 0%, #64B5F6 28%,
+    #42A5F5 44%, #1E88E5 54%,
+    #1565C0 62%,
+    #D4A96A 62%, #C49A5A 76%,
+    #B8874A 100%);
+}
+.home-cloud {
+  position: absolute;
+  background: rgba(255,255,255,.88);
+  border-radius: 50px;
+  filter: blur(1.5px);
+}
+.water-wave {
+  position: absolute;
+  top: 460px; left: 0;
+  width: 360px; height: 40px;
+  background: rgba(255,255,255,.22);
+  border-radius: 60% 60% 0 0;
+}
+.rock {
+  position: absolute;
+  background: linear-gradient(180deg,#8B7355,#6B5335);
+  border-radius: 50% 50% 20% 20%;
+}
+.logo-wrap {
+  position: absolute;
+  top: 190px; left: 33px;
+  width: 295px; height: 120px;
+  display: flex; align-items: center; justify-content: center;
+}
+.logo-text {
+  font-size: 66px;
+  font-weight: 900;
+  font-style: italic;
+  color: #FFD700;
+  text-shadow:
+    4px 4px 0 #7B00CC,
+    -2px -2px 0 #6A0DAD,
+    2px -2px 0 #6A0DAD,
+    -2px  2px 0 #6A0DAD,
+    0 7px 0 #3A0070,
+    0 10px 16px rgba(0,0,0,.5);
+  letter-spacing: 4px;
+}
+.play-frame {
+  position: absolute;
+  top: 390px; left: 110px;
+  width: 141px; height: 59px;
+  background: linear-gradient(180deg,#8B5E30,#6B3F18 50%,#4A2810);
+  border-radius: 10px;
+  border: 3px solid #2A1408;
+  box-shadow: 0 5px 10px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.1);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: transform .1s;
+}
+.play-frame:active { transform: scale(.96); }
+.play-inner {
+  width: 123px; height: 39px;
+  background: linear-gradient(180deg,#E8C06D,#C8922A 50%,#A07020);
+  border-radius: 7px;
+  border: 2px solid #8B6020;
+  display: flex; align-items: center; justify-content: center;
+}
+.play-inner span {
+  font-size: 22px; font-weight: 900; font-style: italic;
+  color: #4A2810;
+  text-shadow: 0 1px 0 rgba(255,255,255,.3);
+  letter-spacing: 2px;
+}
+/* Treasure chest */
+.chest-wrap {
+  position: absolute;
+  top: 530px; left: 105px;
+  width: 150px; height: 130px;
+}
+.chest-glow {
+  position: absolute;
+  top: 10px; left: 15px;
+  width: 110px; height: 35px;
+  background: radial-gradient(ellipse, rgba(255,215,0,.8), transparent 70%);
+  filter: blur(4px);
+}
+.chest-lid {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100px; height: 36px;
+  background: linear-gradient(180deg,#A07030,#7B5020);
+  border-radius: 50% 50% 0 0 / 55% 55% 0 0;
+  border: 3px solid #3A1F08;
+  transform: rotate(-18deg);
+  transform-origin: bottom left;
+}
+.chest-body {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100px; height: 56px;
+  background: linear-gradient(180deg,#8B5E2A,#6B3F18);
+  border-radius: 4px;
+  border: 3px solid #3A1F08;
+}
+.chest-latch {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 20px; height: 14px;
+  background: #F5A623;
+  border-radius: 10px;
+  border: 2px solid #8B6020;
+}
+.chest-coins {
+  position: absolute;
+  top: 4px; left: 8px;
+  font-size: 22px; letter-spacing: -4px;
+}
+
+/* ════════════════════════════════════
+   2. PLAY MAP
+════════════════════════════════════ */
+#screen-play {
+  background: linear-gradient(180deg,
+    #87CEEB 0%, #64B5F6 32%,
+    #2196C4 52%, #1565C0 62%,
+    #D4A96A 62%, #C49A5A 78%, #B8874A 100%);
+}
+.map-scene {
+  position: absolute;
+  top: 56px; left: 0;
+  width: 360px; height: 604px;
+  overflow: hidden;
+}
+.map-house {
+  position: absolute;
+  bottom: 120px; left: 70px;
+}
+.house-body {
+  width: 110px; height: 80px;
+  background: linear-gradient(180deg,#F5E6C8,#E0CC9A);
+  border: 3px solid #C4A47C;
+  border-radius: 4px;
+  position: relative;
+}
+.house-door {
+  position: absolute;
+  bottom: 0; left: 38px;
+  width: 28px; height: 40px;
+  background: linear-gradient(180deg,#A07030,#6B3F18);
+  border-radius: 14px 14px 0 0;
+  border: 2px solid #4A2810;
+}
+.house-window {
+  position: absolute;
+  top: 16px; left: 12px;
+  width: 20px; height: 20px;
+  background: #ADE8F4;
+  border: 2px solid #C4A47C;
+  border-radius: 2px;
+}
+.house-roof {
+  position: absolute;
+  top: -48px; left: -5px;
+  width: 0; height: 0;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  border-bottom: 52px solid #C62828;
+  filter: drop-shadow(0 -2px 0 #8B1A1A);
+}
+.palm {
+  position: absolute;
+}
+.palm-trunk {
+  width: 12px;
+  background: linear-gradient(90deg,#8B6914,#B08020,#8B6914);
+  border-radius: 4px;
+  margin: 0 auto;
+}
+.leaf {
+  position: absolute;
+  width: 52px; height: 13px;
+  background: linear-gradient(90deg,#2E7D32,#43A047);
+  border-radius: 50%;
+  transform-origin: left center;
+}
+.map-rock {
+  position: absolute;
+  background: linear-gradient(180deg,#9E8060,#7B6040);
+  border-radius: 50% 50% 20% 20%;
+}
+/* Level / zone row */
+.lz-row {
+  position: absolute;
+  bottom: 70px; left: 0;
+  width: 360px; height: 54px;
+  display: flex; align-items: center;
+  padding: 0 16px; gap: 10px;
+}
+.btn-level {
+  flex: 1; height: 44px;
+  background: linear-gradient(180deg,#66BB6A,#43A047 60%,#2E7D32);
+  border-radius: 8px;
+  border: 3px solid #1B5E20;
+  box-shadow: 0 4px 0 #1B5E20;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 900; font-size: 18px;
+  cursor: pointer;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.4);
+  transition: transform .1s;
+}
+.btn-level:active { transform: translateY(3px); box-shadow: none; }
+.zone-chip {
+  position: relative;
+  width: 128px; height: 44px;
+  background: linear-gradient(180deg,#43A047,#2E7D32);
+  border-radius: 8px;
+  border: 3px solid #1B5E20;
+  box-shadow: 0 4px 0 #1B5E20;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: transform .1s;
+}
+.zone-chip:active { transform: translateY(3px); box-shadow: none; }
+.zone-name { color: #fff; font-weight: 900; font-size: 14px; text-shadow: 1px 1px 2px rgba(0,0,0,.4); }
+.zone-prog { color: rgba(255,255,255,.8); font-size: 11px; font-family: Arial,sans-serif; }
+.zone-badge {
+  position: absolute;
+  top: -10px; right: -8px;
+  width: 22px; height: 22px;
+  background: radial-gradient(circle at 35% 35%, #FFE082, #F5A623);
+  border-radius: 50%;
+  border: 2px solid #B8780A;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 900; color: #4A2810;
+}
+
+/* ════════════════════════════════════
+   3. LEVEL GRID
+════════════════════════════════════ */
+#screen-level {
+  background: linear-gradient(180deg,#87CEEB 0%,#2196C4 55%,#D4A96A 55%,#B8874A 100%);
+}
+.level-scroll {
+  position: absolute;
+  top: 56px; left: 0;
+  width: 360px; height: 600px;
+  padding: 16px 16px 8px;
+  overflow-y: auto;
+}
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 74px);
+  gap: 9px;
+  justify-content: center;
+}
+.lvl-cell {
+  width: 74px; height: 74px;
+  border-radius: 10px;
+  border: 3px solid #2A1408;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform .1s;
+}
+.lvl-cell:active { transform: scale(.94); }
+.lvl-cell.unlocked {
+  background: linear-gradient(180deg,#FFE082,#F5A623 55%,#D4860A);
+  box-shadow: 0 4px 0 #B8780A;
+}
+.lvl-cell.locked {
+  background: linear-gradient(180deg,#8B3A3A,#5A1A1A);
+  box-shadow: 0 4px 0 #3A1010;
+  cursor: default;
+}
+.lvl-num { font-size: 22px; font-weight: 900; color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,.6); }
+.lvl-stars {
+  display: flex; gap: 2px;
+  position: absolute; top: 5px; left: 50%; transform: translateX(-50%);
+}
+.s { font-size: 13px; }
+.s.on  { color: #FFD700; }
+.s.off { color: rgba(0,0,0,.35); }
+.lvl-lock { font-size: 26px; }
+
+.level-nav {
+  position: absolute;
+  bottom: 70px; left: 0;
+  width: 360px; height: 54px;
+  display: flex; align-items: center;
+  padding: 0 16px; gap: 8px;
+}
+.btn-back {
+  flex: 1; height: 44px;
+  background: linear-gradient(180deg,#66BB6A,#43A047 60%,#2E7D32);
+  border-radius: 8px;
+  border: 3px solid #1B5E20;
+  box-shadow: 0 4px 0 #1B5E20;
+  color: #fff; font-weight: 900; font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: transform .1s;
+}
+.btn-back:active { transform: translateY(3px); box-shadow: none; }
+.btn-page {
+  width: 60px; height: 44px;
+  background: linear-gradient(180deg,#66BB6A,#43A047 60%,#2E7D32);
+  border-radius: 8px;
+  border: 3px solid #1B5E20;
+  box-shadow: 0 4px 0 #1B5E20;
+  color: #fff; font-weight: 900; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: transform .1s;
+}
+.btn-page:active { transform: translateY(3px); box-shadow: none; }
+
+/* ════════════════════════════════════
+   4. GAME PLAY
+════════════════════════════════════ */
+#screen-game {
+  background: linear-gradient(180deg,
+    #87CEEB 0%,#64B5F6 28%,#2196C4 50%,
+    #D4A96A 50%,#B8874A 100%);
+}
+.score-bar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 360px; height: 78px;
+  background: linear-gradient(180deg,#6B3A20,#4A2810);
+  border-bottom: 2px solid #2A1408;
+  display: flex; align-items: center;
+  padding: 8px 8px;
+  gap: 6px;
+  z-index: 5;
+}
+.sc-cell {
+  flex: 1; height: 60px;
+  background: linear-gradient(180deg,#E8C06D,#C8922A);
+  border-radius: 8px;
+  border: 2px solid #8B6020;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.sc-lbl { font-size: 10px; color: #4A2810; font-weight: 700; font-family: Arial,sans-serif; }
+.sc-val { font-size: 20px; font-weight: 900; color: #4A2810; font-family: Arial,sans-serif; }
+.prog-wrap {
+  position: absolute;
+  top: 80px; left: 16px;
+  width: 328px;
+}
+.prog-stars {
+  display: flex; justify-content: space-between;
+  padding: 0 8px; margin-bottom: 2px;
+}
+.prog-star { font-size: 20px; }
+.prog-track {
+  height: 12px;
+  background: #3A1F08;
+  border-radius: 6px;
+  border: 2px solid #2A1408;
+  overflow: hidden;
+}
+.prog-fill {
+  height: 100%;
+  background: linear-gradient(90deg,#FFD700,#F5A623);
+  border-radius: 6px;
+  width: 0%;
+  transition: width .3s;
+}
+/* Scene strip */
+.game-scene {
+  position: absolute;
+  top: 108px; left: 0;
+  width: 360px; height: 130px;
+  overflow: hidden;
+  display: flex; align-items: flex-end;
+  padding: 0 20px 10px;
+  gap: 10px;
+}
+/* Gem grid: 6×6, 300×300, starts at y=248 */
+.gem-grid {
+  touch-action: none; /* 그리드 내 스크롤 방지 → 드래그 전용 */
+  position: absolute;
+  top: 248px; left: 30px;
+  width: 300px; height: 300px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 3px;
+}
+.gc { border-radius: 6px; background: rgba(0,20,60,.18); display: flex; align-items: center; justify-content: center; }
+.gem {
+  width: 40px; height: 40px;
+  border-radius: 9px;
+  border: 2px solid rgba(255,255,255,.25);
+  box-shadow: inset 0 3px 6px rgba(255,255,255,.4), 0 2px 4px rgba(0,0,0,.35);
+  position: relative;
+  cursor: pointer;
+  transition: transform .1s;
+}
+.gem:active { transform: scale(.85); }
+.gem::after {
+  content: '';
+  position: absolute;
+  top: 5px; left: 7px;
+  width: 11px; height: 5px;
+  background: rgba(255,255,255,.45);
+  border-radius: 50%;
+  transform: rotate(-25deg);
+}
+.gem.b { background: linear-gradient(135deg,#1E88E5,#1565C0); }
+.gem.p { background: linear-gradient(135deg,#E91E8C,#AD1457); }
+.gem.y { background: linear-gradient(135deg,#FFD54F,#F9A825); }
+.gem.g { background: linear-gradient(135deg,#66BB6A,#2E7D32); }
+.gem.selected {
+  box-shadow: inset 0 3px 6px rgba(255,255,255,.4), 0 0 0 3px #fff, 0 0 14px rgba(255,255,255,.9);
+  transform: scale(1.12);
+  z-index: 2;
+}
+
+/* 매치된 젬 — 번쩍 후 사라짐 */
+@keyframes gem-flash {
+  0%   { filter: brightness(1);   transform: scale(1);   opacity: 1; }
+  25%  { filter: brightness(2.8) saturate(2); transform: scale(1.22); opacity: 1; }
+  60%  { filter: brightness(1.5); transform: scale(1.1);  opacity: 0.8; }
+  100% { filter: brightness(0.3); transform: scale(0);    opacity: 0; }
+}
+.gem.matched {
+  animation: gem-flash 0.55s ease-in forwards;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* 위에서 떨어지는 새 젬 */
+@keyframes gem-drop {
+  0%   { transform: scale(0) translateY(-16px); opacity: 0; }
+  55%  { transform: scale(1.12) translateY(3px); opacity: 1; }
+  100% { transform: scale(1) translateY(0);     opacity: 1; }
+}
+.gem.new-drop {
+  animation: gem-drop 0.32s cubic-bezier(.2,.8,.4,1.2) forwards;
+}
+/* Toolbar */
+.tool-bar {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 360px; height: 70px;
+  background: linear-gradient(180deg,#6B3A20,#4A2810);
+  border-top: 2px solid #2A1408;
+  display: flex; align-items: center;
+  justify-content: space-around;
+  padding: 0 20px;
+}
+.tool-btn {
+  width: 56px; height: 56px;
+  background: linear-gradient(180deg,#E8C06D,#C8922A);
+  border-radius: 10px;
+  border: 3px solid #8B6020;
+  box-shadow: 0 3px 0 #6B4010;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  position: relative;
+  cursor: pointer;
+  transition: transform .1s;
+}
+.tool-btn:active { transform: translateY(2px); box-shadow: none; }
+.tool-badge {
+  position: absolute;
+  bottom: -5px; right: -5px;
+  width: 20px; height: 20px;
+  background: radial-gradient(circle at 35% 35%, #FFE082, #F5A623);
+  border-radius: 50%;
+  border: 2px solid #B8780A;
+  font-size: 10px; font-weight: 900;
+  color: #4A2810;
+  display: flex; align-items: center; justify-content: center;
+  font-family: Arial,sans-serif;
+}
+
+/* ════════════════════════════════════
+   MODALS
+════════════════════════════════════ */
+
+/* ── Level Select ── */
+.boost-row { display: flex; justify-content: center; gap: 14px; margin: 10px 0 4px; }
+.boost-item {
+  width: 64px; height: 64px;
+  background: linear-gradient(180deg,#E8C06D,#C8922A);
+  border-radius: 10px;
+  border: 3px solid #8B6020;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  position: relative;
+  cursor: pointer;
+}
+.boost-badge {
+  position: absolute;
+  bottom: -5px; right: -5px;
+  width: 20px; height: 20px;
+  background: #F5A623;
+  border-radius: 50%;
+  border: 2px solid #B8780A;
+  font-size: 10px; font-weight: 900;
+  color: #4A2810;
+  display: flex; align-items: center; justify-content: center;
+  font-family: Arial,sans-serif;
+}
+.btn-gold-circle {
+  width: 60px; height: 60px;
+  background: radial-gradient(circle at 35% 35%, #FFE082, #F5A623, #D4860A);
+  border-radius: 50%;
+  border: 3px solid #B8780A;
+  box-shadow: 0 4px 0 #7A5000;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  margin: 12px auto 2px;
+  transition: transform .1s;
+}
+.btn-gold-circle:active { transform: scale(.92); box-shadow: none; }
+
+/* ── Win ── */
+.result-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #C4A47C;
+}
+.r-lbl { font-size: 14px; color: #7B4423; font-family: Arial,sans-serif; }
+.r-val { font-size: 20px; font-weight: 900; color: #4A2810; font-family: Arial,sans-serif; }
+.reward-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px; font-size: 22px; font-weight: 900; color: #4A2810;
+  margin: 10px 0 4px;
+  font-family: Arial,sans-serif;
+}
+.win-btns { display: flex; justify-content: center; gap: 14px; margin-top: 10px; }
+
+/* ── Settings ── */
+.set-row { display: flex; justify-content: space-around; margin: 18px 0 10px; }
+.set-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.set-btn {
+  width: 64px; height: 64px;
+  background: radial-gradient(circle at 35% 35%, #FFE082, #F5A623, #D4860A);
+  border-radius: 50%;
+  border: 3px solid #B8780A;
+  box-shadow: 0 4px 0 #7A5000;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  cursor: pointer;
+  transition: opacity .2s, transform .1s;
+}
+.set-btn:active { transform: scale(.92); }
+.set-btn.off { opacity: .4; }
+.set-lbl { font-size: 13px; color: #7B4423; font-weight: 700; font-family: Arial,sans-serif; }
+
+/* ── Edit Profile ── */
+.inp-lbl { font-size: 13px; color: #7B4423; font-weight: 700; margin-bottom: 4px; font-family: Arial,sans-serif; }
+.txt-input {
+  width: 100%; height: 40px;
+  background: #fff;
+  border: 2px solid #C4A47C;
+  border-radius: 6px;
+  padding: 0 10px;
+  font-size: 15px; color: #4A2810;
+  outline: none;
+  margin-bottom: 12px;
+  font-family: Arial,sans-serif;
+}
+.flag-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin-bottom: 14px;
+}
+.flag-cell {
+  height: 38px;
+  background: #E8D5B0;
+  border-radius: 6px;
+  border: 2px solid #C4A47C;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  transition: border-color .15s;
+}
+.flag-cell.sel { border-color: #2E7D32; background: #E8F5E9; }
+
+/* ── Tasks ── */
+.wp-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.wp-track {
+  flex: 1; height: 14px;
+  background: #C4A47C;
+  border-radius: 7px;
+  border: 2px solid #A08040;
+  overflow: hidden;
+}
+.wp-fill {
+  height: 100%;
+  background: linear-gradient(90deg,#FFD700,#F5A623);
+  width: 20%;
+}
+.task-row {
+  display: flex; align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid #C4A47C;
+  gap: 10px;
+}
+.task-icon {
+  width: 40px; height: 40px;
+  background: #E8D5B0;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.task-name { flex: 1; font-size: 15px; font-weight: 700; color: #4A2810; font-family: Arial,sans-serif; }
+.btn-doit {
+  height: 32px; padding: 0 10px;
+  background: linear-gradient(180deg,#66BB6A,#2E7D32);
+  border-radius: 6px;
+  border: 2px solid #1B5E20;
+  color: #fff; font-weight: 700; font-size: 12px;
+  cursor: pointer; font-family: Arial,sans-serif;
+  transition: opacity .15s;
+}
+.btn-doit.done { background: #9E9E9E; border-color: #777; cursor: default; }
+
+/* ── Golden Key ── */
+.key-demo {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin: 14px 0;
+}
+.mini-gems { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.mg {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  border: 2px solid rgba(255,255,255,.3);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,.3);
+}
+.mg.b { background: linear-gradient(135deg,#1E88E5,#1565C0); }
+.mg.p { background: linear-gradient(135deg,#E91E8C,#AD1457); }
+.mg.y { background: linear-gradient(135deg,#FFD54F,#F9A825); }
+.mg.g { background: linear-gradient(135deg,#66BB6A,#2E7D32); }
+.arr { font-size: 28px; color: #F5A623; }
+.key-big { font-size: 52px; }
+.key-desc {
+  text-align: center;
+  color: #7B4423;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  font-family: Arial,sans-serif;
+}
+</style>
+</head>
+<body>
+<div class="phone" id="app">
+
+<!-- ══════════════════════════════
+     SCREEN 1 — HOME
+══════════════════════════════ -->
+<div class="screen active" id="screen-home">
+  <!-- Clouds -->
+  <div class="home-cloud" style="top:62px;left:18px;width:120px;height:30px;"></div>
+  <div class="home-cloud" style="top:52px;left:44px;width:76px;height:26px;"></div>
+  <div class="home-cloud" style="top:80px;right:36px;width:108px;height:28px;"></div>
+  <div class="home-cloud" style="top:68px;right:16px;width:72px;height:22px;"></div>
+  <div class="home-cloud" style="top:100px;left:160px;width:90px;height:20px;"></div>
+  <!-- Water -->
+  <div class="water-wave"></div>
+  <!-- Rocks -->
+  <div class="rock" style="bottom:196px;left:14px;width:56px;height:48px;"></div>
+  <div class="rock" style="bottom:202px;left:30px;width:36px;height:32px;background:linear-gradient(180deg,#9E8A6A,#7B6545);"></div>
+  <div class="rock" style="bottom:196px;right:26px;width:50px;height:42px;"></div>
+  <!-- Logo -->
+  <div class="logo-wrap"><span class="logo-text">ISLAND</span></div>
+  <!-- Play button -->
+  <div class="play-frame" onclick="nav('screen-play')">
+    <div class="play-inner"><span>Play</span></div>
+  </div>
+  <!-- Treasure chest -->
+  <div class="chest-wrap">
+    <div class="chest-glow"></div>
+    <div class="chest-lid"></div>
+    <div class="chest-body">
+      <div class="chest-latch"></div>
+    </div>
+    <div class="chest-coins">🪙🪙🪙</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SCREEN 2 — PLAY MAP
+══════════════════════════════ -->
+<div class="screen" id="screen-play">
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="tb-gem">🏝️</div>
+    <div class="tb-coins">
+      <div class="coin-circle"></div>
+      <span class="tb-amount">100</span>
+      <div class="tb-plus">+</div>
+    </div>
+    <div class="tb-keys">
+      <div class="key-pip"></div>
+      <span class="tb-amount" style="margin-left:4px;">54</span>
+    </div>
+  </div>
+  <!-- Map scene -->
+  <div class="map-scene">
+    <!-- Clouds -->
+    <div class="home-cloud" style="top:24px;left:14px;width:100px;height:26px;"></div>
+    <div class="home-cloud" style="top:14px;right:28px;width:86px;height:22px;"></div>
+    <!-- Palm 1 -->
+    <div class="palm" style="left:240px;bottom:170px;">
+      <div style="position:relative;width:60px;height:44px;margin-left:-24px;">
+        <div class="leaf" style="top:12px;transform:rotate(-40deg);"></div>
+        <div class="leaf" style="top:7px;transform:rotate(-14deg);"></div>
+        <div class="leaf" style="top:9px;transform:rotate(18deg);"></div>
+        <div class="leaf" style="top:16px;transform:rotate(48deg);"></div>
+      </div>
+      <div class="palm-trunk" style="height:82px;"></div>
+    </div>
+    <!-- Palm 2 -->
+    <div class="palm" style="left:36px;bottom:156px;">
+      <div style="position:relative;width:60px;height:44px;margin-left:-18px;">
+        <div class="leaf" style="top:10px;transform:rotate(-36deg);"></div>
+        <div class="leaf" style="top:6px;transform:rotate(8deg);"></div>
+        <div class="leaf" style="top:14px;transform:rotate(46deg);"></div>
+      </div>
+      <div class="palm-trunk" style="height:60px;"></div>
+    </div>
+    <!-- House -->
+    <div class="map-house">
+      <div class="house-body">
+        <div class="house-roof"></div>
+        <div class="house-door"></div>
+        <div class="house-window"></div>
+      </div>
+    </div>
+    <!-- Mountain rocks -->
+    <div class="map-rock" style="bottom:96px;right:16px;width:88px;height:68px;"></div>
+    <div class="map-rock" style="bottom:84px;right:46px;width:64px;height:52px;background:linear-gradient(180deg,#8B7050,#6B5030);"></div>
+  </div>
+  <!-- Level / Zone row -->
+  <div class="lz-row">
+    <div class="btn-level" onclick="nav('screen-level')">Level 1</div>
+    <div class="zone-chip" onclick="openModal('modal-golden-key')">
+      <span class="zone-name">zone 1</span>
+      <span class="zone-prog">2/10</span>
+      <div class="zone-badge">2</div>
+    </div>
+  </div>
+  <!-- Bottom nav -->
+  <div class="bottom-nav">
+    <div class="nav-btn" onclick="openModal('modal-settings')">⚙️</div>
+    <div class="nav-btn" onclick="openModal('modal-tasks')">📋</div>
+    <div class="nav-btn" onclick="nav('screen-home')">🏠</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SCREEN 3 — LEVEL GRID
+══════════════════════════════ -->
+<div class="screen" id="screen-level">
+  <!-- Pirate ship bg -->
+  <div style="position:absolute;top:130px;left:50%;transform:translateX(-50%);font-size:90px;opacity:.12;pointer-events:none;">🏴‍☠️</div>
+  <div class="level-scroll">
+    <div class="level-grid" id="lvl-grid"></div>
+  </div>
+  <div class="level-nav">
+    <div class="btn-back" onclick="nav('screen-play')">Back</div>
+    <div class="btn-page">‹</div>
+    <div class="btn-page">›</div>
+  </div>
+  <div class="bottom-nav" style="justify-content:space-around;">
+    <div class="nav-btn" onclick="openModal('modal-settings')">⚙️</div>
+    <div class="nav-btn" onclick="nav('screen-play')">🏠</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SCREEN 4 — GAME PLAY
+══════════════════════════════ -->
+<div class="screen" id="screen-game">
+  <!-- Score bar -->
+  <div class="score-bar">
+    <div class="sc-cell">
+      <span class="sc-lbl">Score</span>
+      <span class="sc-val" id="g-score">0</span>
+    </div>
+    <div class="sc-cell">
+      <span class="sc-lbl">Target</span>
+      <div style="display:flex;align-items:center;gap:3px;">
+        <span style="font-size:14px;">🔵</span>
+        <span class="sc-val" id="g-target">42</span>
+      </div>
+    </div>
+    <div class="sc-cell">
+      <span class="sc-lbl">Moves</span>
+      <span class="sc-val" id="g-moves">24</span>
+    </div>
+  </div>
+  <!-- Progress -->
+  <div class="prog-wrap">
+    <div class="prog-stars">
+      <span class="prog-star">⭐</span>
+      <span class="prog-star">⭐</span>
+      <span class="prog-star">⭐</span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="g-prog"></div></div>
+  </div>
+  <!-- Scene -->
+  <div class="game-scene">
+    <span style="font-size:48px;opacity:.55;">🌴</span>
+    <span style="font-size:52px;opacity:.45;">🏴‍☠️</span>
+    <span style="font-size:36px;opacity:.5;">⛵</span>
+  </div>
+  <!-- Gem grid -->
+  <div class="gem-grid" id="g-grid"></div>
+  <!-- Tool bar -->
+  <div class="tool-bar">
+    <div class="tool-btn">🔨<div class="tool-badge">4</div></div>
+    <div class="tool-btn">⚗️<div class="tool-badge">1</div></div>
+    <div class="tool-btn">💉<div class="tool-badge">6</div></div>
+    <div class="tool-btn">🎲<div class="tool-badge">6</div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MODALS
+══════════════════════════════════════════ -->
+
+<!-- Level Select -->
+<div class="modal-overlay" id="modal-level-select">
+  <div class="modal">
+    <div class="modal-ribbon">
+      <span class="modal-title">Level 1</span>
+      <div class="modal-x" onclick="closeModal('modal-level-select')">✕</div>
+    </div>
+    <div class="modal-body">
+      <div class="stars-row">
+        <span class="star-lg">⭐</span><span class="star-lg">⭐</span><span class="star-lg">⭐</span>
+      </div>
+      <div class="sec-label">Select boosts</div>
+      <div class="boost-row">
+        <div class="boost-item">💣<div class="boost-badge">3</div></div>
+        <div class="boost-item">⚡<div class="boost-badge">3</div></div>
+        <div class="boost-item">🌀<div class="boost-badge">3</div></div>
+      </div>
+      <div class="btn-gold-circle" onclick="closeModal('modal-level-select');openModal('modal-begin')">▶</div>
+    </div>
+  </div>
+</div>
+
+<!-- Begin -->
+<div class="modal-overlay" id="modal-begin">
+  <div class="modal">
+    <div class="modal-ribbon">
+      <span class="modal-title">Target</span>
+      <div class="modal-x" onclick="closeModal('modal-begin')">✕</div>
+    </div>
+    <div class="modal-body" style="text-align:center;padding:20px 16px 16px;">
+      <div style="font-size:72px;margin-bottom:6px;">🔵</div>
+      <div style="font-size:38px;font-weight:900;color:#4A2810;font-family:Arial,sans-serif;">42</div>
+      <div class="btn-green" style="margin-top:20px;" onclick="startGame()">Start!</div>
+    </div>
+  </div>
+</div>
+
+<!-- You Win -->
+<div class="modal-overlay" id="modal-win">
+  <div class="modal">
+    <div class="modal-ribbon">
+      <span class="modal-title">You Win</span>
+      <div class="modal-x" onclick="closeModal('modal-win');nav('screen-play')">✕</div>
+    </div>
+    <div class="modal-body">
+      <div class="stars-row">
+        <span class="star-lg">⭐</span><span class="star-lg">⭐</span><span class="star-lg">⭐</span>
+      </div>
+      <div class="result-row">
+        <span class="r-lbl">Target</span><span class="r-val">42</span>
+      </div>
+      <div class="result-row">
+        <span class="r-lbl">Your Score</span>
+        <span class="r-val" id="win-score">0</span>
+      </div>
+      <div class="reward-row">🪙 <span>50+</span></div>
+      <div class="win-btns">
+        <div class="nav-btn" title="태스크" onclick="closeModal('modal-win');openModal('modal-tasks')">📋</div>
+        <div class="nav-btn" title="다음 레벨" onclick="closeModal('modal-win');resetGame();openModal('modal-begin')">▶</div>
+        <div class="nav-btn" title="재시작" onclick="closeModal('modal-win');resetGame();openModal('modal-begin')">🔄</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Settings -->
+<div class="modal-overlay" id="modal-settings">
+  <div class="modal">
+    <div class="modal-ribbon">
+      <span class="modal-title">Settings</span>
+      <div class="modal-x" onclick="closeModal('modal-settings')">✕</div>
+    </div>
+    <div class="modal-body">
+      <div class="set-row">
+        <div class="set-item">
+          <div class="set-btn" id="btn-sound" onclick="toggleSetting('sound')">🔊</div>
+          <span class="set-lbl">Sound</span>
+        </div>
+        <div class="set-item">
+          <div class="set-btn" id="btn-music" onclick="toggleSetting('music')">🎵</div>
+          <span class="set-lbl">Music</span>
+        </div>
+      </div>
+      <div class="btn-green" onclick="closeModal('modal-settings');openModal('modal-edit-profile')">Edit Profile</div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Profile -->
+<div class="modal-overlay" id="modal-edit-profile">
+  <div class="modal">
+    <div class="modal-ribbon">
+      <span class="modal-title">Edit Profile</span>
+      <div class="modal-x" onclick="closeModal('modal-edit-profile')">✕</div>
+    </div>
+    <div class="modal-body">
+      <div class="inp-lbl">Change name</div>
+      <input class="txt-input" type="text" value="Jeyhun Kelov">
+      <div class="inp-lbl">Change profile picture</div>
+      <div class="flag-grid" id="flag-grid">
+        <div class="flag-cell sel">🇹🇲</div>
+        <div class="flag-cell">🇦🇪</div>
+        <div class="flag-cell">🇩🇪</div>
+        <div class="flag-cell">🇬🇪</div>
+        <div class="flag-cell">🇨🇦</div>
+        <div class="flag-cell">🇧🇷</div>
+        <div class="flag-cell">🇰🇬</div>
+        <div class="flag-cell">🇺🇸</div>
+        <div class="flag-cell">🇹🇷</div>
+      </div>
+      <div class="btn-green" onclick="closeModal('modal-edit-profile')">Accept</div>
+    </div>
+  </div>
+</div>
+
+<!-- Tasks -->
+<div class="modal-overlay" id="modal-tasks">
+  <div class="modal">
+    <div class="modal-ribbon">
+      <span class="modal-title">Tasks</span>
+      <div class="modal-x" onclick="closeModal('modal-tasks')">✕</div>
+    </div>
+    <div class="modal-body">
+      <div class="sec-label">World Progress</div>
+      <div class="wp-row">
+        <div class="wp-track"><div class="wp-fill" id="wp-fill"></div></div>
+        <span style="font-size:13px;font-weight:700;color:#4A2810;font-family:Arial,sans-serif;" id="wp-txt">2/10</span>
+        <span style="font-size:22px;">🎁</span>
+      </div>
+      <div class="task-row">
+        <div class="task-icon">🪔</div>
+        <span class="task-name">Lamp</span>
+        <div class="btn-doit" id="task-lamp" onclick="completeTask('task-lamp','wp-fill','wp-txt')">Do it 🔑1</div>
+      </div>
+      <div class="task-row">
+        <div class="task-icon">🪣</div>
+        <span class="task-name">Well</span>
+        <div class="btn-doit" id="task-well" onclick="completeTask('task-well','wp-fill','wp-txt')">Do it 🔑1</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Golden Key -->
+<div class="modal-overlay" id="modal-golden-key">
+  <div class="modal">
+    <div class="modal-ribbon">
+      <span class="modal-title">Golden key</span>
+      <div class="modal-x" onclick="closeModal('modal-golden-key')">✕</div>
+    </div>
+    <div class="modal-body" style="text-align:center;">
+      <div class="key-demo">
+        <div class="mini-gems">
+          <div class="mg b"></div><div class="mg p"></div>
+          <div class="mg y"></div><div class="mg g"></div>
+        </div>
+        <span class="arr">→</span>
+        <span class="key-big">🗝️</span>
+      </div>
+      <div class="key-desc">Beat more levels to earn<br>golden key !</div>
+      <div class="btn-green" onclick="closeModal('modal-golden-key')">Continue</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /phone -->
+
+<script>
+// ── Navigation ──
+function nav(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (id === 'screen-game') buildGemGrid();
+}
+function openModal(id)  { document.getElementById(id).classList.add('active'); }
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+// ── Level grid ──
+const STAR_DATA = [3,3,2,3, 2,3,1,2, 2,1,0,0, 0,0,0,0];
+function buildLevelGrid() {
+  const g = document.getElementById('lvl-grid');
+  for (let i = 0; i < 16; i++) {
+    const unlocked = i < 10;
+    const div = document.createElement('div');
+    div.className = 'lvl-cell ' + (unlocked ? 'unlocked' : 'locked');
+    if (unlocked) {
+      const stars = STAR_DATA[i] || 0;
+      div.innerHTML =
+        `<div class="lvl-stars">${[0,1,2].map(s=>`<span class="s ${s<stars?'on':'off'}">★</span>`).join('')}</div>`+
+        `<span class="lvl-num">${i+1}</span>`;
+      div.onclick = () => { nav('screen-play'); openModal('modal-level-select'); };
+    } else {
+      div.innerHTML = '<span class="lvl-lock">🔒</span>';
+    }
+    g.appendChild(div);
+  }
+}
+
+// ══════════════════════════════════════
+// MATCH-3 GAME ENGINE
+// ══════════════════════════════════════
+const COLORS = ['b','p','y','g'];
+const ROWS = 6, COLS = 6;
+let grid = [];        // [row][col] = color string
+let selected = null;  // {r, c} | null
+let busy = false;
+let gScore = 0, gTarget = 42, gMoves = 24;
+
+// ── 초기화 ──
+function initGrid() {
+  grid = [];
+  for (let r = 0; r < ROWS; r++) {
+    grid[r] = [];
+    for (let c = 0; c < COLS; c++) {
+      let color;
+      do {
+        color = COLORS[Math.floor(Math.random() * 4)];
+      } while (
+        (c >= 2 && grid[r][c-1] === color && grid[r][c-2] === color) ||
+        (r >= 2 && grid[r-1][c] === color && grid[r-2][c] === color)
+      );
+      grid[r][c] = color;
+    }
+  }
+}
+
+function resetGame() {
+  gScore = 0; gTarget = 42; gMoves = 24;
+  selected = null; busy = false;
+  document.getElementById('g-score').textContent = '0';
+  document.getElementById('g-target').textContent = '42';
+  document.getElementById('g-moves').textContent = '24';
+  document.getElementById('g-prog').style.width = '0%';
+}
+
+function startGame() {
+  closeModal('modal-begin');
+  resetGame();
+  nav('screen-game'); // nav → buildGemGrid → initGrid 순서로 처리
+}
+
+// ── 렌더 ──
+function buildGemGrid() {
+  initGrid();
+  renderAll();
+}
+
+function renderAll() {
+  const container = document.getElementById('g-grid');
+  container.innerHTML = '';
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'gc';
+      cell.id = `gc-${r}-${c}`;
+      cell.appendChild(createGemEl(r, c));
+      container.appendChild(cell);
+    }
+  }
+}
+
+function createGemEl(r, c, isNew = false) {
+  const el = document.createElement('div');
+  el.className = 'gem ' + grid[r][c] + (isNew ? ' new-drop' : '');
+  el.dataset.r = r;
+  el.dataset.c = c;
+  el.addEventListener('pointerdown', onPointerDown);
+  return el;
+}
+
+function refreshCell(r, c, isNew = false) {
+  const cell = document.getElementById(`gc-${r}-${c}`);
+  if (!cell) return;
+  cell.innerHTML = '';
+  if (grid[r][c]) cell.appendChild(createGemEl(r, c, isNew));
+}
+
+// ── 드래그 스왑 ──
+let dragState = null; // { r, c, x, y, el, pointerId }
+const MIN_DRAG = 18;  // px — 이 이상 드래그해야 스왑 인정
+
+function onPointerDown(e) {
+  if (busy || gMoves <= 0) return;
+  e.preventDefault();
+  const r = +e.currentTarget.dataset.r;
+  const c = +e.currentTarget.dataset.c;
+
+  clearSelection();
+  const el = e.currentTarget;
+  dragState = { r, c, x: e.clientX, y: e.clientY, el };
+  el.setPointerCapture(e.pointerId);
+  el.classList.add('selected');
+  el.style.transition = 'none'; // 드래그 중 transition 제거 → 즉각 반응
+  el.addEventListener('pointermove',  onPointerMove);
+  el.addEventListener('pointerup',    onPointerUp,     { once: true });
+  el.addEventListener('pointercancel',onPointerCancel, { once: true });
+}
+
+function onPointerMove(e) {
+  if (!dragState) return;
+  const dx = e.clientX - dragState.x;
+  const dy = e.clientY - dragState.y;
+  // 젬을 손가락/커서 위치 그대로 실시간 이동
+  dragState.el.style.transform = `translate(${dx}px,${dy}px) scale(1.15)`;
+  dragState.el.style.zIndex = '20';
+}
+
+function onPointerUp(e) {
+  if (!dragState) return;
+  dragState.el.removeEventListener('pointermove', onPointerMove);
+  const dx = e.clientX - dragState.x;
+  const dy = e.clientY - dragState.y;
+  const { r, c, el } = dragState;
+  dragState = null;
+
+  // 시각 원복
+  el.style.transform = '';
+  el.style.zIndex = '';
+  el.style.transition = '';
+  el.classList.remove('selected');
+
+  const absDx = Math.abs(dx), absDy = Math.abs(dy);
+  if (Math.max(absDx, absDy) < MIN_DRAG) return;
+
+  let tr = r, tc = c;
+  if (absDx >= absDy) tc = dx > 0 ? c + 1 : c - 1;
+  else                 tr = dy > 0 ? r + 1 : r - 1;
+
+  if (tr < 0 || tr >= ROWS || tc < 0 || tc >= COLS) return;
+  trySwap(r, c, tr, tc);
+}
+
+function onPointerCancel(e) {
+  if (!dragState) return;
+  dragState.el.removeEventListener('pointermove', onPointerMove);
+  dragState.el.style.transform = '';
+  dragState.el.style.zIndex = '';
+  dragState.el.style.transition = '';
+  dragState.el.classList.remove('selected');
+  dragState = null;
+}
+
+function clearSelection() {
+  document.querySelectorAll('.gem.selected').forEach(el => el.classList.remove('selected'));
+  selected = null;
+}
+
+function trySwap(r1, c1, r2, c2) {
+  busy = true;
+  swapGrid(r1, c1, r2, c2);
+  refreshCell(r1, c1);
+  refreshCell(r2, c2);
+
+  const matches = findMatches();
+  if (matches.size === 0) {
+    // 매치 없음 → 잠깐 보여줬다가 되돌림
+    setTimeout(() => {
+      swapGrid(r1, c1, r2, c2);
+      refreshCell(r1, c1);
+      refreshCell(r2, c2);
+      busy = false;
+    }, 350);
+  } else {
+    gMoves--;
+    document.getElementById('g-moves').textContent = gMoves;
+    setTimeout(() => processMatches(matches), 150); // 스왑 후 짧은 여유
+  }
+}
+
+function swapGrid(r1, c1, r2, c2) {
+  const tmp = grid[r1][c1];
+  grid[r1][c1] = grid[r2][c2];
+  grid[r2][c2] = tmp;
+}
+
+// ── 매치 탐색 ──
+function findMatches() {
+  const matched = new Set();
+  // 가로
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS - 2; c++) {
+      const color = grid[r][c];
+      if (!color) continue;
+      if (color === grid[r][c+1] && color === grid[r][c+2]) {
+        let end = c + 2;
+        while (end + 1 < COLS && grid[r][end+1] === color) end++;
+        for (let x = c; x <= end; x++) matched.add(r * COLS + x);
+      }
+    }
+  }
+  // 세로
+  for (let c = 0; c < COLS; c++) {
+    for (let r = 0; r < ROWS - 2; r++) {
+      const color = grid[r][c];
+      if (!color) continue;
+      if (color === grid[r+1][c] && color === grid[r+2][c]) {
+        let end = r + 2;
+        while (end + 1 < ROWS && grid[end+1][c] === color) end++;
+        for (let y = r; y <= end; y++) matched.add(y * COLS + c);
+      }
+    }
+  }
+  return matched;
+}
+
+// ── 매치 처리 → 낙하 → 연쇄 ──
+function processMatches(matches) {
+  // 1단계: matched 표시 + grid 상태 null 처리
+  for (const idx of matches) {
+    const r = Math.floor(idx / COLS), c = idx % COLS;
+    const gem = document.querySelector(`#gc-${r}-${c} .gem`);
+    if (gem) gem.classList.add('matched');
+    if (grid[r][c] === 'b') gTarget = Math.max(0, gTarget - 1);
+    gScore += 100 + matches.size * 10;
+    grid[r][c] = null;
+  }
+  updateHUD();
+
+  // 2단계: flash 끝난 뒤(600ms) 중력 적용
+  setTimeout(() => {
+    // gravity 전에 어떤 칸이 비어있었는지 snapshot
+    const wasNull = new Set();
+    for (let r = 0; r < ROWS; r++)
+      for (let c = 0; c < COLS; c++)
+        if (grid[r][c] === null) wasNull.add(r * COLS + c);
+
+    applyGravity();
+
+    // 3단계: 비어있던 칸만 drop 애니, 나머지는 그냥 갱신
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const idx = r * COLS + c;
+        if (wasNull.has(idx)) {
+          // 새로 채워진 칸 — drop 애니
+          const cell = document.getElementById(`gc-${r}-${c}`);
+          cell.innerHTML = '';
+          cell.appendChild(createGemEl(r, c, true));
+        } else {
+          // 기존 젬이 그대로인 칸 — DOM 그대로 유지 (.matched만 클린업)
+          const gem = document.querySelector(`#gc-${r}-${c} .gem`);
+          if (gem && gem.classList.contains('matched')) {
+            refreshCell(r, c, false);
+          }
+        }
+      }
+    }
+
+    // 4단계: drop 애니(320ms) + 여유 후 연쇄 체크
+    setTimeout(() => {
+      const cascade = findMatches();
+      if (cascade.size > 0) {
+        processMatches(cascade);
+      } else {
+        busy = false;
+        checkEndGame();
+      }
+    }, 420);
+  }, 600);
+}
+
+// ── 중력 (빈 칸을 아래로 채움) ──
+function applyGravity() {
+  for (let c = 0; c < COLS; c++) {
+    let write = ROWS - 1;
+    for (let r = ROWS - 1; r >= 0; r--) {
+      if (grid[r][c] !== null) {
+        grid[write][c] = grid[r][c];
+        if (write !== r) grid[r][c] = null;
+        write--;
+      }
+    }
+    while (write >= 0) {
+      grid[write][c] = COLORS[Math.floor(Math.random() * 4)];
+      write--;
+    }
+  }
+}
+
+
+// ── HUD 갱신 ──
+function updateHUD() {
+  document.getElementById('g-score').textContent = gScore.toLocaleString();
+  document.getElementById('g-target').textContent = gTarget;
+  document.getElementById('g-prog').style.width = Math.min(100, ((42 - gTarget) / 42) * 100) + '%';
+}
+
+// ── 종료 체크 ──
+function checkEndGame() {
+  if (gTarget <= 0 || gMoves <= 0) {
+    document.getElementById('win-score').textContent = gScore.toLocaleString();
+    setTimeout(() => openModal('modal-win'), 400);
+  }
+}
+
+// ── Settings toggles ──
+const ST = { sound: true, music: true };
+function toggleSetting(k) {
+  ST[k] = !ST[k];
+  document.getElementById('btn-'+k).classList.toggle('off', !ST[k]);
+}
+
+// ── Task completion ──
+let wpDone = 0;
+function completeTask(btnId, fillId, txtId) {
+  const btn = document.getElementById(btnId);
+  if (btn.classList.contains('done')) return;
+  btn.classList.add('done');
+  btn.textContent = '✓ Done';
+  wpDone++;
+  const pct = Math.min(100, (wpDone/2)*100);
+  document.getElementById(fillId).style.width = pct + '%';
+  const val = 2 + wpDone;
+  document.getElementById(txtId).textContent = val + '/10';
+}
+
+// ── Flag selection ──
+document.getElementById('flag-grid').addEventListener('click', e => {
+  const cell = e.target.closest('.flag-cell');
+  if (!cell) return;
+  document.querySelectorAll('.flag-cell').forEach(f => f.classList.remove('sel'));
+  cell.classList.add('sel');
+});
+
+// ── Init ──
+buildLevelGrid();
+buildGemGrid();
+</script>
+</body>
+</html>

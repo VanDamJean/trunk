@@ -1,0 +1,9 @@
+Command: native folder audit
+Started: 2026-06-03T11:27:18Z
+
+android/: absent
+
+ios/: absent
+
+Exit code: 0
+Finished: 2026-06-03T11:27:18Z

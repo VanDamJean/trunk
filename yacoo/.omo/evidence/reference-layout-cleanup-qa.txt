@@ -1,0 +1,7 @@
+scorePanelVisible=true
+scorePanelBox={"x":318,"y":18,"width":312,"height":1378.625}
+dicePanelVisible=true
+diceCount=5
+cubeCount=5
+visibleLogPanel=false
+overflowOk=true

@@ -1,0 +1,1 @@
+UpgradeScreen.kt compiles, upgradeCost/canUpgrade logic untouched, localized labels preserved.

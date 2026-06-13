@@ -1,0 +1,4 @@
+dice=5
+cubes=5
+pips=105
+expected=dice 5, cubes 5, pips 105

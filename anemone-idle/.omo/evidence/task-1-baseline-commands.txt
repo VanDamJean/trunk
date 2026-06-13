@@ -1,0 +1,30 @@
+Task 1 baseline command evidence summary
+Started: 2026-06-03T11:28:28Z
+
+== task-1-npm-test.txt ==
+1:Command: npm test
+18:Exit code: 0
+
+== task-1-npm-build.txt ==
+1:Command: npm run build
+12:dist/index.html                  0.62 kB │ gzip:  0.41 kB
+13:dist/assets/index-BZAdXuA0.css  24.53 kB │ gzip:  5.01 kB
+14:dist/assets/index-BLNzLOmR.js   50.73 kB │ gzip: 16.38 kB
+18:Exit code: 0
+20:dist/: present
+
+== task-1-progression-validation.txt ==
+1:Command: node scripts/validate-progression-content.mjs
+6:Exit code: 0
+
+== task-1-balance-report.txt ==
+1:Command: node scripts/balance-report.mjs --scenario chapter1-active
+27:Exit code: 1
+
+== task-1-native-folder-audit.txt ==
+1:Command: native folder audit
+4:android/: absent
+6:ios/: absent
+8:Exit code: 0
+
+Finished: 2026-06-03T11:28:28Z

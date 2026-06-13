@@ -1,0 +1,25 @@
+{
+  "name": "anemone-idle",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "mobile:sync": "npm run build && cap sync",
+    "mobile:android": "npm run build && cap run android",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "vitest run",
+    "mobile:ios": "npm run build && cap run ios",
+    "mobile:open:android": "cap open android",
+    "mobile:open:ios": "cap open ios"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/cli": "^7.4.4",
+    "@capacitor/core": "^7.4.4",
+    "@capacitor/ios": "^7.6.6",
+    "vite": "^8.0.14",
+    "vitest": "^4.1.7"
+  }
+}

@@ -1,0 +1,13 @@
+
+> yacoo@0.0.0 test /Users/a1/Desktop/manus/yacoo
+> vitest -- --run src/game/scoring.test.ts
+
+
+ RUN  v4.1.8 /Users/a1/Desktop/manus/yacoo
+
+
+ Test Files  2 passed (2)
+      Tests  10 passed (10)
+   Start at  22:31:51
+   Duration  547ms (transform 37ms, setup 77ms, import 62ms, tests 57ms, environment 594ms)
+

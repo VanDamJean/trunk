@@ -1,0 +1,13 @@
+Task 7 Android debug build
+Started: 2026-06-03T12:37:04Z
+
+BLOCKED-BY-ENV: java command exists but no Java Runtime is installed.
+Exact output:
+The operation couldn’t be completed. Unable to locate a Java Runtime.
+Please visit http://www.java.com for information on installing Java.
+
+
+Next action: install a JDK compatible with the generated Android Gradle project, then rerun ./android/gradlew assembleDebug.
+
+Android build/check exit code: 127
+Finished: 2026-06-03T12:37:04Z

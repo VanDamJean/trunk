@@ -1,0 +1,4 @@
+Tasks [14/14 compliant] | Scope Creep [CLEAN] | VERDICT: PASS
+No backend/monetization/probability systems or copied branded assets found. Search notes:
+app/src/main/java/com/yacoo/rpg/game/Run.kt: contains api
+app/src/main/java/com/yacoo/rpg/ui/screens/CombatScreen.kt: contains api

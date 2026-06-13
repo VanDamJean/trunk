@@ -1,0 +1,73 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - article [ref=e549]:
+      - generic [ref=e550]: 🫧
+      - generic [ref=e551]:
+        - strong [ref=e552]: "19"
+        - generic [ref=e553]: 꿈틀밥 · +0.2/초
+    - article [ref=e554]:
+      - generic [ref=e555]: ⚪
+      - generic [ref=e556]:
+        - strong [ref=e557]: "0.0"
+        - generic [ref=e558]: 허세 진주 · +0.0/초
+    - article [ref=e559]:
+      - generic [ref=e560]: 🌊
+      - generic [ref=e561]:
+        - strong [ref=e562]: "0.0"
+        - generic [ref=e563]: 뿅 파워 · +0.0/초
+  - generic [ref=e20]:
+    - generic [ref=e25]: "3"
+    - generic [ref=e29]:
+      - paragraph [ref=e30]: 합법인 척하는 산호초 스타트업
+      - 'heading "말미잘 방치형: 뿅 회사" [level=1] [ref=e564]'
+      - paragraph [ref=e32]: 사장 말미잘을 두들기고, 촉수 알바를 고용하고, 바다 헛소리를 분기별 꿈틀 수익으로 바꾸세요.
+    - text: BLOOP
+  - generic [ref=e33]:
+    - article [ref=e565]:
+      - generic [ref=e566]:
+        - paragraph [ref=e567]: 회사식 무리수
+        - heading "국수 구덩이 채용" [level=2] [ref=e568]
+        - paragraph [ref=e569]: 인턴 촉수가 노조 만들기 전에 5개 보유.
+      - generic "국수 구덩이 채용 진행도" [ref=e570]
+      - button "1 / 5" [disabled] [ref=e572] [cursor=pointer]
+    - article [ref=e573]:
+      - generic [ref=e574]:
+        - paragraph [ref=e575]: 회사식 무리수
+        - heading "관리직 발명" [level=2] [ref=e576]
+        - paragraph [ref=e577]: 작은 클립보드를 든 새우 중간관리자 3마리 보유.
+      - generic "관리직 발명 진행도" [ref=e578]
+      - button "0 / 3" [disabled] [ref=e579] [cursor=pointer]
+    - article [ref=e580]:
+      - generic [ref=e581]:
+        - paragraph [ref=e582]: 회사식 무리수
+        - heading "살짝 유명해지기" [level=2] [ref=e583]
+        - paragraph [ref=e584]: 조개 관종력으로 누적 허세 진주 25개 모으기.
+      - generic "살짝 유명해지기 진행도" [ref=e585]
+      - button "0 / 25" [disabled] [ref=e586] [cursor=pointer]
+  - generic [ref=e55]: 언어 도깨비가 자막을 바꿨습니다.
+  - generic [ref=e587]:
+    - paragraph [ref=e588]: 옵션 지하실
+    - heading "헛소리 언어 선택" [level=2] [ref=e589]
+    - paragraph [ref=e590]: 모든 문구를 영어와 한국어로 바꿉니다. 작은 산호초 도깨비가 이 기기에 선택을 기억합니다.
+    - generic [ref=e591]:
+      - button "English" [ref=e592] [cursor=pointer]:
+        - strong [ref=e593]: English
+      - button "한국어 현재 외치는 중" [ref=e595] [cursor=pointer]:
+        - strong [ref=e596]: 한국어
+        - generic [ref=e597]: 현재 외치는 중
+    - article [ref=e598]:
+      - heading "이 사기가 돈 버는 법" [level=3] [ref=e599]
+      - paragraph [ref=e600]: 생산자를 고용한 뒤부터 방치 수입이 시작됩니다. 거대한 뿅 버튼은 여전히 축축한 권력을 느끼는 가장 빠른 길입니다.
+  - navigation "Game tabs" [ref=e104]:
+    - button "🪸 노동 산호초" [ref=e601] [cursor=pointer]:
+      - text: 🪸
+      - generic [ref=e106]: 노동 산호초
+    - button "🫧 전리품 조개" [ref=e602] [cursor=pointer]:
+      - text: 🫧
+      - generic [ref=e108]: 전리품 조개
+    - button "⚪ 허세 진주" [ref=e603] [cursor=pointer]:
+      - text: ⚪
+      - generic [ref=e110]: 허세 진주
+    - button "⚙ 언어 도깨비" [ref=e604] [cursor=pointer]:
+      - text: ⚙
+      - generic [ref=e112]: 언어 도깨비

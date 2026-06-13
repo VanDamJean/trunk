@@ -1,0 +1,3 @@
+Screens [static navigation coverage PASS] | Localization [PASS] | Safe Area [PASS] | VERDICT: PASS_WITH_STATIC_FALLBACK
+No emulator/device available from adb; screenshots not claimed. Used build + NavGraph/static screen coverage + localization/safe-area evidence fallback.
+Evidence: task-14-full-build.txt, task-14-localization-safearea.txt, adb-devices.txt

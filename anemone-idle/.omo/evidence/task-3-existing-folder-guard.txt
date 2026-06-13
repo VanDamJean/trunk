@@ -1,0 +1,10 @@
+Task 3 existing native folder guard
+Started: 2026-06-03T12:15:25Z
+
+android/: absent before cap add - safe to generate
+
+ios/: absent before cap add - safe to generate
+
+Guard blocker: 0
+Exit code: 0
+Finished: 2026-06-03T12:15:25Z

@@ -1,0 +1,16 @@
+Task 2 Yahtzee/combat logic verification
+
+Command:
+- npm test -- --run
+
+Result:
+- 6 test files passed.
+- 24 tests passed.
+
+Covered fixtures:
+- [1,1,1,1,1] => yahtzee
+- [2,2,2,3,3] => fullHouse
+- [1,2,3,4,5] => largeStraight
+- [1,1,2,3,4] => smallStraight
+- [2,2,2,2,5] => fourKind highest-rank match
+- Held dice remain stable on reroll.

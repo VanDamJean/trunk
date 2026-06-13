@@ -1,0 +1,189 @@
+{
+  "schema_version": 2,
+  "active_work_id": "habby-yahtzee-correction-a18002ab",
+  "works": {
+    "habby-yahtzee-correction-a18002ab": {
+      "work_id": "habby-yahtzee-correction-a18002ab",
+      "active_plan": "/Users/a1/Desktop/manus/yacoo_rpg/.omo/plans/habby-yahtzee-correction.md",
+      "plan_name": "habby-yahtzee-correction",
+      "status": "completed",
+      "started_at": "2026-06-03T18:12:24.170Z",
+      "updated_at": "2026-06-04T05:58:02.872Z",
+      "session_ids": [
+        "opencode:ses_171503c3affeYcX0yNKgRMLOEr",
+        "opencode:ses_1714dc72bfferHCewY9GMlDh7p",
+        "opencode:ses_1714dc707ffeL7MhpD8WLMJ6iA",
+        "opencode:ses_1714dc69bffenpTnzNjk4eKZXD",
+        "opencode:ses_1714dc68dffeF6fmM4098BlibJ"
+      ],
+      "session_origins": {
+        "opencode:ses_171503c3affeYcX0yNKgRMLOEr": "direct",
+        "opencode:ses_1714dc72bfferHCewY9GMlDh7p": "appended",
+        "opencode:ses_1714dc707ffeL7MhpD8WLMJ6iA": "appended",
+        "opencode:ses_1714dc69bffenpTnzNjk4eKZXD": "appended",
+        "opencode:ses_1714dc68dffeF6fmM4098BlibJ": "appended"
+      },
+      "agent": "atlas",
+      "task_sessions": {
+        "todo:1": {
+          "task_key": "todo:1",
+          "task_label": "1",
+          "task_title": "Add selectable Yahtzee category mechanics",
+          "session_id": "opencode:ses_1714036b6ffeUgEZsx3DwOXvEG",
+          "agent": "general",
+          "category": "",
+          "started_at": "2026-06-03T18:16:29.370Z",
+          "status": "running",
+          "updated_at": "2026-06-03T18:33:06.325Z"
+        },
+        "todo:2": {
+          "task_key": "todo:2",
+          "task_label": "2",
+          "task_title": "Replace Combat dice panel with direct category selection",
+          "session_id": "opencode:ses_1714dc68dffeF6fmM4098BlibJ",
+          "agent": "librarian",
+          "category": "",
+          "started_at": "2026-06-03T18:35:06.238Z",
+          "status": "running",
+          "updated_at": "2026-06-03T23:48:52.764Z"
+        },
+        "todo:4": {
+          "task_key": "todo:4",
+          "task_label": "4",
+          "task_title": "Remake screens around game-like mobile hierarchy",
+          "session_id": "opencode:ses_16ef3891fffelGDSl2QR66dX4E",
+          "agent": "Sisyphus-Junior",
+          "category": "",
+          "started_at": "2026-06-04T05:23:24.058Z",
+          "status": "running",
+          "updated_at": "2026-06-04T05:27:53.498Z"
+        },
+        "todo:6": {
+          "task_key": "todo:6",
+          "task_label": "6",
+          "task_title": "Update Playwright QA and Korean docs",
+          "session_id": "opencode:ses_16ee2e18effeQqf2kNyhMt1Tut",
+          "agent": "general",
+          "category": "",
+          "started_at": "2026-06-04T05:30:36.725Z",
+          "status": "running",
+          "updated_at": "2026-06-04T05:34:34.667Z"
+        },
+        "todo:7": {
+          "task_key": "todo:7",
+          "task_label": "7",
+          "task_title": "Run full regression and remove old-flow leftovers",
+          "session_id": "opencode:ses_16eddade1ffeP5lnyqt1HMMXds",
+          "agent": "general",
+          "category": "",
+          "updated_at": "2026-06-04T05:41:13.971Z",
+          "started_at": "2026-06-04T05:41:13.971Z",
+          "status": "running"
+        },
+        "final-wave:f1": {
+          "task_key": "final-wave:f1",
+          "task_label": "F1",
+          "task_title": "Plan Compliance Audit — oracle",
+          "session_id": "opencode:ses_16ecc457bffedEaJ7lwHrmbHV7",
+          "agent": "general",
+          "category": "",
+          "started_at": "2026-06-04T05:47:18.184Z",
+          "status": "running",
+          "updated_at": "2026-06-04T05:56:54.788Z"
+        }
+      },
+      "ended_at": "2026-06-04T05:58:02.872Z",
+      "elapsed_ms": 42338702
+    }
+  },
+  "active_plan": "/Users/a1/Desktop/manus/yacoo_rpg/.omo/plans/habby-yahtzee-correction.md",
+  "started_at": "2026-06-03T18:12:24.170Z",
+  "status": "completed",
+  "updated_at": "2026-06-04T05:58:02.872Z",
+  "session_ids": [
+    "opencode:ses_171503c3affeYcX0yNKgRMLOEr",
+    "opencode:ses_1714dc72bfferHCewY9GMlDh7p",
+    "opencode:ses_1714dc707ffeL7MhpD8WLMJ6iA",
+    "opencode:ses_1714dc69bffenpTnzNjk4eKZXD",
+    "opencode:ses_1714dc68dffeF6fmM4098BlibJ"
+  ],
+  "session_origins": {
+    "opencode:ses_171503c3affeYcX0yNKgRMLOEr": "direct",
+    "opencode:ses_1714dc72bfferHCewY9GMlDh7p": "appended",
+    "opencode:ses_1714dc707ffeL7MhpD8WLMJ6iA": "appended",
+    "opencode:ses_1714dc69bffenpTnzNjk4eKZXD": "appended",
+    "opencode:ses_1714dc68dffeF6fmM4098BlibJ": "appended"
+  },
+  "plan_name": "habby-yahtzee-correction",
+  "task_sessions": {
+    "todo:1": {
+      "task_key": "todo:1",
+      "task_label": "1",
+      "task_title": "Add selectable Yahtzee category mechanics",
+      "session_id": "opencode:ses_1714036b6ffeUgEZsx3DwOXvEG",
+      "agent": "general",
+      "category": "",
+      "started_at": "2026-06-03T18:16:29.370Z",
+      "status": "running",
+      "updated_at": "2026-06-03T18:33:06.325Z"
+    },
+    "todo:2": {
+      "task_key": "todo:2",
+      "task_label": "2",
+      "task_title": "Replace Combat dice panel with direct category selection",
+      "session_id": "opencode:ses_1714dc68dffeF6fmM4098BlibJ",
+      "agent": "librarian",
+      "category": "",
+      "started_at": "2026-06-03T18:35:06.238Z",
+      "status": "running",
+      "updated_at": "2026-06-03T23:48:52.764Z"
+    },
+    "todo:4": {
+      "task_key": "todo:4",
+      "task_label": "4",
+      "task_title": "Remake screens around game-like mobile hierarchy",
+      "session_id": "opencode:ses_16ef3891fffelGDSl2QR66dX4E",
+      "agent": "Sisyphus-Junior",
+      "category": "",
+      "started_at": "2026-06-04T05:23:24.058Z",
+      "status": "running",
+      "updated_at": "2026-06-04T05:27:53.498Z"
+    },
+    "todo:6": {
+      "task_key": "todo:6",
+      "task_label": "6",
+      "task_title": "Update Playwright QA and Korean docs",
+      "session_id": "opencode:ses_16ee2e18effeQqf2kNyhMt1Tut",
+      "agent": "general",
+      "category": "",
+      "started_at": "2026-06-04T05:30:36.725Z",
+      "status": "running",
+      "updated_at": "2026-06-04T05:34:34.667Z"
+    },
+    "todo:7": {
+      "task_key": "todo:7",
+      "task_label": "7",
+      "task_title": "Run full regression and remove old-flow leftovers",
+      "session_id": "opencode:ses_16eddade1ffeP5lnyqt1HMMXds",
+      "agent": "general",
+      "category": "",
+      "updated_at": "2026-06-04T05:41:13.971Z",
+      "started_at": "2026-06-04T05:41:13.971Z",
+      "status": "running"
+    },
+    "final-wave:f1": {
+      "task_key": "final-wave:f1",
+      "task_label": "F1",
+      "task_title": "Plan Compliance Audit — oracle",
+      "session_id": "opencode:ses_16ecc457bffedEaJ7lwHrmbHV7",
+      "agent": "general",
+      "category": "",
+      "started_at": "2026-06-04T05:47:18.184Z",
+      "status": "running",
+      "updated_at": "2026-06-04T05:56:54.788Z"
+    }
+  },
+  "agent": "atlas",
+  "ended_at": "2026-06-04T05:58:02.872Z",
+  "elapsed_ms": 42338702
+}

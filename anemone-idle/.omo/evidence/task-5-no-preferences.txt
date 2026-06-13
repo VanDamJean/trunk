@@ -1,0 +1,8 @@
+Command: rg -n "@capacitor/preferences" package.json package-lock.json
+Started: 2026-06-03T12:31:54Z
+
+Result: @capacitor/preferences absent
+
+rg exit code: 1
+Evidence exit code: 0
+Finished: 2026-06-03T12:31:54Z

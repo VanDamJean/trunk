@@ -1,0 +1,97 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - article [ref=e169]:
+      - generic [ref=e170]: 🫧
+      - generic [ref=e171]:
+        - strong [ref=e172]: "8.2"
+        - generic [ref=e173]: Plankton · +0.2/s
+    - article [ref=e174]:
+      - generic [ref=e175]: ⚪
+      - generic [ref=e176]:
+        - strong [ref=e177]: "0.0"
+        - generic [ref=e178]: Pearls · +0.0/s
+    - article [ref=e179]:
+      - generic [ref=e180]: 🌊
+      - generic [ref=e181]:
+        - strong [ref=e182]: "0.0"
+        - generic [ref=e183]: Tide Energy · +0.0/s
+  - generic [ref=e20]:
+    - generic [ref=e22]: ✺
+    - generic [ref=e26]:
+      - paragraph [ref=e27]: Abyss Garden 01
+      - heading "Anemone Idle" [level=1] [ref=e28]
+      - paragraph [ref=e29]: Grow a moonlit reef colony, call helpers from the tide, and open drifting capsules.
+  - generic [ref=e30]:
+    - article [ref=e184]:
+      - generic [ref=e185]:
+        - paragraph [ref=e186]: Mission
+        - heading "Wake the colony" [level=2] [ref=e187]
+        - paragraph [ref=e188]: Own 5 Drift Polyps.
+      - generic "Wake the colony progress" [ref=e189]
+      - button "1 / 5" [disabled] [ref=e191]
+    - article [ref=e192]:
+      - generic [ref=e193]:
+        - paragraph [ref=e194]: Mission
+        - heading "Recruit reef helpers" [level=2] [ref=e195]
+        - paragraph [ref=e196]: Own 3 Cleaner Shrimp.
+      - generic "Recruit reef helpers progress" [ref=e197]
+      - button "0 / 3" [disabled] [ref=e198]
+    - article [ref=e199]:
+      - generic [ref=e200]:
+        - paragraph [ref=e201]: Mission
+        - heading "Polish a cache" [level=2] [ref=e202]
+        - paragraph [ref=e203]: Collect 25 lifetime pearls.
+      - generic "Polish a cache progress" [ref=e204]
+      - button "0 / 25" [disabled] [ref=e205]
+  - generic [ref=e52]: The reef grows another helper.
+  - generic [ref=e53]:
+    - generic [ref=e206]:
+      - paragraph [ref=e207]: Production reef
+      - heading "Stacked bloom engines" [level=2] [ref=e208]
+    - generic [ref=e209]:
+      - article [ref=e210]:
+        - generic [ref=e211]: 🪸
+        - generic [ref=e212]:
+          - generic [ref=e213]:
+            - heading "Drift Polyps" [level=3] [ref=e214]
+            - strong [ref=e215]: "1"
+          - paragraph [ref=e216]: Tiny tentacles comb food from the passing blue.
+          - text: +0.2/s Plankton
+        - button "Buy · 14 🫧" [disabled] [ref=e217]
+      - article [ref=e218]:
+        - generic [ref=e219]: 🦐
+        - generic [ref=e220]:
+          - generic [ref=e221]:
+            - heading "Cleaner Shrimp" [level=3] [ref=e222]
+            - strong [ref=e223]: "0"
+          - paragraph [ref=e224]: Helpful reef keepers herd morsels toward the colony.
+          - text: +0.0/s Plankton
+        - button "Buy · 95 🫧" [disabled] [ref=e225]
+      - article [ref=e226]:
+        - generic [ref=e227]: 🐚
+        - generic [ref=e228]:
+          - generic [ref=e229]:
+            - heading "Shell Nursery" [level=3] [ref=e230]
+            - strong [ref=e231]: "0"
+          - paragraph [ref=e232]: Patient shells polish grit into small moon-bright pearls.
+          - text: +0.0/s Pearls
+        - button "Buy · 720 🫧" [disabled] [ref=e233]
+      - article [ref=e234]:
+        - generic [ref=e235]: 🌙
+        - generic [ref=e236]:
+          - generic [ref=e237]:
+            - heading "Moon Current" [level=3] [ref=e238]
+            - strong [ref=e239]: "0"
+          - paragraph [ref=e240]: A looping tide ribbon stores power for deeper blooms.
+          - text: +0.0/s Tide Energy
+        - button "Buy · 28 ⚪" [disabled] [ref=e241]
+  - navigation "Game tabs" [ref=e90]:
+    - button "🪸 Reef" [ref=e91] [cursor=pointer]:
+      - text: 🪸
+      - generic [ref=e92]: Reef
+    - button "🫧 Capsule" [ref=e93] [cursor=pointer]:
+      - text: 🫧
+      - generic [ref=e94]: Capsule
+    - button "⚪ Pearls" [ref=e95] [cursor=pointer]:
+      - text: ⚪
+      - generic [ref=e96]: Pearls

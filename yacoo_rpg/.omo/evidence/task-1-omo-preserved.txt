@@ -1,0 +1,9 @@
+Task 1 OMO preservation verification
+
+Confirmed paths:
+- .omo/plans/yahtzee-rpg-habby-style.md exists.
+- .omo/drafts/yahtzee-rpg-habby-style.md exists.
+- .omo/notepads/yahtzee-rpg-habby-style/issues.md exists.
+- .omo/evidence/ exists.
+
+.omo was not deleted during scaffold creation.

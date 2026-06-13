@@ -1,0 +1,17 @@
+Task: task-2-combat-category-selection-general
+Date: 2026-06-04
+
+Selected attack flow source evidence:
+- `src/screens/CombatScreen.tsx` imports `ATTACK_CATEGORIES`, `calculateSelectedCategoryDamage`, and `getValidAttackCategories`.
+- Valid categories are computed only when `dice.length === COMBAT_TIMING.diceCount && rolls > 0`; otherwise every attack category button is disabled with `Roll first`.
+- Every `ATTACK_CATEGORIES` entry is rendered as a category button under `Choose Attack Hand` with visible text like `Pair x1.2` and accessible label like `Pair attack x1.2`.
+- After a complete roll, categories not returned by `getValidAttackCategories(dice)` are disabled with `Not matched`.
+- Clicking an enabled category calls `resolveCategory(category)`, guards against invalid categories, and applies `calculateSelectedCategoryDamage(equipment, category)`.
+- Attack feedback uses the selected metadata: `${label} attack x${multiplier} dealt ${damage}`.
+- Resolving a category sets the last selected category, damages the enemy, closes the panel, clears dice, clears holds, resets rolls to 0, consumes dice charge, and resumes auto-battle by setting `diceOpen` false.
+- `Cancel Dice` calls the same reset/close path without calling damage logic.
+- DEV fixtures set dice to `[2, 2, 2, 2, 5]` or `[2, 2, 2, 3, 3]`, set rolls to 1, clear holds, and open the panel.
+
+Local verification:
+- `npm run build` exits 0.
+- `npm test -- --run` exits 0.

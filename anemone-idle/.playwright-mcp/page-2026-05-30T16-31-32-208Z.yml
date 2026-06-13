@@ -1,0 +1,73 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - article [ref=e228]:
+      - generic [ref=e229]: 🫧
+      - generic [ref=e230]:
+        - strong [ref=e231]: "20"
+        - generic [ref=e232]: Wiggle Food · +0.0/s
+    - article [ref=e233]:
+      - generic [ref=e234]: ⚪
+      - generic [ref=e235]:
+        - strong [ref=e236]: "0.0"
+        - generic [ref=e237]: Drama Pearls · +0.0/s
+    - article [ref=e238]:
+      - generic [ref=e239]: 🌊
+      - generic [ref=e240]:
+        - strong [ref=e241]: "0.0"
+        - generic [ref=e242]: Bloop Power · +0.0/s
+  - generic [ref=e20]:
+    - generic [ref=e25]: "3"
+    - generic [ref=e29]:
+      - paragraph [ref=e30]: Totally Legal Reef Startup
+      - 'heading "Anemone Idle: Bloop Office" [level=1] [ref=e31]'
+      - paragraph [ref=e32]: Mash the boss blob, hire underpaid tentacles, and turn ocean nonsense into quarterly wiggle profit.
+    - text: BLOOP
+  - generic [ref=e33]:
+    - article [ref=e243]:
+      - generic [ref=e244]:
+        - paragraph [ref=e245]: Corporate Dare
+        - heading "Staff the noodle pit" [level=2] [ref=e246]
+        - paragraph [ref=e247]: Own 5 Intern Tentacles before they unionize.
+      - generic "Staff the noodle pit progress" [ref=e248]
+      - button "0 / 5" [disabled] [ref=e249] [cursor=pointer]
+    - article [ref=e250]:
+      - generic [ref=e251]:
+        - paragraph [ref=e252]: Corporate Dare
+        - heading "Invent management" [level=2] [ref=e253]
+        - paragraph [ref=e254]: Own 3 Shrimp Middle Managers with tiny clipboards.
+      - generic "Invent management progress" [ref=e255]
+      - button "0 / 3" [disabled] [ref=e256] [cursor=pointer]
+    - article [ref=e257]:
+      - generic [ref=e258]:
+        - paragraph [ref=e259]: Corporate Dare
+        - heading "Become mildly famous" [level=2] [ref=e260]
+        - paragraph [ref=e261]: Collect 25 lifetime Drama Pearls from clam clout.
+      - generic "Become mildly famous progress" [ref=e262]
+      - button "0 / 25" [disabled] [ref=e263] [cursor=pointer]
+  - generic [ref=e55]: A tiny anemone opens a basement company with zero permits.
+  - generic [ref=e264]:
+    - paragraph [ref=e265]: Options Basement
+    - heading "Choose your nonsense language" [level=2] [ref=e266]
+    - paragraph [ref=e267]: Flip every label between English and Korean. The tiny reef goblin remembers your choice on this device.
+    - generic [ref=e268]:
+      - button "English Currently yelling" [ref=e269] [cursor=pointer]:
+        - strong [ref=e270]: English
+        - generic [ref=e271]: Currently yelling
+      - button "한국어" [ref=e272] [cursor=pointer]:
+        - strong [ref=e273]: 한국어
+    - article [ref=e275]:
+      - heading "How the scam earns" [level=3] [ref=e276]
+      - paragraph [ref=e277]: Idle income starts after you hire producers. The giant bloop button is still the fastest way to feel powerful and damp.
+  - navigation "Game tabs" [ref=e120]:
+    - button "🪸 Grind Reef" [ref=e121] [cursor=pointer]:
+      - text: 🪸
+      - generic [ref=e122]: Grind Reef
+    - button "🫧 Loot Clam" [ref=e123] [cursor=pointer]:
+      - text: 🫧
+      - generic [ref=e124]: Loot Clam
+    - button "⚪ Drama Pearls" [ref=e125] [cursor=pointer]:
+      - text: ⚪
+      - generic [ref=e126]: Drama Pearls
+    - button "⚙ Language Goblin" [active] [ref=e127] [cursor=pointer]:
+      - text: ⚙
+      - generic [ref=e128]: Language Goblin

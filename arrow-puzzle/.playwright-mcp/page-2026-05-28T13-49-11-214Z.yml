@@ -1,0 +1,62 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - article [ref=e286]:
+      - generic [ref=e287]: 🫧
+      - generic [ref=e288]:
+        - strong [ref=e289]: "11"
+        - generic [ref=e290]: Plankton · +0.2/s
+    - article [ref=e291]:
+      - generic [ref=e292]: ⚪
+      - generic [ref=e293]:
+        - strong [ref=e294]: "0.0"
+        - generic [ref=e295]: Pearls · +0.0/s
+    - article [ref=e296]:
+      - generic [ref=e297]: 🌊
+      - generic [ref=e298]:
+        - strong [ref=e299]: "0.0"
+        - generic [ref=e300]: Tide Energy · +0.0/s
+  - generic [ref=e20]:
+    - generic [ref=e22]: ✺
+    - generic [ref=e26]:
+      - paragraph [ref=e27]: Abyss Garden 01
+      - heading "Anemone Idle" [level=1] [ref=e28]
+      - paragraph [ref=e29]: Grow a moonlit reef colony, call helpers from the tide, and open drifting capsules.
+  - generic [ref=e30]:
+    - article [ref=e301]:
+      - generic [ref=e302]:
+        - paragraph [ref=e303]: Mission
+        - heading "Wake the colony" [level=2] [ref=e304]
+        - paragraph [ref=e305]: Own 5 Drift Polyps.
+      - generic "Wake the colony progress" [ref=e306]
+      - button "1 / 5" [disabled] [ref=e308]
+    - article [ref=e309]:
+      - generic [ref=e310]:
+        - paragraph [ref=e311]: Mission
+        - heading "Recruit reef helpers" [level=2] [ref=e312]
+        - paragraph [ref=e313]: Own 3 Cleaner Shrimp.
+      - generic "Recruit reef helpers progress" [ref=e314]
+      - button "0 / 3" [disabled] [ref=e315]
+    - article [ref=e316]:
+      - generic [ref=e317]:
+        - paragraph [ref=e318]: Mission
+        - heading "Polish a cache" [level=2] [ref=e319]
+        - paragraph [ref=e320]: Collect 25 lifetime pearls.
+      - generic "Polish a cache progress" [ref=e321]
+      - button "0 / 25" [disabled] [ref=e322]
+  - generic [ref=e52]: A reef capsule begins to glow.
+  - generic [ref=e323]:
+    - generic [ref=e324]: ◌
+    - paragraph [ref=e325]: Timed reef capsule
+    - heading "Capsule ripening" [level=2] [ref=e326]
+    - paragraph [ref=e327]: Capsules bring a burst of plankton and rare materials based on your reef.
+    - button "Ready in 5:00" [disabled] [ref=e330]
+  - navigation "Game tabs" [ref=e90]:
+    - button "🪸 Reef" [ref=e91] [cursor=pointer]:
+      - text: 🪸
+      - generic [ref=e92]: Reef
+    - button "🫧 Capsule" [ref=e93] [cursor=pointer]:
+      - text: 🫧
+      - generic [ref=e94]: Capsule
+    - button "⚪ Pearls" [ref=e95] [cursor=pointer]:
+      - text: ⚪
+      - generic [ref=e96]: Pearls

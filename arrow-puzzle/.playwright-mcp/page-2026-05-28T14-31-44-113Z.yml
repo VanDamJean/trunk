@@ -1,0 +1,106 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - article [ref=e5]:
+      - generic [ref=e6]: 🫧
+      - generic [ref=e7]:
+        - strong [ref=e8]: "20"
+        - generic [ref=e9]: Plankton · +0.0/s
+    - article [ref=e10]:
+      - generic [ref=e11]: ⚪
+      - generic [ref=e12]:
+        - strong [ref=e13]: "0.0"
+        - generic [ref=e14]: Pearls · +0.0/s
+    - article [ref=e15]:
+      - generic [ref=e16]: 🌊
+      - generic [ref=e17]:
+        - strong [ref=e18]: "0.0"
+        - generic [ref=e19]: Tide Energy · +0.0/s
+  - generic [ref=e20]:
+    - generic [ref=e22]: ✺
+    - generic [ref=e26]:
+      - paragraph [ref=e27]: Abyss Garden 01
+      - heading "Anemone Idle" [level=1] [ref=e28]
+      - paragraph [ref=e29]: Grow a moonlit reef colony, call helpers from the tide, and open drifting capsules.
+  - generic [ref=e30]:
+    - article [ref=e31]:
+      - generic [ref=e32]:
+        - paragraph [ref=e33]: Mission
+        - heading "Wake the colony" [level=2] [ref=e34]
+        - paragraph [ref=e35]: Own 5 Drift Polyps.
+      - generic "Wake the colony progress" [ref=e36]
+      - button "0 / 5" [disabled] [ref=e37]
+    - article [ref=e38]:
+      - generic [ref=e39]:
+        - paragraph [ref=e40]: Mission
+        - heading "Recruit reef helpers" [level=2] [ref=e41]
+        - paragraph [ref=e42]: Own 3 Cleaner Shrimp.
+      - generic "Recruit reef helpers progress" [ref=e43]
+      - button "0 / 3" [disabled] [ref=e44]
+    - article [ref=e45]:
+      - generic [ref=e46]:
+        - paragraph [ref=e47]: Mission
+        - heading "Polish a cache" [level=2] [ref=e48]
+        - paragraph [ref=e49]: Collect 25 lifetime pearls.
+      - generic "Polish a cache progress" [ref=e50]
+      - button "0 / 25" [disabled] [ref=e51]
+  - generic [ref=e52]: A young reef anemone opens to the current.
+  - generic [ref=e53]:
+    - generic [ref=e54]:
+      - paragraph [ref=e55]: Production reef
+      - heading "Stacked bloom engines" [level=2] [ref=e56]
+    - generic [ref=e57]:
+      - generic [ref=e58]:
+        - paragraph [ref=e59]: Manual tide
+        - heading "Pulse the reef" [level=2] [ref=e60]
+        - paragraph [ref=e61]: Tap the anemone to squeeze plankton from the current. Producers keep earning while you wait.
+      - button "Pulse +3.0 🫧" [ref=e62] [cursor=pointer]
+    - generic [ref=e63]:
+      - article [ref=e64]:
+        - generic [ref=e65]: 🪸
+        - generic [ref=e66]:
+          - generic [ref=e67]:
+            - heading "Drift Polyps" [level=3] [ref=e68]
+            - strong [ref=e69]: "0"
+          - paragraph [ref=e70]: Tiny tentacles comb food from the passing blue.
+          - text: +0.0/s Plankton
+        - button "Buy · 12 🫧" [ref=e71] [cursor=pointer]
+      - article [ref=e72]:
+        - generic [ref=e73]: 🦐
+        - generic [ref=e74]:
+          - generic [ref=e75]:
+            - heading "Cleaner Shrimp" [level=3] [ref=e76]
+            - strong [ref=e77]: "0"
+          - paragraph [ref=e78]: Helpful reef keepers herd morsels toward the colony.
+          - text: +0.0/s Plankton
+        - button "Buy · 95 🫧" [disabled] [ref=e79]
+      - article [ref=e80]:
+        - generic [ref=e81]: 🐚
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - heading "Shell Nursery" [level=3] [ref=e84]
+            - strong [ref=e85]: "0"
+          - paragraph [ref=e86]: Patient shells polish grit into small moon-bright pearls.
+          - text: +0.0/s Pearls
+        - button "Buy · 720 🫧" [disabled] [ref=e87]
+      - article [ref=e88]:
+        - generic [ref=e89]: 🌙
+        - generic [ref=e90]:
+          - generic [ref=e91]:
+            - heading "Moon Current" [level=3] [ref=e92]
+            - strong [ref=e93]: "0"
+          - paragraph [ref=e94]: A looping tide ribbon stores power for deeper blooms.
+          - text: +0.0/s Tide Energy
+        - button "Buy · 28 ⚪" [disabled] [ref=e95]
+  - navigation "Game tabs" [ref=e96]:
+    - button "🪸 Reef" [ref=e97] [cursor=pointer]:
+      - text: 🪸
+      - generic [ref=e98]: Reef
+    - button "🫧 Capsule" [ref=e99] [cursor=pointer]:
+      - text: 🫧
+      - generic [ref=e100]: Capsule
+    - button "⚪ Pearls" [ref=e101] [cursor=pointer]:
+      - text: ⚪
+      - generic [ref=e102]: Pearls
+    - button "⚙ Options" [ref=e103] [cursor=pointer]:
+      - text: ⚙
+      - generic [ref=e104]: Options

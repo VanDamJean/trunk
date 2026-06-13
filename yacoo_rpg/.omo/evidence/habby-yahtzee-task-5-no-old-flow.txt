@@ -1,0 +1,10 @@
+Old-flow grep evidence after Task 4/5 verification
+
+Runtime source search for `Best hand|Resolve Attack`:
+No matches found in runtime source files.
+
+Test source search for `Resolve Attack`:
+src/App.test.tsx contains only negative assertions that the old `Resolve Attack` button is not present after opening dice and after resolving selected Pair.
+
+Interpretation:
+Runtime has no old auto-best-only flow. Tests target selected category buttons (`Pair attack x1.2`, disabled `Full House attack x2.5`, disabled `Yahtzee attack x6`) and include negative coverage for the rejected old button.

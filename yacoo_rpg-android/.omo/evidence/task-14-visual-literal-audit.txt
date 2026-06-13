@@ -1,0 +1,263 @@
+app/src/main/java/com/yacoo/rpg/ui/components/GameArt.kt:27: private val SHADOW_COLOR    = Color(0x22503015)
+app/src/main/java/com/yacoo/rpg/ui/components/GameArt.kt:192:         drawRect(Brush.verticalGradient(listOf(ArtSky, Color(0xFFCDF0FF))))
+app/src/main/java/com/yacoo/rpg/ui/components/GameArt.kt:238:     size: Dp = 120.dp,
+app/src/main/java/com/yacoo/rpg/ui/components/GameComponents.kt:123:             .height(52.dp)
+app/src/main/java/com/yacoo/rpg/ui/components/GameComponents.kt:314:                     .width(24.dp)
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:129:         tonalElevation  = 0.dp
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:269:         modifier = modifier.fillMaxWidth().height(52.dp),
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:290:         modifier = modifier.fillMaxWidth().height(46.dp),
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:311:             .height(10.dp)
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:312:             .clip(RoundedCornerShape(5.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/CombatScreen.kt:212:                         .width(80.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/CombatScreen.kt:215:                     HeroCanvas(modifier = Modifier.size(64.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/CombatScreen.kt:239:                         .width(80.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/CombatScreen.kt:242:                     MonsterCanvas(modifier = Modifier.size(64.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:85:     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:91:             Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:95:                     fontSize = 30.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:101:                     fontSize = 13.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:108:                     .clip(RoundedCornerShape(999.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:110:                     .border(1.5.dp, ColorHeldBorder, RoundedCornerShape(999.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:111:                     .padding(horizontal = 12.dp, vertical = 7.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:113:                 fontSize = 11.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:119:             fontSize = 12.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:135:             .clip(RoundedCornerShape(24.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:144:             .border(2.dp, ColorHeldBorder, RoundedCornerShape(24.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:145:             .padding(14.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:146:         verticalArrangement = Arrangement.spacedBy(12.dp)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:149:             horizontalArrangement = Arrangement.spacedBy(14.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:154:                     .size(132.dp)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:155:                     .clip(RoundedCornerShape(22.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:157:                     .border(1.5.dp, Color.White.copy(alpha = 0.9f), RoundedCornerShape(22.dp)),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:163:                     size = 116.dp
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:169:                 verticalArrangement = Arrangement.spacedBy(8.dp)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:174:                     fontSize = 20.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:180:                     fontSize = 12.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:183:                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:190:         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:192:                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:213:             .clip(RoundedCornerShape(14.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:215:             .border(1.dp, ColorHeldBorder.copy(alpha = 0.55f), RoundedCornerShape(14.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:216:             .padding(horizontal = 12.dp, vertical = 8.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:219:         Text(value, fontWeight = FontWeight.Black, fontSize = 16.sp, color = ColorPrimaryBottom)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:220:         Text(label, fontWeight = FontWeight.Bold, fontSize = 10.sp, color = ColorMuted)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:234:             .clip(RoundedCornerShape(16.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:237:                 1.5.dp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:239:                 RoundedCornerShape(16.dp)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:242:             .padding(horizontal = 10.dp, vertical = 9.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:243:         horizontalArrangement = Arrangement.spacedBy(8.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:246:         Text(slotEmoji(slot), fontSize = 22.sp)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:251:                 fontSize = 12.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:257:                 fontSize = 11.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:269:             .clip(RoundedCornerShape(20.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:271:             .border(2.dp, ColorHeldBorder, RoundedCornerShape(20.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:272:             .padding(14.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:273:         verticalArrangement = Arrangement.spacedBy(10.dp)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:276:             horizontalArrangement = Arrangement.spacedBy(12.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:281:                     .size(54.dp)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:282:                     .clip(RoundedCornerShape(16.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:284:                     .border(1.5.dp, Color.White.copy(alpha = 0.8f), RoundedCornerShape(16.dp)),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:287:                 Text(slotEmoji(item.slot), fontSize = 30.sp)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:293:                     fontSize = 18.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:299:                     fontSize = 12.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:306:                     .clip(RoundedCornerShape(999.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:308:                     .padding(horizontal = 11.dp, vertical = 7.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:310:                 fontSize = 12.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:318:                 .clip(RoundedCornerShape(14.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:320:                 .padding(12.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:321:             verticalArrangement = Arrangement.spacedBy(4.dp)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:326:                 fontSize = 12.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:332:                 fontSize = 15.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:344:             .clip(RoundedCornerShape(18.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:346:             .border(1.5.dp, Color(0x22000000), RoundedCornerShape(18.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:347:             .padding(horizontal = 14.dp, vertical = 12.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:351:         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:355:                 fontSize = 18.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:361:                 fontSize = 11.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:368:                 .clip(RoundedCornerShape(999.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:370:                 .padding(horizontal = 12.dp, vertical = 7.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:372:             fontSize = 12.sp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:389:             .clip(RoundedCornerShape(18.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:392:                 1.5.dp,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:394:                 RoundedCornerShape(18.dp)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:397:             .padding(12.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:398:         horizontalArrangement = Arrangement.spacedBy(12.dp),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:403:                 .size(46.dp)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:404:                 .clip(RoundedCornerShape(14.dp))
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:406:                 .border(1.dp, ColorHeldBorder.copy(alpha = 0.45f), RoundedCornerShape(14.dp)),
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:409:             Text(slotEmoji(item.slot), fontSize = 26.sp)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:413:             verticalArrangement = Arrangement.spacedBy(2.dp)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:415:             Text(item.name, fontWeight = FontWeight.Black, fontSize = 15.sp, color = ColorInkStrong)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:416:             Text(labels.equippedNow, fontWeight = FontWeight.Bold, fontSize = 11.sp, color = ColorBark)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:417:             Text(equipmentBonusLabel(item), fontSize = 12.sp, color = ColorMuted)
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:424:                 fontSize = 14.sp
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:430:                 fontSize = 10.sp
+app/src/main/java/com/yacoo/rpg/ui/screens/HomeScreen.kt:84:                     size      = 120.dp
+app/src/main/java/com/yacoo/rpg/ui/screens/HomeScreen.kt:97:                     .size(44.dp)
+app/src/main/java/com/yacoo/rpg/ui/screens/RunMapScreen.kt:68:                         .size(52.dp)
+app/src/main/java/com/yacoo/rpg/ui/screens/RunMapScreen.kt:110:                             .width(2.dp)
+app/src/main/java/com/yacoo/rpg/ui/screens/RunMapScreen.kt:111:                             .height(24.dp)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:8: val ColorInk         = Color(0xFF2F2519)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:9: val ColorInkStrong   = Color(0xFF21180F)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:10: val ColorInkSoft     = Color(0xFF604627)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:11: val ColorMuted       = Color(0xFF7B664E)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:12: val ColorBark        = Color(0xFF6F4B26)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:15: val ColorCard        = Color(0xDCFFFFFF)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:16: val ColorCardSolid   = Color(0xFFFFFAF0)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:17: val ColorCream       = Color(0xFFFFF8DF)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:18: val ColorCreamWarm   = Color(0xFFFFF3C9)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:19: val ColorCreamSoft   = Color(0xFFFFF0B9)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:20: val ColorDisabled    = Color(0xFFC9BDA8)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:23: val ColorPrimaryTop    = Color(0xFF8BD552)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:24: val ColorPrimaryBottom = Color(0xFF4F9B3F)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:25: val ColorPrimaryShadow = Color(0xFF2F7132)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:28: val ColorSecondaryTop    = Color(0xFFFFD96F)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:29: val ColorSecondaryBottom = Color(0xFFEE9328)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:30: val ColorSecondaryShadow = Color(0xFFBD7025)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:33: val ColorDangerTop    = Color(0xFFFF8D8D)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:34: val ColorDangerBottom = Color(0xFFDF5555)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:37: val ColorHpFillStart = Color(0xFF7AC34A)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:38: val ColorHpFillEnd   = Color(0xFFFFD66B)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:39: val ColorHpTrack     = Color(0x29503015)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:42: val ColorHeld        = Color(0xFFDFF7BD)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:43: val ColorHeldBorder  = Color(0xFF7DBD4E)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:45: val ColorRedDot      = Color(0xFFF13636)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:50: val ColorSurfaceElevated = Color(0xFFFFFFFF)  // elevated card
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:51: val ColorSurfacePanel   = Color(0xFFFFF5E0)   // inner panel background
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:52: val ColorOverlayDim     = Color(0x80000000)   // modal/dialog overlay
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:55: val ColorOutline        = Color(0xFFD4C4A8)   // default border
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:56: val ColorOutlineSubtle  = Color(0xFFE8DCC8)   // light separator
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:57: val ColorOutlineStrong  = Color(0xFF8B7355)   // emphasized border
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:62: val ColorTextTertiary   = Color(0xFF9E8D78)    // hint/caption text
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:64: val ColorTextOnDark     = Color(0xFFFFF8DF)    // text on dark bg
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:65: val ColorTextDanger     = Color(0xFFCC3333)    // error/danger text
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:68: val RarityCommon       = Color(0xFFA0937D)     // bronze/stone
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:69: val RarityUncommon     = Color(0xFF6BBF59)     // forest green
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:70: val RarityRare         = Color(0xFF4DA6D9)     // teal blue
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:71: val RarityEpic         = Color(0xFFD97BF5)     // orchid magenta
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:72: val RarityLegendary    = Color(0xFFFFB347)     // blazing amber/gold
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:75: val RarityCommonBg     = Color(0x1AA0937D)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:76: val RarityUncommonBg   = Color(0x1A6BBF59)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:77: val RarityRareBg       = Color(0x1A4DA6D9)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:78: val RarityEpicBg       = Color(0x1AD97BF5)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:79: val RarityLegendaryBg  = Color(0x1AFFB347)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:82: val ColorStateSuccess     = Color(0xFF5CB85C)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:83: val ColorStateWarning     = Color(0xFFFFAA33)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:84: val ColorStateError       = Color(0xFFE04B4B)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:85: val ColorStateDisabledFg  = Color(0x613F2A1A)  // 38% opacity ink
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:89: val ColorNavBg         = Color(0xF0FFF3C9)     // bottom nav bg
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:90: val ColorNavIndicator  = Color(0x30549B3F)     // active tab indicator
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:96: val ColorCardShadow    = Color(0x14000000)      // subtle shadow
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:97: val ColorCardHighlight = Color(0x338BD552)      // selected card glow
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:110: val ColorSlotEmpty     = Color(0x0D2F2519)      // very subtle fill
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:112: val ColorSlotLocked    = Color(0x337B664E)       // locked overlay
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:122: val ArtHeroLight  = Color(0xFFF7C576)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:123: val ArtHeroDeep   = Color(0xFFC97A3D)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:124: val ArtLeafLight  = Color(0xFF9EE35E)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:125: val ArtLeafDeep   = Color(0xFF3D9C45)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:126: val ArtMossLight  = Color(0xFF89D96B)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:127: val ArtMossDeep   = Color(0xFF2F7D4D)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:128: val ArtBark       = Color(0xFF8B5930)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:129: val ArtCream      = Color(0xFFFFF1C9)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:130: val ArtSky        = Color(0xFF9CE3FF)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:131: val ArtHillBack   = Color(0xFF89D56F)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:132: val ArtHillFront  = Color(0xFF54B75A)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:133: val ArtGround     = Color(0xFFD99A42)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:134: val ArtPath       = Color(0xFFFFE0A0)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:135: val ArtSun        = Color(0xFFFFE66D)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:136: val ArtOutline    = Color(0xFF51351F)
+app/src/main/java/com/yacoo/rpg/ui/theme/Color.kt:137: val ArtLine       = Color(0xFF3B2819)
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:24:     HOME("🏠"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:25:     BATTLE("⚔️"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:26:     GEAR("🛡"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:27:     UPGRADE("⬆️"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:28:     DRAW("🎲"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:31:     WEAPON("⚔️"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:32:     ARMOR("🛡"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:33:     CHARM("💎"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:34:     BOOTS("👟"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:37:     GOLD("💰"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:38:     GEM("💎"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:39:     ENERGY("⚡"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:41:     SCRAP("🔩"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:44:     ATTACK("⚔️"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:45:     DEFEND("🛡"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:46:     DICE("🎲"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:47:     HEAL("❤️"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:51:     REWARD("🎁"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:53:     CHEST("🗃️"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:56:     SETTINGS("⚙️"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:59:     RESET("🔄"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:63:     VICTORY("🏆"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:64:     DEFEAT("💀"),
+app/src/main/java/com/yacoo/rpg/ui/theme/GameIcons.kt:67:     ARROW_UP("⬆"),
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:16:         fontSize = 28.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:17:         lineHeight = 32.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:22:         fontSize = 20.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:23:         lineHeight = 24.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:28:         fontSize = 16.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:29:         lineHeight = 20.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:34:         fontSize = 14.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:35:         lineHeight = 20.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:40:         fontSize = 13.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:41:         lineHeight = 16.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:46:         fontSize = 11.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:47:         lineHeight = 14.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:57:         fontSize = 24.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:58:         lineHeight = 28.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:63:         fontSize = 18.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:64:         lineHeight = 22.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:69:         fontSize = 16.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:70:         lineHeight = 20.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:75:         fontSize = 14.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:76:         lineHeight = 18.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:81:         fontSize = 10.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:82:         lineHeight = 12.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:87:         fontSize = 13.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:88:         lineHeight = 16.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:93:         fontSize = 11.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:94:         lineHeight = 14.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:99:         fontSize = 14.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:100:         lineHeight = 18.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:105:         fontSize = 14.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:106:         lineHeight = 20.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:111:         fontSize = 11.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:112:         lineHeight = 14.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:117:         fontSize = 10.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:118:         lineHeight = 12.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:123:         fontSize = 10.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:124:         lineHeight = 12.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:129:         fontSize = 9.sp,
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:130:         lineHeight = 11.sp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:137:     val xs   = 2.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:138:     val sm   = 4.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:139:     val md   = 8.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:140:     val lg   = 12.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:141:     val xl   = 16.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:142:     val xxl  = 24.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:143:     val xxxl = 32.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:145:     val screenPadding = 16.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:146:     val cardPadding   = 12.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:147:     val chipPaddingH  = 10.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:148:     val chipPaddingV  = 4.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:149:     val itemGap       = 8.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:150:     val sectionGap    = 16.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:156:     val sm     = 8.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:157:     val md     = 12.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:158:     val lg     = 16.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:159:     val xl     = 20.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:160:     val pill   = 22.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:161:     val circle = 50.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:163:     val cardRadius   = 14.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:164:     val buttonRadius = 14.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:165:     val chipRadius   = 20.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:166:     val panelRadius  = 16.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:172:     val flat       = 0.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:173:     val low        = 2.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:174:     val medium     = 4.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:175:     val high       = 8.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:176:     val prominent  = 12.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:182:     val thin   = 1.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:183:     val medium = 2.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:184:     val thick  = 3.dp
+app/src/main/java/com/yacoo/rpg/ui/theme/Type.kt:185:     val heavy  = 4.dp

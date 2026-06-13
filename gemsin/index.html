@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemsin Prototype</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="stage">
+      <section id="onboarding-1" class="phone-screen welcome-screen view">
+        <header class="status-bar">
+          <span>9:41</span>
+          <span class="status-icons">◉ ◉ ◉</span>
+        </header>
+
+        <div class="welcome-hero">
+          <div class="arcade-box">
+            <span class="arcade-title" id="onboarding-1-badge">GEMSIN</span>
+          </div>
+        </div>
+
+        <section class="welcome-panel">
+          <h1 id="onboarding-1-title">Games Are More Fun!</h1>
+          <p id="onboarding-1-desc"></p>
+          <div class="onboarding-meta">
+            <button class="meta-btn" data-target="home-screen">Skip</button>
+            <div class="dots">
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+          <button class="cta-circle next-onboarding" data-target="onboarding-2" aria-label="다음 화면">
+            ❯
+          </button>
+        </section>
+      </section>
+
+      <section id="onboarding-2" class="phone-screen welcome-screen view hidden">
+        <header class="status-bar">
+          <span>9:41</span>
+          <span class="status-icons">◉ ◉ ◉</span>
+        </header>
+
+        <div class="welcome-hero">
+          <div class="arcade-box alt-box">
+            <span class="arcade-title" id="onboarding-2-badge">LEVEL UP</span>
+          </div>
+        </div>
+
+        <section class="welcome-panel">
+          <h1 id="onboarding-2-title">Compete & Earn</h1>
+          <p id="onboarding-2-desc"></p>
+          <div class="onboarding-meta">
+            <button class="meta-btn" data-target="home-screen">Skip</button>
+            <div class="dots">
+              <span class="dot"></span>
+              <span class="dot active"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+          <button class="cta-circle next-onboarding" data-target="onboarding-3" aria-label="다음 화면">
+            ❯
+          </button>
+        </section>
+      </section>
+
+      <section id="onboarding-3" class="phone-screen welcome-screen view hidden">
+        <header class="status-bar">
+          <span>9:41</span>
+          <span class="status-icons">◉ ◉ ◉</span>
+        </header>
+
+        <div class="welcome-hero">
+          <div class="arcade-box alt-box-2">
+            <span class="arcade-title" id="onboarding-3-badge">COMMUNITY</span>
+          </div>
+        </div>
+
+        <section class="welcome-panel">
+          <h1 id="onboarding-3-title">Play Together</h1>
+          <p id="onboarding-3-desc"></p>
+          <div class="onboarding-meta">
+            <button class="meta-btn" data-target="home-screen">Skip</button>
+            <div class="dots">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot active"></span>
+            </div>
+          </div>
+          <button class="cta-circle next-onboarding" data-target="home-screen" aria-label="홈으로 이동">
+            ✓
+          </button>
+        </section>
+      </section>
+
+      <section id="home-screen" class="phone-screen home-screen view hidden">
+        <header class="status-bar">
+          <span>9:41</span>
+          <span class="status-icons">◉ ◉ ◉</span>
+        </header>
+
+        <div class="top-row">
+          <div class="chip ticket-chip">🎟 270</div>
+          <div class="brand">GEMSIN</div>
+          <button class="avatar tab-nav avatar-btn" data-target="profile-screen" aria-label="프로필 이동">
+            🕶️
+          </button>
+        </div>
+
+        <section class="checkin-card">
+          <h2>Daily Check In</h2>
+          <p>Dapatkan 5 kredit tiap harinya!</p>
+          <div class="progress-wrap">
+            <div class="progress-fill"></div>
+            <span>Day 1</span>
+          </div>
+        </section>
+
+        <section class="stats-row">
+          <article class="stat-card active">
+            <strong>623</strong>
+            <span>Total Diamond</span>
+          </article>
+          <article class="stat-card">
+            <strong>982</strong>
+            <span>Total Kredit</span>
+          </article>
+        </section>
+
+        <div class="search-row">
+          <div class="search-box">🔍 Ketik Sesatu..</div>
+          <button class="filter-btn">⎚</button>
+        </div>
+
+        <section class="game-grid" id="home-game-grid">
+        </section>
+
+        <nav class="bottom-tab">
+          <button class="tab-item active tab-nav" data-target="home-screen">🏠<span>Home</span></button>
+          <button class="tab-item tab-nav" data-target="leaderboard-screen">📊<span>Leaderboard</span></button>
+          <button class="tab-item center active-center tab-nav" data-target="ticket-screen">🎟</button>
+          <button class="tab-item tab-nav" data-target="friends-screen">👥<span>Teman</span></button>
+          <button class="tab-item tab-nav" data-target="history-screen">📋<span>History</span></button>
+        </nav>
+      </section>
+
+      <section id="leaderboard-screen" class="phone-screen home-screen view hidden">
+        <header class="status-bar"><span>9:41</span><span class="status-icons">◉ ◉ ◉</span></header>
+        <div class="page-wrap">
+          <div class="page-head">
+            <h2>Leaderboard</h2>
+            <button class="mini-chip" id="leaderboard-range-btn">Weekly</button>
+          </div>
+          <div class="segmented-control" id="leaderboard-region-tabs">
+            <button class="segment-btn active" data-region="nasional">Nasional</button>
+            <button class="segment-btn" data-region="provinsi">Provinsi</button>
+            <button class="segment-btn" data-region="kota">Kota</button>
+          </div>
+          <div class="dropdown-wrap">
+            <button class="dropdown-trigger" id="leaderboard-game-trigger">Semua Permainan ▾</button>
+            <div class="dropdown-menu hidden" id="leaderboard-game-menu">
+              <button class="dropdown-item active" data-game-filter="all">Semua Permainan</button>
+              <button class="dropdown-item" data-game-filter="flappy">Flappy Bird</button>
+              <button class="dropdown-item" data-game-filter="abc">ABC 5 Dasar</button>
+              <button class="dropdown-item" data-game-filter="lari">Lari Cepat</button>
+              <button class="dropdown-item" data-game-filter="hitung">Hitung Matematika</button>
+              <button class="dropdown-item" data-game-filter="tetris">Tetris</button>
+            </div>
+          </div>
+          <div class="tool-row">
+            <input id="leaderboard-search" class="tool-input" type="text" placeholder="Search player..." />
+            <button class="mini-chip" id="leaderboard-sort-btn">Sort: High</button>
+          </div>
+          <h3 class="lb-title">Hall of Fame</h3>
+          <div class="rank-podium" id="leaderboard-podium"></div>
+          <div class="list-card" id="leaderboard-list"></div>
+          <div id="leaderboard-empty" class="empty-state hidden">
+            <strong>No leaderboard data</strong>
+            <p>Try another keyword or change the sort/range filter.</p>
+          </div>
+        </div>
+        <nav class="bottom-tab">
+          <button class="tab-item tab-nav" data-target="home-screen">🏠<span>Home</span></button>
+          <button class="tab-item active tab-nav" data-target="leaderboard-screen">📊<span>Leaderboard</span></button>
+          <button class="tab-item center tab-nav" data-target="ticket-screen">🎟</button>
+          <button class="tab-item tab-nav" data-target="friends-screen">👥<span>Teman</span></button>
+          <button class="tab-item tab-nav" data-target="history-screen">📋<span>History</span></button>
+        </nav>
+      </section>
+
+      <section id="ticket-screen" class="phone-screen home-screen view hidden">
+        <header class="status-bar"><span>9:41</span><span class="status-icons">◉ ◉ ◉</span></header>
+        <div class="page-wrap">
+          <div class="page-head">
+            <h2>Credit & Ticket</h2>
+            <button class="mini-chip">Wallet</button>
+          </div>
+          <div class="wallet-card">
+            <div><span>Current Credit</span><strong id="wallet-credit">982</strong></div>
+            <button class="action-btn" data-mock-action="daily-claim">Claim Daily +5</button>
+          </div>
+          <div class="list-card" id="ticket-packs">
+            <h3 class="sub-head">Top Up Packs</h3>
+          </div>
+        </div>
+        <nav class="bottom-tab">
+          <button class="tab-item tab-nav" data-target="home-screen">🏠<span>Home</span></button>
+          <button class="tab-item tab-nav" data-target="leaderboard-screen">📊<span>Leaderboard</span></button>
+          <button class="tab-item center active-center tab-nav" data-target="ticket-screen">🎟</button>
+          <button class="tab-item tab-nav" data-target="friends-screen">👥<span>Teman</span></button>
+          <button class="tab-item tab-nav" data-target="history-screen">📋<span>History</span></button>
+        </nav>
+      </section>
+
+      <section id="friends-screen" class="phone-screen home-screen view hidden">
+        <header class="status-bar"><span>9:41</span><span class="status-icons">◉ ◉ ◉</span></header>
+        <div class="page-wrap">
+          <div class="page-head">
+            <h2>Teman</h2>
+            <button class="mini-chip tab-nav" data-target="profile-screen">My Profile</button>
+          </div>
+          <div class="tool-row">
+            <input id="friends-search" class="tool-input" type="text" placeholder="Search friends..." />
+          </div>
+          <div class="list-card" id="friends-list"></div>
+        </div>
+        <nav class="bottom-tab">
+          <button class="tab-item tab-nav" data-target="home-screen">🏠<span>Home</span></button>
+          <button class="tab-item tab-nav" data-target="leaderboard-screen">📊<span>Leaderboard</span></button>
+          <button class="tab-item center tab-nav" data-target="ticket-screen">🎟</button>
+          <button class="tab-item active tab-nav" data-target="friends-screen">👥<span>Teman</span></button>
+          <button class="tab-item tab-nav" data-target="history-screen">📋<span>History</span></button>
+        </nav>
+      </section>
+
+      <section id="profile-screen" class="phone-screen home-screen view hidden">
+        <header class="status-bar">
+          <button class="icon-back tab-nav" data-target="home-screen">‹</button>
+          <span>Profile</span>
+          <span class="status-icons"></span>
+        </header>
+        <div class="profile-top">
+          <div class="profile-avatar">🕶️</div>
+          <strong>Wan Sabrina Mayzura</strong>
+          <small>@wansabrina | +6281247029597</small>
+        </div>
+        <section class="checkin-card profile-checkin">
+          <h2>Daily Check In</h2>
+          <p>Dapatkan 5 kredit tiap harinya!</p>
+          <div class="progress-wrap">
+            <div class="progress-fill"></div>
+            <span>Day 3</span>
+          </div>
+          <button class="inline-link tab-nav" data-target="daily-checkin-screen">Klaim disini</button>
+        </section>
+        <section class="list-card profile-list">
+          <button class="settings-row tab-nav" data-target="edit-profile-screen">Edit Profile</button>
+          <button class="settings-row">Notifications</button>
+          <button class="settings-row">Bahasa</button>
+        </section>
+        <section class="list-card profile-list">
+          <button class="settings-row">Help & Support</button>
+          <button class="settings-row">Contact Us</button>
+          <button class="settings-row">Privacy Policy</button>
+        </section>
+        <nav class="bottom-tab">
+          <button class="tab-item tab-nav" data-target="home-screen">🏠<span>Home</span></button>
+          <button class="tab-item tab-nav" data-target="leaderboard-screen">📊<span>Leaderboard</span></button>
+          <button class="tab-item center active-center tab-nav" data-target="ticket-screen">🎟</button>
+          <button class="tab-item active tab-nav" data-target="friends-screen">👥<span>Teman</span></button>
+          <button class="tab-item tab-nav" data-target="history-screen">📋<span>History</span></button>
+        </nav>
+      </section>
+
+      <section id="daily-checkin-screen" class="phone-screen home-screen view hidden">
+        <header class="status-bar">
+          <button class="icon-back tab-nav" data-target="profile-screen">‹</button>
+          <span>Daily Checkin</span>
+          <span class="status-icons"></span>
+        </header>
+        <div class="daily-hero">
+          <div class="daily-credit">
+            <span>2</span><span>7</span><span>5</span><small>Kredit</small>
+          </div>
+          <div class="calendar-card">
+            <div class="calendar-hooks">◉ ◉ ◉ ◉ ◉ ◉ ◉</div>
+            <div class="calendar-grid">
+              <span class="day done">✓</span><span class="day done">✓</span><span class="day done">✓</span>
+              <span class="day">4</span><span class="day">5</span><span class="day">6</span><span class="day">7</span>
+              <span class="day">8</span><span class="day">9</span><span class="day">10</span><span class="day">11</span><span class="day">12</span><span class="day">13</span><span class="day">14</span>
+              <span class="day">15</span><span class="day">16</span><span class="day">17</span><span class="day">18</span><span class="day">19</span><span class="day">20</span><span class="day">21</span>
+              <span class="day">22</span><span class="day">23</span><span class="day">24</span><span class="day">25</span><span class="day">26</span><span class="day">27</span><span class="day">28</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="edit-profile-screen" class="phone-screen home-screen view hidden">
+        <header class="status-bar">
+          <button class="icon-back tab-nav" data-target="profile-screen">‹</button>
+          <span>Profile</span>
+          <span class="status-icons"></span>
+        </header>
+        <div class="profile-top compact">
+          <div class="profile-avatar">🕶️</div>
+          <small>Ubah Foto Profile</small>
+        </div>
+        <form class="form-wrap" id="edit-profile-form">
+          <label>Nama Lengkap<input type="text" value="Wan Sabrina Mayzura" /></label>
+          <label>Username<input type="text" value="@wansabrina" /></label>
+          <label>No Telepon<input type="text" value="08147029597" /></label>
+          <label>Alamat Pengiriman<textarea>Wan Sabrina Mayzura | 08147029597 Jalan Bukit Merah Brava, Jawa Maju, 3rd Kepulau</textarea></label>
+          <button type="submit" class="save-btn">Simpan</button>
+        </form>
+      </section>
+
+      <section id="history-screen" class="phone-screen home-screen view hidden">
+        <header class="status-bar"><span>9:41</span><span class="status-icons">◉ ◉ ◉</span></header>
+        <div class="page-wrap">
+          <div class="page-head">
+            <h2>History</h2>
+            <button class="mini-chip">This Week</button>
+          </div>
+          <div class="tool-row">
+            <button class="mini-chip history-filter active-filter" data-history-filter="all">All</button>
+            <button class="mini-chip history-filter" data-history-filter="today">Today</button>
+            <button class="mini-chip history-filter" data-history-filter="yesterday">Yesterday</button>
+          </div>
+          <div class="list-card" id="history-list"></div>
+          <div id="history-empty" class="empty-state hidden">
+            <strong>No history yet</strong>
+            <p>No records for this filter range.</p>
+          </div>
+        </div>
+        <nav class="bottom-tab">
+          <button class="tab-item tab-nav" data-target="home-screen">🏠<span>Home</span></button>
+          <button class="tab-item tab-nav" data-target="leaderboard-screen">📊<span>Leaderboard</span></button>
+          <button class="tab-item center tab-nav" data-target="ticket-screen">🎟</button>
+          <button class="tab-item tab-nav" data-target="friends-screen">👥<span>Teman</span></button>
+          <button class="tab-item active tab-nav" data-target="history-screen">📋<span>History</span></button>
+        </nav>
+      </section>
+
+      <div id="game-detail-modal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-card">
+          <div class="page-head">
+            <h2 id="modal-game-title">Game Detail</h2>
+            <button id="close-modal-btn" class="mini-chip">Close</button>
+          </div>
+          <p id="modal-game-desc" class="modal-desc"></p>
+          <div class="modal-meta">
+            <span id="modal-game-mode" class="mini-chip"></span>
+            <span id="modal-game-difficulty" class="mini-chip"></span>
+          </div>
+          <button id="modal-start-btn" class="action-btn">Start Game</button>
+        </div>
+      </div>
+    </main>
+
+    <script src="./mock-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

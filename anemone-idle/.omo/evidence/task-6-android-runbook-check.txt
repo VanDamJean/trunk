@@ -1,0 +1,27 @@
+Task 6 Android runbook command check
+Started: 2026-06-03T12:35:20Z
+
+Documented mobile scripts from package.json:
+mobile:sync=npm run build && cap sync
+mobile:android=npm run build && cap run android
+mobile:open:android=cap open android
+
+Generated Android folder:
+android/: present
+
+Runbook command mentions:
+47:npm run build
+59:npm run mobile:sync
+62:이 스크립트는 내부적으로 `npm run build && cap sync`를 실행합니다.
+69:npm run build
+70:npx cap add android
+71:npm run mobile:sync
+77:npm run mobile:open:android
+83:npm run mobile:android
+93:npm run build
+95:npm run mobile:sync
+137:`android/` 또는 `ios/`가 이미 있으면 `npx cap add`를 다시 실행하지 말고 먼저 폴더 상태를 확인합니다. 덮어쓰기보다 `npm run mobile:sync`를 우선 사용합니다.
+147:`npm run mobile:sync` 전에 항상 `npm run build`가 성공해야 합니다. 오래된 `dist/`가 네이티브 앱에 들어가지 않도록 sync 스크립트는 빌드를 먼저 실행합니다.
+
+rg exit code: 0
+Finished: 2026-06-03T12:35:20Z

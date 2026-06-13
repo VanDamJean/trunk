@@ -1,0 +1,37 @@
+Command: npm test && npm run build
+Started: 2026-06-03T12:14:28Z
+
+== npm test ==
+
+> anemone-idle@0.1.0 test
+> vitest run
+
+
+ RUN  v4.1.7 /Users/a1/Desktop/manus/anemone-idle
+
+
+ Test Files  11 passed (11)
+      Tests  52 passed (52)
+   Start at  21:14:28
+   Duration  212ms (transform 341ms, setup 0ms, import 526ms, tests 68ms, environment 1ms)
+
+
+npm test exit code: 0
+
+== npm run build ==
+
+> anemone-idle@0.1.0 build
+> vite build
+
+vite v8.0.14 building client environment for production...
+[2Ktransforming...✓ 17 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  0.62 kB │ gzip:  0.41 kB
+dist/assets/index-BZAdXuA0.css  24.53 kB │ gzip:  5.01 kB
+dist/assets/index-BLNzLOmR.js   50.73 kB │ gzip: 16.38 kB
+
+✓ built in 25ms
+
+npm run build exit code: 0
+Finished: 2026-06-03T12:14:28Z

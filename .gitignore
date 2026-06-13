@@ -1,0 +1,66 @@
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Node.js
+**/node_modules/
+**/dist/
+**/.pnpm-store/
+**/.eslintcache
+**/.parcel-cache
+**/.next/
+**/.nuxt/
+**/out/
+**/release/
+**/.expo/
+
+# Android / Kotlin
+**/.gradle/
+**/build/
+**/local.properties
+**/.kotlin/
+**/*.apk
+**/*.aar
+**/*.jar
+**/*.hprof
+
+# IDEs and editors
+**/.idea/
+**/.vscode/
+**/*.iml
+**/*.ipr
+**/*.iws
+**/*.suo
+**/*.ntvs*
+**/*.njsproj
+**/*.sln
+**/*.sw?
+
+# Python
+**/venv/
+**/.venv/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/.pytest_cache/
+**/.mypy_cache/
+
+# Local configuration files
+**/.env
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+**/*.env
+
+# Other build/temp files
+**/*.log
+**/*.tmp
+**/tmp/
+**/*.zip

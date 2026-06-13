@@ -1,0 +1,34 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic "Stage 1" [ref=e5]:
+      - generic [ref=e6]: Stage
+      - strong [ref=e7]: "1"
+    - generic "Coins 0" [ref=e8]:
+      - generic [ref=e9]: Coins
+      - strong [ref=e10]: "0"
+    - generic "Power 119" [ref=e11]:
+      - generic [ref=e12]: Power
+      - strong [ref=e13]: "119"
+  - main [ref=e14]:
+    - generic [ref=e94]:
+      - generic [ref=e97]: WIN
+      - generic [ref=e98]:
+        - heading "Result" [level=1] [ref=e99]
+        - heading "Victory!" [level=2] [ref=e100]
+        - generic [ref=e101]: Stage 1
+    - generic [ref=e102]:
+      - generic "Coins earned 40" [ref=e103]:
+        - generic [ref=e104]: Coins earned
+        - strong [ref=e105]: "40"
+      - paragraph [ref=e106]:
+        - text: "Selected attack:"
+        - strong [ref=e107]: Yahtzee
+      - generic [ref=e108]: Path cleared
+      - button "Claim Reward" [ref=e109] [cursor=pointer]
+      - button "Back Home" [ref=e110] [cursor=pointer]
+  - navigation "Main navigation" [ref=e88]:
+    - button "Home" [ref=e89]
+    - button "Combat" [ref=e90]
+    - button "Equipment" [ref=e91]
+    - button "Upgrade" [ref=e92]
+    - button "Result" [ref=e93]

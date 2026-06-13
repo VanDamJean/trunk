@@ -1,0 +1,73 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic "Stage 1" [ref=e5]:
+      - generic [ref=e6]: Stage
+      - strong [ref=e7]: "1"
+    - generic "Coins 100" [ref=e8]:
+      - generic [ref=e9]: Coins
+      - strong [ref=e10]: "100"
+    - generic "Power 119" [ref=e11]:
+      - generic [ref=e12]: Power
+      - strong [ref=e13]: "119"
+  - main [ref=e14]:
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - generic [ref=e17]: Stage 1
+        - heading "Home" [level=1] [ref=e18]
+        - paragraph [ref=e19]: Dice Cub is ready to clear the forest path with selected attack hands.
+      - generic [ref=e20]:
+        - img
+        - generic [ref=e22]:
+          - img "Dice Cub hero" [ref=e23]
+          - generic "Power 119" [ref=e35]:
+            - generic [ref=e36]: Power
+            - strong [ref=e37]: "119"
+    - generic [ref=e38]:
+      - generic "Stage 1 route" [ref=e39]:
+        - generic [ref=e40]: "1"
+        - generic [ref=e42]: "2"
+        - generic [ref=e44]: Boss
+      - button "Start Combat" [ref=e45] [cursor=pointer]
+      - status [ref=e46]:
+        - generic "Upgrade ready" [ref=e47]
+        - generic [ref=e48]: Gear upgrade ready before the next fight.
+    - generic [ref=e49]:
+      - heading "Camp Prep" [level=2] [ref=e50]
+      - generic [ref=e51]:
+        - button "Equipment" [ref=e52] [cursor=pointer]
+        - button "Upgrade Upgrade ready" [ref=e53] [cursor=pointer]:
+          - text: Upgrade
+          - generic "Upgrade ready" [ref=e54]
+    - generic [ref=e55]:
+      - generic [ref=e56]:
+        - heading "Gear Summary" [level=2] [ref=e57]
+        - generic [ref=e58]: 100 Coins
+      - generic [ref=e59]:
+        - generic [ref=e60]:
+          - img [ref=e62]
+          - strong [ref=e65]: Twig Wand
+          - generic [ref=e66]: Lv 1
+        - generic [ref=e67]:
+          - img [ref=e69]
+          - strong [ref=e71]: Leaf Hoodie
+          - generic [ref=e72]: Lv 1
+        - generic [ref=e73]:
+          - img [ref=e75]
+          - strong [ref=e78]: Lucky Acorn
+          - generic [ref=e79]: Lv 1
+        - generic [ref=e80]:
+          - img [ref=e82]
+          - strong [ref=e84]: Tiny Boots
+          - generic [ref=e85]: Lv 1
+      - button "Reset" [ref=e86] [cursor=pointer]
+    - generic [ref=e87]:
+      - heading "DEV QA" [level=2] [ref=e88]
+      - button "Grant 100 Coins" [ref=e89] [cursor=pointer]
+      - button "Force Win Result" [ref=e90] [cursor=pointer]
+      - button "Force Loss Result" [ref=e91] [cursor=pointer]
+  - navigation "Main navigation" [ref=e92]:
+    - button "Home" [ref=e93]
+    - button "Combat" [ref=e94]
+    - button "Equipment" [ref=e95]
+    - button "Upgrade" [ref=e96]
+    - button "Result" [ref=e97]

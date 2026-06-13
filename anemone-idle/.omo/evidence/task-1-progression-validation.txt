@@ -1,0 +1,7 @@
+Command: node scripts/validate-progression-content.mjs
+Started: 2026-06-03T11:28:17Z
+
+progression content valid
+
+Exit code: 0
+Finished: 2026-06-03T11:28:17Z

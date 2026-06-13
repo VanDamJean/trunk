@@ -1,0 +1,14 @@
+Task 3 equipment progression verification
+
+Command:
+- npm test -- --run
+
+Result:
+- 6 test files passed.
+- 24 tests passed.
+
+Covered checks:
+- Level 1 weapon upgrade costs 25 coins.
+- Insufficient coins reject upgrade without mutation.
+- Level cap blocks upgrade.
+- Hero stats derive from all four gear slots.

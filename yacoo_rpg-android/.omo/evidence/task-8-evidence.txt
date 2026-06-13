@@ -1,0 +1,1 @@
+EquipmentScreen.kt compiles, remains localized, equipment model untouched.

@@ -1,0 +1,37 @@
+# Word Game Community Design Analysis
+
+## Overview
+- **Theme**: Word Puzzle Game (Mobile UI)
+- **Language**: Kyrgyz (based on text like "Жар담", "Тиши бар бирок тиштебейт")
+- **Style**: Playful, Cartoonish, Bright colors
+
+## Key Screens
+1. **Main Game Screen**:
+   - Top Bar: Stars (Score), Level Number, Gems (Currency)
+   - Center: Riddle/Question text ("Тиши бар бирок тиштебейт")
+   - Middle: Answer slots (Empty boxes)
+   - Bottom: Letter grid (Keyboard)
+   - Background: Sky, clouds, mountains, trees, and a traditional yurt.
+
+2. **Popups**:
+   - **Help (Жар담)**: Options to open a letter or remove a letter with gem costs.
+   - **Gem Reward (Асыл таш)**: Option to watch an ad for gems.
+   - **Success (Буркут)**: Shows stars earned and "Correct answer!" message.
+
+## Visual Elements
+- **Colors**:
+  - Sky: Light Blue (#AEE2FF)
+  - Grass: Green (#8BC34A)
+  - Buttons: Blue (#2196F3), Orange (#FF9800)
+  - Text: Dark Blue/Black
+- **Typography**: Rounded sans-serif font (e.g., Nunito, Quicksand)
+- **Assets needed**:
+  - Background illustration (Sky, mountains, yurt, trees)
+  - Icons: Star, Gem, Lightbulb, Close (X)
+  - UI Components: Rounded buttons, input boxes, letter tiles
+
+## Responsive Strategy
+- Mobile-first design.
+- Use Flexbox/Grid for the letter keyboard.
+- Scale background elements to fit different screen sizes.
+- Centered popups with overlays.

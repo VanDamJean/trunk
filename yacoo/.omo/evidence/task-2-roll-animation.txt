@@ -1,0 +1,4 @@
+data-rolling=true
+animation-name=dice-throw
+settled-six-labels=4
+expected=rolling true, animation not none, settled labels include 6s

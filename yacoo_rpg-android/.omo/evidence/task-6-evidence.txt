@@ -1,0 +1,1 @@
+HomeScreen.kt uses design tokens and GameIcon abstraction; language dialog and callbacks preserved.

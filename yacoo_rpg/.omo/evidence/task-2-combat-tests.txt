@@ -1,0 +1,14 @@
+Task 2 combat math verification
+
+Command:
+- npm test -- --run
+
+Result:
+- 6 test files passed.
+- 24 tests passed.
+
+Covered checks:
+- Stage 3 enemy formula: HP 140 / attack 10.
+- Full House damage with level-1 weapon/charm: 34.
+- HP clamp never goes below 0.
+- Enemy damage minimum is 1.

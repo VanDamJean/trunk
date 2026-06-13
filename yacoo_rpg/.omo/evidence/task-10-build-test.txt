@@ -1,0 +1,11 @@
+Task 10 build/test/accessibility verification
+
+Commands:
+- npm install: passed, 0 vulnerabilities.
+- npm test -- --run: passed, 6 test files / 24 tests.
+- npm run build: passed, tsc -b and Vite build completed.
+- rg forbidden patterns: no app-code matches for as any, @ts-ignore, @ts-expect-error, TODO, FIXME, HACK, console.log. Only plan heading "## TODOs" matched.
+
+LSP diagnostics:
+- Not available because typescript-language-server is not installed in the environment.
+- TypeScript validation was covered by `tsc -b` inside npm run build.

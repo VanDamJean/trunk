@@ -1,0 +1,30 @@
+Task 5 localStorage reload smoke
+Started: 2026-06-03T12:33:34Z
+
+Preview readiness exit code: 0
+{
+  "appUrl": "http://127.0.0.1:4175/",
+  "saveKey": "anemone-idle-save-v1",
+  "before": {
+    "href": "http://127.0.0.1:4175/",
+    "keyBefore": null,
+    "pulseExists": true
+  },
+  "afterClick": {
+    "clicked": true,
+    "keyAfterClick": "{\"version\":2,\"economy\":{\"resources\":{\"plankton\":26.22044,\"pearls\":0,\"tideEnergy\":0},\"lifetimeEarned\":{\"plankton\":26.22044,\"pearls\":0,\"tideEnergy\":0},\"producers\":{\"driftPolyps\":1,\"cleanerShrimp\":0,\"crabBranchBoss\":0,\"whaleShareholder\":0,\"shellNursery\":0,\"moonCurrent\":0},\"producerProgress\":{\"cleanerShrimp\":0,\"crabBranchBoss\":0,\"whaleShareholder\":0},\"purchasedUpgrades\":[],\"upgradeLevels\":{\"silkTentacles\":0,\"prismReef\":0,\"deepBloom\":0},\"stats\":{\"purchases\":0,\"missionsClaimed\":0,\"capsulesOpened\":0,\"upgradesPurchased\":0,\"autoHires\":0}},\"missions\":{\"claimed\":[]},\"progression\":{\"chapters\":{\"chapter1-office-reef\":\"active\"},\"quests\":{\"quest-first-interns\":\"active\",\"quest-first-shrimp\":\"locked\",\"quest-first-capsule\":\"locked\",\"quest-first-upgrade\":\"locked\",\"quest-first-crab\":\"locked\",\"quest-chapter1-complete\":\"locked\"}},\"settings\":{\"locale\":\"en\"},\"adBuffs\":{\"activeUntil\":0,\"lastClaimedAt\":0,\"rewardId\":null},\"capsule\":null,\"lastSavedAt\":1780490017447,\"lastTickAt\":1780490017447,\"notice\":\"noticePulse\",\"noticeArgs\":{\"amount\":\"6.0\"}}"
+  },
+  "afterPersist": {
+    "keyAfterPersist": "{\"version\":2,\"economy\":{\"resources\":{\"plankton\":26.22044,\"pearls\":0,\"tideEnergy\":0},\"lifetimeEarned\":{\"plankton\":26.22044,\"pearls\":0,\"tideEnergy\":0},\"producers\":{\"driftPolyps\":1,\"cleanerShrimp\":0,\"crabBranchBoss\":0,\"whaleShareholder\":0,\"shellNursery\":0,\"moonCurrent\":0},\"producerProgress\":{\"cleanerShrimp\":0,\"crabBranchBoss\":0,\"whaleShareholder\":0},\"purchasedUpgrades\":[],\"upgradeLevels\":{\"silkTentacles\":0,\"prismReef\":0,\"deepBloom\":0},\"stats\":{\"purchases\":0,\"missionsClaimed\":0,\"capsulesOpened\":0,\"upgradesPurchased\":0,\"autoHires\":0}},\"missions\":{\"claimed\":[]},\"progression\":{\"chapters\":{\"chapter1-office-reef\":\"active\"},\"quests\":{\"quest-first-interns\":\"active\",\"quest-first-shrimp\":\"locked\",\"quest-first-capsule\":\"locked\",\"quest-first-upgrade\":\"locked\",\"quest-first-crab\":\"locked\",\"quest-chapter1-complete\":\"locked\"}},\"settings\":{\"locale\":\"en\"},\"adBuffs\":{\"activeUntil\":0,\"lastClaimedAt\":0,\"rewardId\":null},\"capsule\":null,\"lastSavedAt\":1780490017447,\"lastTickAt\":1780490017447,\"notice\":\"noticePulse\",\"noticeArgs\":{\"amount\":\"6.0\"}}",
+    "text": "🫧\n26\nWiggle Food · +0.2/s\n⚪\n0.0\nDrama Pearls · +0.0/s\n🌊\n0.0\nBloop Power · +0.0/s\n3\n\nTOTALLY LEGAL REEF STARTUP\n\nANEMONE IDLE: BLOOP OFFICE\n\nMash the boss blob"
+  },
+  "afterReload": {
+    "keyAfterReload": "{\"version\":2,\"economy\":{\"resources\":{\"plankton\":26.33418,\"pearls\":0,\"tideEnergy\":0},\"lifetimeEarned\":{\"plankton\":26.33418,\"pearls\":0,\"tideEnergy\":0},\"producers\":{\"driftPolyps\":1,\"cleanerShrimp\":0,\"crabBranchBoss\":0,\"whaleShareholder\":0,\"shellNursery\":0,\"moonCurrent\":0},\"producerProgress\":{\"cleanerShrimp\":0,\"crabBranchBoss\":0,\"whaleShareholder\":0},\"purchasedUpgrades\":[],\"upgradeLevels\":{\"silkTentacles\":0,\"prismReef\":0,\"deepBloom\":0},\"stats\":{\"purchases\":0,\"missionsClaimed\":0,\"capsulesOpened\":0,\"upgradesPurchased\":0,\"autoHires\":0}},\"missions\":{\"claimed\":[]},\"progression\":{\"chapters\":{\"chapter1-office-reef\":\"active\"},\"quests\":{\"quest-first-interns\":\"active\",\"quest-first-shrimp\":\"locked\",\"quest-first-capsule\":\"locked\",\"quest-first-upgrade\":\"locked\",\"quest-first-crab\":\"locked\",\"quest-chapter1-complete\":\"locked\"}},\"settings\":{\"locale\":\"en\"},\"adBuffs\":{\"activeUntil\":0,\"lastClaimedAt\":0,\"rewardId\":null},\"capsule\":null,\"lastSavedAt\":1780490017964,\"lastTickAt\":1780490017964,\"notice\":\"noticePulse\",\"noticeArgs\":{\"amount\":\"6.0\"}}",
+    "pulseExistsAfterReload": true,
+    "bodyReady": true
+  },
+  "passed": true
+}
+
+Smoke exit code: 0
+Finished: 2026-06-03T12:33:38Z

@@ -1,0 +1,15 @@
+Changed-scope files inspected:
+- src/components/DiceRow.tsx
+- src/styles.css
+- src/__tests__/App.test.tsx
+- tests/e2e/yachoo.spec.ts
+
+Forbidden pattern scan:
+- No `as any`, `@ts-ignore`, `@ts-expect-error` in changed files.
+- No dependency additions in package.json.
+- No Canvas/WebGL/Three.js/physics dependency usage added.
+- No game scoring, bot strategy, dice RNG, category rules, or state model files edited.
+
+Notes:
+- Grep false positives: `threes` contains `three`; `--color-canvas` is an existing CSS color variable, not Canvas API usage.
+- LSP diagnostics unavailable because `typescript-language-server` is not installed; `pnpm build` passed TypeScript validation.

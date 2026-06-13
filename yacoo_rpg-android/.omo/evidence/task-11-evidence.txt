@@ -1,0 +1,1 @@
+ResultScreen.kt and RunResultScreen.kt compile, reward/result values still sourced from existing state.

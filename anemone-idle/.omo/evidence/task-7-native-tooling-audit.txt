@@ -1,0 +1,30 @@
+Task 7 native tooling audit
+Started: 2026-06-03T12:36:13Z
+
+== java ==
+/usr/bin/java
+command -v java exit code: 0
+The operation couldn’t be completed. Unable to locate a Java Runtime.
+Please visit http://www.java.com for information on installing Java.
+
+The operation couldn’t be completed. Unable to locate a Java Runtime.
+Please visit http://www.java.com for information on installing Java.
+
+java version command exit code: 1
+
+== xcodebuild ==
+/usr/bin/xcodebuild
+command -v xcodebuild exit code: 0
+xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance
+xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance
+xcodebuild version command exit code: 1
+
+== pod ==
+command -v pod exit code: 1
+
+ANDROID_HOME=
+ANDROID_SDK_ROOT=
+ANDROID_HOME directory: absent or unset
+android/: present
+ios/: absent
+Finished: 2026-06-03T12:36:13Z

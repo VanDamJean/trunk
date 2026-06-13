@@ -1,0 +1,66 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - article [ref=e364]:
+      - generic [ref=e365]: 🫧
+      - generic [ref=e366]:
+        - strong [ref=e367]: "13"
+        - generic [ref=e368]: Wiggle Food · +0.2/s
+    - article [ref=e369]:
+      - generic [ref=e370]: ⚪
+      - generic [ref=e371]:
+        - strong [ref=e372]: "0.0"
+        - generic [ref=e373]: Drama Pearls · +0.0/s
+    - article [ref=e374]:
+      - generic [ref=e375]: 🌊
+      - generic [ref=e376]:
+        - strong [ref=e377]: "0.0"
+        - generic [ref=e378]: Bloop Power · +0.0/s
+  - generic [ref=e20]:
+    - generic [ref=e25]: "3"
+    - generic [ref=e29]:
+      - paragraph [ref=e30]: Totally Legal Reef Startup
+      - 'heading "Anemone Idle: Bloop Office" [level=1] [ref=e31]'
+      - paragraph [ref=e32]: Mash the boss blob, hire underpaid tentacles, and turn ocean nonsense into quarterly wiggle profit.
+    - text: BLOOP
+  - generic [ref=e33]:
+    - article [ref=e379]:
+      - generic [ref=e380]:
+        - paragraph [ref=e381]: Corporate Dare
+        - heading "Staff the noodle pit" [level=2] [ref=e382]
+        - paragraph [ref=e383]: Own 5 Intern Tentacles before they unionize.
+      - generic "Staff the noodle pit progress" [ref=e384]
+      - button "1 / 5" [disabled] [ref=e386] [cursor=pointer]
+    - article [ref=e387]:
+      - generic [ref=e388]:
+        - paragraph [ref=e389]: Corporate Dare
+        - heading "Invent management" [level=2] [ref=e390]
+        - paragraph [ref=e391]: Own 3 Shrimp Middle Managers with tiny clipboards.
+      - generic "Invent management progress" [ref=e392]
+      - button "0 / 3" [disabled] [ref=e393] [cursor=pointer]
+    - article [ref=e394]:
+      - generic [ref=e395]:
+        - paragraph [ref=e396]: Corporate Dare
+        - heading "Become mildly famous" [level=2] [ref=e397]
+        - paragraph [ref=e398]: Collect 25 lifetime Drama Pearls from clam clout.
+      - generic "Become mildly famous progress" [ref=e399]
+      - button "0 / 25" [disabled] [ref=e400] [cursor=pointer]
+  - generic [ref=e55]: New employee acquired. HR is a crab with a clipboard.
+  - generic [ref=e401]:
+    - generic [ref=e402]: ◌
+    - paragraph [ref=e403]: Suspicious Free Thing
+    - heading "Order one questionable loot clam" [level=2] [ref=e404]
+    - paragraph [ref=e405]: Capsules cough up resources after a dramatic wait. Nobody signed the safety waiver.
+    - button "Shake 5:00 loot clam" [ref=e407] [cursor=pointer]
+  - navigation "Game tabs" [ref=e104]:
+    - button "🪸 Grind Reef" [ref=e105] [cursor=pointer]:
+      - text: 🪸
+      - generic [ref=e106]: Grind Reef
+    - button "🫧 Loot Clam" [active] [ref=e107] [cursor=pointer]:
+      - text: 🫧
+      - generic [ref=e108]: Loot Clam
+    - button "⚪ Drama Pearls" [ref=e109] [cursor=pointer]:
+      - text: ⚪
+      - generic [ref=e110]: Drama Pearls
+    - button "⚙ Language Goblin" [ref=e111] [cursor=pointer]:
+      - text: ⚙
+      - generic [ref=e112]: Language Goblin

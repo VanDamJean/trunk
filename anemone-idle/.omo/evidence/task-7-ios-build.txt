@@ -1,0 +1,9 @@
+Task 7 iOS build/open check
+Started: 2026-06-03T12:36:33Z
+
+BLOCKED-BY-ENV: ios/ is absent because npx cap add ios failed before generation.
+Exact blocker: CocoaPods command pod is missing; see .omo/evidence/mobile-ios-cocoapods-blocker.txt.
+Next action: install CocoaPods, rerun npx cap add ios, then rerun iOS build/open verification.
+
+iOS build/open check exit code: 127
+Finished: 2026-06-03T12:36:33Z

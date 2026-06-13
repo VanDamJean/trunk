@@ -1,0 +1,48 @@
+Task 8 final mobile smoke
+Started: 2026-06-03T12:38:43Z
+
+Preview readiness exit code: 0
+{
+  "appUrl": "http://127.0.0.1:4176/",
+  "viewport": "375x812",
+  "saveKey": "anemone-idle-save-v1",
+  "layoutBefore": {
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "noHorizontalScroll": true,
+    "navVisible": true,
+    "pulseExists": true
+  },
+  "interactions": {
+    "pulseClicked": true,
+    "tabs": {
+      "reef": {
+        "hit": true,
+        "active": true
+      },
+      "capsule": {
+        "hit": true,
+        "active": true
+      },
+      "upgrades": {
+        "hit": true,
+        "active": true
+      },
+      "settings": {
+        "hit": true,
+        "active": true
+      }
+    },
+    "keyAfterPulse": "{\"version\":2,\"economy\":{\"resources\":{\"plankton\":26.24398,\"pearls\":0,\"tideEnergy\":0},\"lifetimeEarned\":{\"plankton\":26.24398,\"pearls\":0,\"tideEnergy\":0},\"producers\":{\"driftPolyps\":1,\"cleanerShrimp\":0,\"crabBranchBoss\":0,\"whaleShareholder\":0,\"shellNursery\":0,\"moonCurrent\":0},\"producerProgress\":{\"cleanerShrimp\":0,\"crabBranchBoss\":0,\"whaleShareholder\":0},\"purchasedUpgrades\":[],\"upgradeLevels\":{\"silkTentacles\":0,\"prismReef\":0,\"deepBloom\":0},\"stats\":{\"purchases\":0,\"missionsClaimed\":0,\"capsulesOpened\":0,\"upgradesPurchased\":0,\"autoHires\":0}},\"missions\":{\"claimed\":[]},\"progression\":{\"chapters\":{\"chapter1-office-reef\":\"active\"},\"quests\":{\"quest-first-interns\":\"active\",\"quest-first-shrimp\":\"locked\",\"quest-first-capsule\":\"locked\",\"quest-first-upgrade\":\"locked\",\"quest-first-crab\":\"locked\",\"quest-chapter1-complete\":\"locked\"}},\"settings\":{\"locale\":\"en\"},\"adBuffs\":{\"activeUntil\":0,\"lastClaimedAt\":0,\"rewardId\":null},\"capsule\":null,\"lastSavedAt\":1780490326075,\"lastTickAt\":1780490326075,\"notice\":\"noticePulse\",\"noticeArgs\":{\"amount\":\"6.0\"}}"
+  },
+  "afterReload": {
+    "keyAfterReload": "{\"version\":2,\"economy\":{\"resources\":{\"plankton\":26.35882,\"pearls\":0,\"tideEnergy\":0},\"lifetimeEarned\":{\"plankton\":26.35882,\"pearls\":0,\"tideEnergy\":0},\"producers\":{\"driftPolyps\":1,\"cleanerShrimp\":0,\"crabBranchBoss\":0,\"whaleShareholder\":0,\"shellNursery\":0,\"moonCurrent\":0},\"producerProgress\":{\"cleanerShrimp\":0,\"crabBranchBoss\":0,\"whaleShareholder\":0},\"purchasedUpgrades\":[],\"upgradeLevels\":{\"silkTentacles\":0,\"prismReef\":0,\"deepBloom\":0},\"stats\":{\"purchases\":0,\"missionsClaimed\":0,\"capsulesOpened\":0,\"upgradesPurchased\":0,\"autoHires\":0}},\"missions\":{\"claimed\":[]},\"progression\":{\"chapters\":{\"chapter1-office-reef\":\"active\"},\"quests\":{\"quest-first-interns\":\"active\",\"quest-first-shrimp\":\"locked\",\"quest-first-capsule\":\"locked\",\"quest-first-upgrade\":\"locked\",\"quest-first-crab\":\"locked\",\"quest-chapter1-complete\":\"locked\"}},\"settings\":{\"locale\":\"en\"},\"adBuffs\":{\"activeUntil\":0,\"lastClaimedAt\":0,\"rewardId\":null},\"capsule\":null,\"lastSavedAt\":1780490326597,\"lastTickAt\":1780490326597,\"notice\":\"noticePulse\",\"noticeArgs\":{\"amount\":\"6.0\"}}",
+    "pulseExistsAfterReload": true,
+    "bodyReady": true,
+    "noHorizontalScrollAfterReload": true
+  },
+  "passed": true
+}
+
+Smoke exit code: 0
+Finished: 2026-06-03T12:38:47Z

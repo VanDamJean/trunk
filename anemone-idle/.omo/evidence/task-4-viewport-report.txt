@@ -1,0 +1,33 @@
+COMMANDS: npm run preview -- --host 127.0.0.1 --port 4173; Google Chrome headless via DevTools Protocol
+PREVIEW: ready
+VIEWPORT 375x667: PASS
+  scrollWidth=375, clientWidth=375, noHorizontalScroll=true, shellWidth=375
+  headerTop=0, headerBottom=75, navTop=575, navBottom=655, navVisible=true
+  safeAreaTokens top=0px, bottom=0px
+  pulse physical hit=true, resourceBefore=20, resourceAfter=26, overlapsBottomNav=false
+  nav tabs=reef:hit=true/active=true, capsule:hit=true/active=true, upgrades:hit=true/active=true, settings:hit=true/active=true
+  bottom controls=reef:overlap=false/hit=true, capsule:overlap=false/hit=true, upgrades:overlap=false/hit=true, settings:overlap=false/hit=true
+  screenshot=.omo/evidence/task-4-mobile-layout-375x667.png
+VIEWPORT 375x812: PASS
+  scrollWidth=375, clientWidth=375, noHorizontalScroll=true, shellWidth=375
+  headerTop=0, headerBottom=75, navTop=720, navBottom=800, navVisible=true
+  safeAreaTokens top=0px, bottom=0px
+  pulse physical hit=true, resourceBefore=27, resourceAfter=33, overlapsBottomNav=false
+  nav tabs=reef:hit=true/active=true, capsule:hit=true/active=true, upgrades:hit=true/active=true, settings:hit=true/active=true
+  bottom controls=reef:overlap=false/hit=true, capsule:overlap=false/hit=true, upgrades:overlap=false/hit=true, settings:overlap=false/hit=true
+  screenshot=.omo/evidence/task-4-mobile-layout-375x812.png
+VIEWPORT 390x844: PASS
+  scrollWidth=390, clientWidth=390, noHorizontalScroll=true, shellWidth=390
+  headerTop=0, headerBottom=75, navTop=752, navBottom=832, navVisible=true
+  safeAreaTokens top=0px, bottom=0px
+  pulse physical hit=true, resourceBefore=34, resourceAfter=40, overlapsBottomNav=false
+  nav tabs=reef:hit=true/active=true, capsule:hit=true/active=true, upgrades:hit=true/active=true, settings:hit=true/active=true
+  bottom controls=reef:overlap=false/hit=true, capsule:overlap=false/hit=true, upgrades:overlap=false/hit=true, settings:overlap=false/hit=true
+  screenshot=.omo/evidence/task-4-mobile-layout-390x844.png
+
+OVERALL: PASS
+PREVIEW_OUTPUT:
+> anemone-idle@0.1.0 preview
+> vite preview --host 127.0.0.1 --host 127.0.0.1 --port 4173
+
+  ➜  Local:   http://127.0.0.1:4173/

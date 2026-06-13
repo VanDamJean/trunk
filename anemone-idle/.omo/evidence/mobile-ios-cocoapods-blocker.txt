@@ -1,0 +1,7 @@
+Command: command -v pod && pod --version
+Started: 2026-06-03T12:16:32Z
+
+
+command -v pod exit code: 1
+pod --version exit code: 127
+Finished: 2026-06-03T12:16:32Z

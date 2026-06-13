@@ -1,0 +1,6 @@
+home title: Home
+initial svg count: 5
+combat svg count: 2
+dice buttons after roll: 5
+equipment badge glyphs: 4
+console errors: 0

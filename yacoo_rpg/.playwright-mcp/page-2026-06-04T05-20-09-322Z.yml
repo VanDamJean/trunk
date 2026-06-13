@@ -1,0 +1,68 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic "Stage 1" [ref=e5]:
+      - generic [ref=e6]: Stage
+      - strong [ref=e7]: "1"
+    - generic "Coins 0" [ref=e8]:
+      - generic [ref=e9]: Coins
+      - strong [ref=e10]: "0"
+    - generic "Power 119" [ref=e11]:
+      - generic [ref=e12]: Power
+      - strong [ref=e13]: "119"
+  - main [ref=e14]:
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - generic [ref=e17]: Stage 1
+        - heading "Home" [level=1] [ref=e18]
+        - paragraph [ref=e19]: Dice Cub is ready to clear the forest path with selected attack hands.
+      - generic [ref=e20]:
+        - img
+        - generic [ref=e22]:
+          - img "Dice Cub hero" [ref=e23]
+          - generic "Power 119" [ref=e35]:
+            - generic [ref=e36]: Power
+            - strong [ref=e37]: "119"
+    - generic [ref=e38]:
+      - generic "Stage 1 route" [ref=e39]:
+        - generic [ref=e40]: "1"
+        - generic [ref=e42]: "2"
+        - generic [ref=e44]: Boss
+      - button "Start Combat" [ref=e45] [cursor=pointer]
+    - generic [ref=e46]:
+      - heading "Camp Prep" [level=2] [ref=e47]
+      - generic [ref=e48]:
+        - button "Equipment" [ref=e49] [cursor=pointer]
+        - button "Upgrade" [ref=e50] [cursor=pointer]
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - heading "Gear Summary" [level=2] [ref=e53]
+        - generic [ref=e54]: 0 Coins
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - img [ref=e58]
+          - strong [ref=e61]: Twig Wand
+          - generic [ref=e62]: Lv 1
+        - generic [ref=e63]:
+          - img [ref=e65]
+          - strong [ref=e67]: Leaf Hoodie
+          - generic [ref=e68]: Lv 1
+        - generic [ref=e69]:
+          - img [ref=e71]
+          - strong [ref=e74]: Lucky Acorn
+          - generic [ref=e75]: Lv 1
+        - generic [ref=e76]:
+          - img [ref=e78]
+          - strong [ref=e80]: Tiny Boots
+          - generic [ref=e81]: Lv 1
+      - button "Reset" [ref=e82] [cursor=pointer]
+    - generic [ref=e83]:
+      - heading "DEV QA" [level=2] [ref=e84]
+      - button "Grant 100 Coins" [ref=e85] [cursor=pointer]
+      - button "Force Win Result" [ref=e86] [cursor=pointer]
+      - button "Force Loss Result" [ref=e87] [cursor=pointer]
+  - navigation "Main navigation" [ref=e88]:
+    - button "Home" [ref=e89]
+    - button "Combat" [ref=e90]
+    - button "Equipment" [ref=e91]
+    - button "Upgrade" [ref=e92]
+    - button "Result" [ref=e93]

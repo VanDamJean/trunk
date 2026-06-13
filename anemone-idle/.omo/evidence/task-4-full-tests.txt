@@ -1,0 +1,13 @@
+
+> anemone-idle@0.1.0 test
+> vitest run
+
+
+ RUN  v4.1.7 /Users/a1/Desktop/manus/anemone-idle
+
+
+ Test Files  11 passed (11)
+      Tests  52 passed (52)
+   Start at  00:11:43
+   Duration  225ms (transform 366ms, setup 0ms, import 569ms, tests 70ms, environment 1ms)
+

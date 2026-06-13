@@ -1,0 +1,13 @@
+
+> yacoo@0.0.0 build /Users/a1/Desktop/manus/yacoo
+> tsc -b && vite build
+
+vite v8.0.16 building client environment for production...
+[2Ktransforming...✓ 25 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.56 kB │ gzip:  0.39 kB
+dist/assets/index-Z5gdS9HH.css    4.86 kB │ gzip:  1.48 kB
+dist/assets/index-C5MMB7p0.js   200.89 kB │ gzip: 63.42 kB
+
+✓ built in 64ms

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Arrow Puzzle - Ultimate Generator</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%E2%9E%A1%EF%B8%8F%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div id="ui-top">
+        <button id="btn-undo">↩ Undo</button>
+        <div class="gen-buttons">
+            <button id="btn-gen-1">🎲 1-Cell</button>
+            <button id="btn-gen-sq">🐍 Squiggly</button>
+            <button id="btn-gen-mx">🌀 Mixed</button>
+        </div>
+    </div>
+    
+    <div id="status-text"></div>
+    
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <div id="ui-bottom">
+        <div class="setting-row">
+            <label>Grid Max: <span id="val-grid">15</span></label>
+            <input type="range" id="slider-grid" min="8" max="40" value="15">
+        </div>
+        <div class="setting-row buttons-row">
+            <label for="img-upload" class="btn btn-primary">🖼️ Image Upload</label>
+            <input type="file" id="img-upload" accept="image/*" style="display:none">
+            <button id="btn-export" class="btn btn-secondary">💾 Export JSON</button>
+        </div>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+</body>
+</html>

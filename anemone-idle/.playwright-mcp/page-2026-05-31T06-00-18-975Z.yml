@@ -1,0 +1,132 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - article [ref=e5]:
+      - generic [ref=e6]: 🫧
+      - generic [ref=e7]:
+        - strong [ref=e8]: "20"
+        - generic [ref=e9]: Wiggle Food · +0.0/s
+    - article [ref=e10]:
+      - generic [ref=e11]: ⚪
+      - generic [ref=e12]:
+        - strong [ref=e13]: "0.0"
+        - generic [ref=e14]: Drama Pearls · +0.0/s
+    - article [ref=e15]:
+      - generic [ref=e16]: 🌊
+      - generic [ref=e17]:
+        - strong [ref=e18]: "0.0"
+        - generic [ref=e19]: Bloop Power · +0.0/s
+  - generic [ref=e20]:
+    - generic [ref=e25]: "3"
+    - generic [ref=e29]:
+      - paragraph [ref=e30]: Totally Legal Reef Startup
+      - 'heading "Anemone Idle: Bloop Office" [level=1] [ref=e31]'
+      - paragraph [ref=e32]: Mash the boss blob, hire underpaid tentacles, and turn ocean nonsense into quarterly wiggle profit.
+    - text: BLOOP
+  - article [ref=e34]:
+    - generic [ref=e35]:
+      - paragraph [ref=e36]: Chapter Objective
+      - heading "Staff the noodle pit" [level=2] [ref=e37]
+      - paragraph [ref=e38]: Own 5 Intern Tentacles and prove the company has arms.
+      - text: In progress
+    - generic "Staff the noodle pit progress" [ref=e39]
+    - button "Employees · 0 / 5" [disabled] [ref=e40] [cursor=pointer]
+  - generic [ref=e41]: A tiny anemone opens a basement company with zero permits.
+  - generic [ref=e42]:
+    - generic [ref=e43]:
+      - paragraph [ref=e44]: Profit Aquarium
+      - heading "Make the office wiggle" [level=2] [ref=e45]
+    - generic [ref=e46]:
+      - generic [ref=e51]: O
+      - generic [ref=e52]:
+        - paragraph [ref=e53]: Main Character Button
+        - heading "SLAP THE ANEMONE CEO" [level=2] [ref=e54]
+        - paragraph [ref=e55]: Every tap converts confidence, bubbles, and mild panic into Wiggle Food. Middle management keeps pretending to help.
+      - button "BLOOP! +3.0 🫧" [ref=e56] [cursor=pointer]
+      - text: CEO
+    - generic [ref=e57]:
+      - generic [ref=e58]:
+        - paragraph [ref=e59]: Chapter Desk
+        - 'heading "Chapter 1: Office Reef Startup" [level=2] [ref=e60]'
+        - paragraph [ref=e61]: Turn a basement anemone company into a tiny self-feeding org chart.
+      - 'generic "Chapter 1: Office Reef Startup" [ref=e62]'
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - term [ref=e66]: 0% complete
+          - definition [ref=e67]: 0%
+        - generic [ref=e68]:
+          - term [ref=e69]: Next unlock
+          - definition [ref=e70]: First Shrimp Middle Manager
+        - generic [ref=e71]:
+          - term [ref=e72]: Current bottleneck
+          - definition [ref=e73]: Wiggle Food
+        - generic [ref=e74]:
+          - term [ref=e75]: Production
+          - definition [ref=e76]: Wiggle Food +0.0/s
+    - generic [ref=e77]:
+      - article [ref=e78]:
+        - generic [ref=e79]: 🪸
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - heading "Intern Tentacles" [level=3] [ref=e82]
+            - strong [ref=e83]: "0"
+          - paragraph [ref=e84]: Tiny unpaid arms wave spreadsheets until snacks fall out of the sea.
+          - text: +0.0/s Wiggle Food
+        - button "Hire · 12 🫧" [ref=e85] [cursor=pointer]
+      - article [ref=e86]:
+        - generic [ref=e87]: 🦐
+        - generic [ref=e88]:
+          - generic [ref=e89]:
+            - heading "Shrimp Middle Managers" [level=3] [ref=e90]
+            - strong [ref=e91]: "0"
+          - paragraph [ref=e92]: They point at bubbles, skim Wiggle Food, and automatically hire Intern Tentacles.
+          - text: +0.0/s Intern Tentacles
+        - button "Hire · 95 🫧" [ref=e93] [cursor=pointer]
+      - article [ref=e94]:
+        - generic [ref=e95]: 🦀
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - heading "Crab Branch Bosses" [level=3] [ref=e98]
+            - strong [ref=e99]: "0"
+          - paragraph [ref=e100]: Regional claw executives stamp paperwork until Shrimp Middle Managers appear.
+          - text: +0.0/s Shrimp Middle Managers
+        - button "Hire · 1,350 🫧" [ref=e101] [cursor=pointer]
+      - article [ref=e102]:
+        - generic [ref=e103]: 🐋
+        - generic [ref=e104]:
+          - generic [ref=e105]:
+            - heading "Whale Shareholders" [level=3] [ref=e106]
+            - strong [ref=e107]: "0"
+          - paragraph [ref=e108]: Boardroom whales inhale Drama Pearls and exhale Crab Branch Bosses.
+          - text: +0.0/s Crab Branch Bosses
+        - button "Hire · 24.0k ⚪" [ref=e109] [cursor=pointer]
+      - article [ref=e110]:
+        - generic [ref=e111]: 🐚
+        - generic [ref=e112]:
+          - generic [ref=e113]:
+            - heading "Clam Influencer Farm" [level=3] [ref=e114]
+            - strong [ref=e115]: "0"
+          - paragraph [ref=e116]: Glossy clams post thirst traps until Drama Pearls appear from pure cringe.
+          - text: +0.0/s Drama Pearls
+        - button "Hire · 720 🫧" [ref=e117] [cursor=pointer]
+      - article [ref=e118]:
+        - generic [ref=e119]: 🌙
+        - generic [ref=e120]:
+          - generic [ref=e121]:
+            - heading "Suspicious Moon Hose" [level=3] [ref=e122]
+            - strong [ref=e123]: "0"
+          - paragraph [ref=e124]: A hose from the moon drips Bloop Power. Legal asked us not to explain.
+          - text: +0.0/s Bloop Power
+        - button "Hire · 28 ⚪" [ref=e125] [cursor=pointer]
+  - navigation "Game tabs" [ref=e126]:
+    - button "🪸 Grind Reef" [ref=e127] [cursor=pointer]:
+      - text: 🪸
+      - generic [ref=e128]: Grind Reef
+    - button "🫧 Loot Clam" [ref=e129] [cursor=pointer]:
+      - text: 🫧
+      - generic [ref=e130]: Loot Clam
+    - button "⚪ Drama Pearls" [ref=e131] [cursor=pointer]:
+      - text: ⚪
+      - generic [ref=e132]: Drama Pearls
+    - button "⚙ Language Goblin" [ref=e133] [cursor=pointer]:
+      - text: ⚙
+      - generic [ref=e134]: Language Goblin

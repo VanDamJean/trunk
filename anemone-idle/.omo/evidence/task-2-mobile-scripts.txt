@@ -1,0 +1,11 @@
+Mobile script inventory
+Started: 2026-06-03T12:14:28Z
+
+mobile:sync=npm run build && cap sync
+mobile:android=npm run build && cap run android
+mobile:ios=npm run build && cap run ios
+mobile:open:android=cap open android
+mobile:open:ios=cap open ios
+
+Exit code: 0
+Finished: 2026-06-03T12:14:28Z

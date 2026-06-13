@@ -1,0 +1,1 @@
+GameArt.kt and DiceView.kt compile; public APIs and dice semantics preserved; art colors use theme tokens.

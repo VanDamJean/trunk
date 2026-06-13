@@ -1,0 +1,59 @@
+app/src/main/java/com/yacoo/rpg/game/Types.kt:165: enum class AppLanguage { KOREAN, ENGLISH }
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:17: import com.yacoo.rpg.game.AppLanguage
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:31:     language: AppLanguage = AppLanguage.ENGLISH,
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:122:     language: AppLanguage = AppLanguage.ENGLISH,
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:170:     language: AppLanguage = AppLanguage.ENGLISH,
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:187:             modifier = Modifier.windowInsetsPadding(
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:188:                 WindowInsets.safeDrawing.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:201:             modifier = Modifier.windowInsetsPadding(
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:202:                 WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom + WindowInsetsSides.Horizontal)
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:230: private fun shellLabels(language: AppLanguage): ShellLabels = when (language) {
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:231:     AppLanguage.KOREAN -> ShellLabels(
+app/src/main/java/com/yacoo/rpg/ui/components/Shell.kt:243:     AppLanguage.ENGLISH -> ShellLabels(
+app/src/main/java/com/yacoo/rpg/ui/screens/CombatScreen.kt:43:     language: AppLanguage = AppLanguage.KOREAN,
+app/src/main/java/com/yacoo/rpg/ui/screens/CombatScreen.kt:356: private fun combatLabels(language: AppLanguage): CombatLabels = when (language) {
+app/src/main/java/com/yacoo/rpg/ui/screens/CombatScreen.kt:357:     AppLanguage.KOREAN -> CombatLabels("전투", "적 턴", "턴", "주사위 굴리기", "굴리는 중…", "리롤", "회 남음", "족보 공격", "기본 공격")
+app/src/main/java/com/yacoo/rpg/ui/screens/CombatScreen.kt:358:     AppLanguage.ENGLISH -> CombatLabels("Battle", "Enemy Turn", "Turn", "Roll Dice", "Rolling…", "Reroll", " left", "Hand Attacks", "Basic Attack")
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:35:     language: AppLanguage = AppLanguage.ENGLISH,
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:455: private fun equipmentLabels(language: AppLanguage): EquipmentLabels = when (language) {
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:456:     AppLanguage.KOREAN -> EquipmentLabels(
+app/src/main/java/com/yacoo/rpg/ui/screens/EquipmentScreen.kt:474:     AppLanguage.ENGLISH -> EquipmentLabels(
+app/src/main/java/com/yacoo/rpg/ui/screens/GachaScreen.kt:25: import com.yacoo.rpg.game.AppLanguage
+app/src/main/java/com/yacoo/rpg/ui/screens/GachaScreen.kt:38:     language: AppLanguage = AppLanguage.ENGLISH,
+app/src/main/java/com/yacoo/rpg/ui/screens/GachaScreen.kt:138: private fun gachaLabels(language: AppLanguage): GachaLabels = when (language) {
+app/src/main/java/com/yacoo/rpg/ui/screens/GachaScreen.kt:139:     AppLanguage.KOREAN -> GachaLabels(
+app/src/main/java/com/yacoo/rpg/ui/screens/GachaScreen.kt:153:     AppLanguage.ENGLISH -> GachaLabels(
+app/src/main/java/com/yacoo/rpg/ui/screens/HomeScreen.kt:39:     language: AppLanguage = AppLanguage.ENGLISH,
+app/src/main/java/com/yacoo/rpg/ui/screens/HomeScreen.kt:40:     onLanguageChange: (AppLanguage) -> Unit = {},
+app/src/main/java/com/yacoo/rpg/ui/screens/HomeScreen.kt:159:     selectedLanguage: AppLanguage,
+app/src/main/java/com/yacoo/rpg/ui/screens/HomeScreen.kt:160:     onSelectLanguage: (AppLanguage) -> Unit,
+app/src/main/java/com/yacoo/rpg/ui/screens/HomeScreen.kt:177:                     selected = selectedLanguage == AppLanguage.KOREAN,
+app/src/main/java/com/yacoo/rpg/ui/screens/HomeScreen.kt:178:                     onClick = { onSelectLanguage(AppLanguage.KOREAN) }
+app/src/main/java/com/yacoo/rpg/ui/screens/HomeScreen.kt:182:                     selected = selectedLanguage == AppLanguage.ENGLISH,
+app/src/main/java/com/yacoo/rpg/ui/screens/HomeScreen.kt:183:                     onClick = { onSelectLanguage(AppLanguage.ENGLISH) }
+app/src/main/java/com/yacoo/rpg/ui/screens/HomeScreen.kt:229: private fun homeLabels(language: AppLanguage): HomeLabels = when (language) {
+app/src/main/java/com/yacoo/rpg/ui/screens/HomeScreen.kt:230:     AppLanguage.KOREAN -> HomeLabels(
+app/src/main/java/com/yacoo/rpg/ui/screens/HomeScreen.kt:237:     AppLanguage.ENGLISH -> HomeLabels(
+app/src/main/java/com/yacoo/rpg/ui/screens/ResultScreen.kt:28:     language: AppLanguage = AppLanguage.ENGLISH,
+app/src/main/java/com/yacoo/rpg/ui/screens/ResultScreen.kt:96: private fun resultLabels(language: AppLanguage): ResultLabels = when (language) {
+app/src/main/java/com/yacoo/rpg/ui/screens/ResultScreen.kt:97:     AppLanguage.KOREAN -> ResultLabels("승리!", "패배...", "스테이지", "코인", "족보", "보너스", "중복", "보상 받기")
+app/src/main/java/com/yacoo/rpg/ui/screens/ResultScreen.kt:98:     AppLanguage.ENGLISH -> ResultLabels("Victory!", "Defeat...", "Stage", "Coins", "Hand", "Bonus", "duplicate", "Claim Reward")
+app/src/main/java/com/yacoo/rpg/ui/screens/RewardPickScreen.kt:28:     language: AppLanguage = AppLanguage.KOREAN,
+app/src/main/java/com/yacoo/rpg/ui/screens/RewardPickScreen.kt:117: private fun rewardPickLabels(language: AppLanguage): RewardPickLabels = when (language) {
+app/src/main/java/com/yacoo/rpg/ui/screens/RewardPickScreen.kt:118:     AppLanguage.KOREAN -> RewardPickLabels("보상 선택", "하나를 선택하세요", "보상 없음", "선택", "회복", "스크랩", "주사위", "리롤", "보상", "현재 HP를 회복합니다", "강화 재료를 획득합니다", "주사위 개수가 영구적으로 증가합니다", "리롤 횟수가 영구적으로 증가합니다")
+app/src/main/java/com/yacoo/rpg/ui/screens/RewardPickScreen.kt:119:     AppLanguage.ENGLISH -> RewardPickLabels("Choose Reward", "Pick one reward", "No rewards", "Pick", "Heal", "Scrap", "Dice", "Reroll", "Reward", "Recover current HP", "Gain upgrade materials", "Increase dice count for this run", "Increase rerolls for this run")
+app/src/main/java/com/yacoo/rpg/ui/screens/RunMapScreen.kt:29:     language: AppLanguage = AppLanguage.KOREAN,
+app/src/main/java/com/yacoo/rpg/ui/screens/RunMapScreen.kt:147: private fun runMapLabels(language: AppLanguage): RunMapLabels = when (language) {
+app/src/main/java/com/yacoo/rpg/ui/screens/RunMapScreen.kt:148:     AppLanguage.KOREAN -> RunMapLabels("전투", "엘리트 전투", "보물", "휴식", "보스", "완료", "현재 위치", "미개방", "진행", "챕터 완료! 다음 챕터로 진행합니다…")
+app/src/main/java/com/yacoo/rpg/ui/screens/RunMapScreen.kt:149:     AppLanguage.ENGLISH -> RunMapLabels("Battle", "Elite Battle", "Treasure", "Rest", "Boss", "Cleared", "Current", "Locked", "Start", "Chapter complete! Moving to the next chapter…")
+app/src/main/java/com/yacoo/rpg/ui/screens/RunResultScreen.kt:27:     language: AppLanguage = AppLanguage.KOREAN,
+app/src/main/java/com/yacoo/rpg/ui/screens/RunResultScreen.kt:74: private fun runResultLabels(language: AppLanguage): RunResultLabels = when (language) {
+app/src/main/java/com/yacoo/rpg/ui/screens/RunResultScreen.kt:75:     AppLanguage.KOREAN -> RunResultLabels("런 종료", "최고 챕터", "총 런 수", "회", "보유 코인", "홈으로 돌아가기")
+app/src/main/java/com/yacoo/rpg/ui/screens/RunResultScreen.kt:76:     AppLanguage.ENGLISH -> RunResultLabels("Run Ended", "Best Chapter", "Total Runs", "", "Coins", "Return Home")
+app/src/main/java/com/yacoo/rpg/ui/screens/UpgradeScreen.kt:33:     language: AppLanguage = AppLanguage.ENGLISH,
+app/src/main/java/com/yacoo/rpg/ui/screens/UpgradeScreen.kt:147: private fun upgradeLabels(language: AppLanguage): UpgradeLabels = when (language) {
+app/src/main/java/com/yacoo/rpg/ui/screens/UpgradeScreen.kt:148:     AppLanguage.KOREAN -> UpgradeLabels(
+app/src/main/java/com/yacoo/rpg/ui/screens/UpgradeScreen.kt:161:     AppLanguage.ENGLISH -> UpgradeLabels(
+app/src/main/java/com/yacoo/rpg/viewmodel/GameViewModel.kt:28:     private val _language = MutableStateFlow(AppLanguage.ENGLISH)
+app/src/main/java/com/yacoo/rpg/viewmodel/GameViewModel.kt:29:     val language: StateFlow<AppLanguage> = _language.asStateFlow()
+app/src/main/java/com/yacoo/rpg/viewmodel/GameViewModel.kt:48:     fun setLanguage(language: AppLanguage) {
