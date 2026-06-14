@@ -20,6 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.text.style.TextAlign
 import com.yacoo.rpg.game.AppLanguage
 import com.yacoo.rpg.ui.components.*
@@ -31,9 +33,11 @@ fun GachaScreen(
     gems: Int,
     language: AppLanguage = AppLanguage.ENGLISH,
     onBack: () -> Unit,
+    onDraw: (Boolean) -> String, // true for weapon chest, false for armor chest
     modifier: Modifier = Modifier
 ) {
     var selectedTab by remember { mutableStateOf(0) }
+    var drawResultText by remember { mutableStateOf<String?>(null) }
     val labels = gachaLabels(language)
     val tabs = listOf(labels.weapon, labels.armor)
 
@@ -45,9 +49,18 @@ fun GachaScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 14.dp, vertical = 12.dp)
-                .padding(top = 80.dp, bottom = 120.dp), // Adjust for Top/Bottom HUD
+                .padding(top = 10.dp, bottom = 120.dp)
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            TopStatsBar(
+                stage = 1,
+                coins = coins,
+                gems = gems,
+                power = 100, // placeholder
+                language = language
+            )
+
             // Header Row
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -131,8 +144,71 @@ fun GachaScreen(
                 kind = tabs[selectedTab], 
                 labels = labels, 
                 isWeapon = selectedTab == 0,
-                modifier = Modifier.weight(1f)
+                coins = coins,
+                onDraw = { isWeapon, count ->
+                    val results = mutableListOf<String>()
+                    for (i in 0 until count) {
+                        val result = onDraw(isWeapon)
+                        if (result.isNotEmpty()) {
+                            results.add(result)
+                        }
+                    }
+                    if (results.isNotEmpty()) {
+                        drawResultText = results.joinToString("\n")
+                    }
+                },
+                modifier = Modifier.wrapContentHeight()
             )
+        }
+
+        // Draw Result Modal Dialog
+        drawResultText?.let { result ->
+            DarkOverlayPanel(
+                modifier = Modifier.clickable { drawResultText = null }
+            ) {
+                Column(
+                    modifier = Modifier
+                        .width(280.dp)
+                        .cartoonShadow(6.dp, ColorInk, RoundedCornerShape(20.dp))
+                        .cartoonBorder(4.dp, ColorInk, RoundedCornerShape(20.dp))
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(ColorSurfacePanel)
+                        .padding(20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    RewardBanner(title = "CONGRATS!")
+                    
+                    Box(
+                        modifier = Modifier
+                            .size(100.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(Brush.verticalGradient(listOf(ColorSecondaryTop, ColorSecondaryBottom)))
+                            .border(3.dp, ColorInk, RoundedCornerShape(16.dp))
+                            .pulseGlow(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        GameIcon(
+                            icon = if (selectedTab == 0) GameIconRole.WEAPON else GameIconRole.ARMOR,
+                            fontSize = 64f
+                        )
+                    }
+                    
+                    Text(
+                        text = result,
+                        style = GameTypography.statValue,
+                        color = ColorInk,
+                        fontWeight = FontWeight.Black,
+                        textAlign = TextAlign.Center
+                    )
+                    
+                    SecondaryButton(
+                        text = "OK",
+                        onClick = { drawResultText = null },
+                        modifier = Modifier.fillMaxWidth().height(44.dp)
+                    )
+                }
+            }
         }
     }
 }
@@ -198,7 +274,14 @@ private fun ResourceChip(label: String, value: Int?, emptyText: String, bgColor:
 }
 
 @Composable
-private fun DrawPanel(kind: String, labels: GachaLabels, isWeapon: Boolean, modifier: Modifier = Modifier) {
+private fun DrawPanel(
+    kind: String,
+    labels: GachaLabels,
+    isWeapon: Boolean,
+    coins: Int,
+    onDraw: (Boolean, Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val panelShape = RoundedCornerShape(24.dp)
     
     Box(
@@ -212,8 +295,8 @@ private fun DrawPanel(kind: String, labels: GachaLabels, isWeapon: Boolean, modi
             .padding(20.dp)
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             
@@ -249,28 +332,29 @@ private fun DrawPanel(kind: String, labels: GachaLabels, isWeapon: Boolean, modi
                 // Mystic Treasure Chest
                 Box(
                     modifier = Modifier
-                        .size(150.dp)
-                        .floatBobbing()
+                        .size(160.dp)
+                        .bounceIn()
+                        .floatBobbing(amount = 8.dp)
                         .pulseGlow(),
                     contentAlignment = Alignment.Center
                 ) {
                     Box(
                         modifier = Modifier
-                            .size(128.dp)
-                            .cartoonShadow(4.dp, ColorInk, RoundedCornerShape(20.dp))
+                            .size(140.dp)
+                            .cartoonShadow(6.dp, ColorInk, RoundedCornerShape(20.dp))
                             .cartoonBorder(4.dp, ColorInk, RoundedCornerShape(20.dp))
                             .clip(RoundedCornerShape(20.dp))
                             .background(Brush.radialGradient(listOf(Color(0xFFFFF3D3), Color(0xFFFF9500))))
                     ) {
                         GameIcon(
                             icon = GameIconRole.CHEST,
-                            fontSize = 86f,
+                            fontSize = 90f,
                             modifier = Modifier.align(Alignment.Center)
                         )
                         GameIcon(
                             icon = if (isWeapon) GameIconRole.WEAPON else GameIconRole.ARMOR,
                             fontSize = 32f,
-                            modifier = Modifier.align(Alignment.BottomEnd).padding(10.dp)
+                            modifier = Modifier.align(Alignment.BottomEnd).padding(8.dp)
                         )
                     }
                 }
@@ -283,7 +367,7 @@ private fun DrawPanel(kind: String, labels: GachaLabels, isWeapon: Boolean, modi
                     color = ColorTextSecondary,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Black,
-                    fontSize = 12.sp,
+                    fontSize = 11.sp,
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
 
@@ -303,15 +387,17 @@ private fun DrawPanel(kind: String, labels: GachaLabels, isWeapon: Boolean, modi
             ) {
                 SecondaryButton(
                     labels.drawOne,
-                    onClick = {}, 
-                    enabled = false,
-                    modifier = Modifier.weight(1f).height(60.dp)
+                    onClick = { onDraw(isWeapon, 1) }, 
+                    enabled = coins >= 100,
+                    modifier = Modifier.weight(1f).height(54.dp).bounceIn().pulseGlow(),
+                    height = 54.dp
                 )
                 PrimaryButton(
                     labels.drawTen,
-                    onClick = {}, 
-                    enabled = false,
-                    modifier = Modifier.weight(1f).height(60.dp)
+                    onClick = { onDraw(isWeapon, 10) }, 
+                    enabled = coins >= 1000,
+                    modifier = Modifier.weight(1f).height(54.dp).bounceIn().pulseGlow(),
+                    height = 54.dp
                 )
             }
         }
@@ -405,11 +491,11 @@ private fun gachaLabels(language: AppLanguage): GachaLabels = when (language) {
 @Preview(showBackground = true, widthDp = 375, heightDp = 812)
 @Composable
 private fun GachaScreenPreview() {
-    GachaScreen(coins = 1200, gems = 0, onBack = {})
+    GachaScreen(coins = 1200, gems = 0, onBack = {}, onDraw = { _ -> "" })
 }
 
 @Preview(showBackground = true, widthDp = 375, heightDp = 812, name = "Gacha Korean")
 @Composable
 private fun GachaScreenKoreanPreview() {
-    GachaScreen(coins = 13_500, gems = 1352, language = AppLanguage.KOREAN, onBack = {})
+    GachaScreen(coins = 13_500, gems = 1352, language = AppLanguage.KOREAN, onBack = {}, onDraw = { _ -> "" })
 }

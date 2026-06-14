@@ -73,7 +73,23 @@ fun RunResultScreen(
                     
                     RunStatRow(labels.bestChapter, "${labels.chapter} ${meta.bestChapter}")
                     RunStatRow(labels.totalRuns,  "${meta.totalRuns}${labels.runSuffix}")
-                    RunStatRow(labels.coins, "${meta.coins} ${GameIconRole.GOLD.fallback}")
+                    
+                    // Glowing Central Score
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier
+                            .padding(vertical = 12.dp)
+                            .pulseGlow()
+                    ) {
+                        GameIcon(icon = GameIconRole.GOLD, fontSize = 48f)
+                        Text(
+                            text = "${meta.coins}",
+                            color = ColorPrimaryTop,
+                            fontSize = 42.sp,
+                            fontWeight = FontWeight.Black
+                        )
+                    }
                 }
             }
 
@@ -104,7 +120,7 @@ private fun RunStatRow(label: String, value: String) {
             .fillMaxWidth()
             .cartoonBorder(2.dp, ColorPanelBrownLight, shape)
             .clip(shape)
-            .background(Color(0xFF22172E))
+            .background(ColorChrome)
             .padding(horizontal = 16.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically

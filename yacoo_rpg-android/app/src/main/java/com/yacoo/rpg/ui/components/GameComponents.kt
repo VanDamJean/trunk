@@ -2,6 +2,7 @@ package com.yacoo.rpg.ui.components
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -22,6 +23,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
@@ -30,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yacoo.rpg.ui.theme.*
 import com.yacoo.rpg.game.*
+import com.yacoo.rpg.R
 
 // ── Text Outline & Shadow ───────────────────────────────────────────
 
@@ -142,7 +146,8 @@ fun GameButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    variant: GameButtonVariant = GameButtonVariant.PRIMARY
+    variant: GameButtonVariant = GameButtonVariant.PRIMARY,
+    height: androidx.compose.ui.unit.Dp = 48.dp
 ) {
     val shape = RoundedCornerShape(percent = 50)
 
@@ -203,7 +208,7 @@ fun GameButton(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(48.dp)
+                .height(height)
                 .offset(y = mainOffset)
                 .clip(shape)
                 .then(
@@ -475,12 +480,12 @@ fun EquippedSlotCard(
         Box(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .background(Color(0xFFFFFDF9))
-                .border(1.dp, ColorInk, badgeShape)
-                .padding(horizontal = 4.dp, vertical = 2.dp)
+                .background(itemRarity.color)
+                .border(2.dp, ColorInk, badgeShape)
+                .padding(horizontal = 6.dp, vertical = 2.dp)
         ) {
             Text(
-                text = "+${item.level}",
+                text = "Lv.${item.level}",
                 fontSize = 10.sp,
                 fontWeight = FontWeight.Black,
                 color = ColorInk
@@ -743,13 +748,14 @@ fun ChunkyProgressBar(
     progress: Float,
     colorStart: Color = ColorPrimaryTop,
     colorEnd: Color = ColorPrimaryBottom,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    height: androidx.compose.ui.unit.Dp = 24.dp
 ) {
     val shape = RoundedCornerShape(percent = 50)
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(24.dp)
+            .height(height)
             .cartoonShadow(3.dp, ColorInk, shape)
             .cartoonBorder(3.dp, ColorInk, shape)
             .clip(shape)
@@ -910,65 +916,10 @@ fun SunburstBackground(modifier: Modifier = Modifier) {
 
 @Composable
 fun AdventureBackground(modifier: Modifier = Modifier) {
-    // This creates a vibrant, full-screen continuous world background.
-    Box(
-        modifier = modifier
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFF99E5FF), // Light Sky Blue
-                        Color(0xFF55C4FF)  // Deep Sky Blue
-                    )
-                )
-            )
-    ) {
-        // Distant Clouds
-        Canvas(modifier = Modifier.fillMaxSize()) {
-            drawCircle(
-                color = Color(0x99FFFFFF),
-                radius = 120.dp.toPx(),
-                center = androidx.compose.ui.geometry.Offset(size.width * 0.2f, size.height * 0.15f)
-            )
-            drawCircle(
-                color = Color(0x99FFFFFF),
-                radius = 160.dp.toPx(),
-                center = androidx.compose.ui.geometry.Offset(size.width * 0.8f, size.height * 0.25f)
-            )
-        }
-        
-        // Sun
-        Box(
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .offset(x = 40.dp, y = (-40).dp)
-                .size(160.dp)
-                .clip(CircleShape)
-                .background(Brush.radialGradient(listOf(Color(0xFFFFFAED), Color(0xFFFFD13B))))
-        )
-
-        // Ground / Grassland
-        Box(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
-                .fillMaxHeight(0.35f) // Bottom 35% is ground
-                .background(
-                    Brush.verticalGradient(
-                        colors = listOf(
-                            Color(0xFF88E044), // Light Green
-                            Color(0xFF4CA52E)  // Dark Green
-                        )
-                    )
-                )
-        ) {
-            // Ground curve
-            Canvas(modifier = Modifier.fillMaxSize()) {
-                drawOval(
-                    color = Color(0xFF9FF555), // Lighter green top edge
-                    topLeft = androidx.compose.ui.geometry.Offset(-size.width * 0.2f, -40.dp.toPx()),
-                    size = androidx.compose.ui.geometry.Size(size.width * 1.4f, 80.dp.toPx())
-                )
-            }
-        }
-    }
+    Image(
+        painter = painterResource(id = R.drawable.bg_home_adventure),
+        contentDescription = "Adventure Background",
+        contentScale = ContentScale.Crop,
+        modifier = modifier.fillMaxSize()
+    )
 }

@@ -64,3 +64,6 @@ fun claimRewardMeta(state: MetaAppState): MetaAppState {
 
 fun upgradeSlotMeta(meta: MetaSave, slot: EquipmentSlot): MetaSave =
     upgradeEquipment(meta, slot)
+
+fun drawChestMeta(meta: MetaSave, isWeapon: Boolean): Pair<MetaSave, String> =
+    drawChest(meta, isWeapon)

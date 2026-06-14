@@ -98,7 +98,88 @@
 
 ---
 
-## 4. 남은 작업 (Antigravity가 해야 할 것)
+## 4. 최신 스크린샷 피드백 — 우선 수정사항
+
+최근 Antigravity 작업 결과 스크린샷 기준으로 아래 4개가 최우선 수정 대상입니다.
+
+### P0-1. 하단바를 iOS 하단 스와이프/홈 인디케이터 영역과 시각적으로 통합
+
+현재 문제:
+- Bottom navigation bar가 화면 안쪽에 독립된 검은 캡슐처럼 떠 있어서, 하단 iOS home indicator / swipe area와 따로 노는 느낌이 강함.
+- 중앙 돌출 탭 때문에 전체 bottom nav가 더 위로 떠 있어야 하지만, 동시에 하단 safe-area와 하나의 바닥 UI처럼 붙어 보여야 함.
+
+수정 방향:
+- `Shell.kt`의 `YacooBottomNav` / `YacooShell` 하단 영역을 수정.
+- bottom nav 배경 패널을 safe-area/home-indicator 영역까지 자연스럽게 이어지게 만들 것.
+- 단, 가운데 돌출 원형 탭이 있으므로 전체 nav 콘텐츠는 현재보다 약간 위로 띄우고, 패널/그림자는 하단까지 확장.
+- `WindowInsets.safeDrawing` 처리는 제거하지 말 것. safe-area는 보존하면서 시각적 배경만 하단까지 합쳐야 함.
+
+성공 기준:
+- 하단 검은 nav가 “떠 있는 독립 카드”가 아니라 “화면 바닥에 붙은 게임 UI”처럼 보임.
+- iOS home indicator와 충돌하지 않음.
+- 가운데 돌출 탭은 잘리지 않고 유지됨.
+
+### P0-2. Battle의 Hand Attacks 리스트를 2~3열 그리드로 바꿔 한 화면에 모두 보이게 하기
+
+현재 문제:
+- `CombatScreen`의 Hand Attacks가 1줄 리스트로 길게 내려가서 `Chance`, `Pair`, `Two Pair`, `Three of a Kind`, `Small Straight`, `Full House`, `Four of a Kind`, `Large Straight`, `Yahtzee`가 한 화면에 다 안 보임.
+- 하단 nav에 일부 항목이 가려짐.
+
+수정 방향:
+- `CombatScreen.kt`에서 공격 조합 표시 영역을 1-column vertical list에서 compact 2-column 또는 3-column grid로 변경.
+- 각 항목은 작은 pill/card 형태로: 왼쪽 hand name, 오른쪽 multiplier.
+- 영어 기준 긴 이름(`Three of a Kind`, `Small Straight`, `Large Straight`)도 잘리지 않게 font size/line break/width 조절.
+- 목표는 스크롤 없이 또는 최소 스크롤로 한 화면 내 모든 hand attack이 보이게 하는 것.
+
+성공 기준:
+- 9개 hand attack 항목이 화면 하단 nav 위에서 모두 확인 가능.
+- multiplier(`x1.0`, `x1.2`, `x1.5`...)가 잘리지 않음.
+- dice board와 roll button 영역은 유지됨.
+
+### P0-3. Gear 화면을 Habby식 장비 인벤토리 구조로 재배치
+
+현재 문제:
+- Gear 화면이 상단 paperdoll + 4개 장비 슬롯 + 하단 상세 카드 정도로만 구성되어, reference 이미지 같은 Habby식 “장비 인벤토리 화면” 느낌이 부족함.
+- 현재 하단에 일부 인벤토리 카드가 nav 뒤로 보이는 등 레이아웃이 어정쩡함.
+
+참조 방향:
+- 사용자 제공 reference 이미지처럼:
+  - 상단: 캐릭터/paperdoll 중앙 배치
+  - 좌우: 장착 장비 슬롯 6개 안팎 배치(현재 게임 모델은 WEAPON/ARMOR/CHARM/BOOTS 4개뿐이므로 4개만 사용)
+  - 중단: HP/ATK/DEF/POWER 스탯 바
+  - 탭/버튼: “내 장비”, “합성” 같은 영역은 현재 기능이 없으면 비활성/placeholder로만 표시
+  - 하단: 장비 카드 grid inventory 느낌. 현재 실제 bag model이 없으므로 equipped/current items를 반복하지 말고, placeholder/locked slots 또는 current equipment card grid로 명확하게 표현.
+
+수정 방향:
+- `EquipmentScreen.kt`를 Habby-style inventory screen 구조로 재구성.
+- 단, 게임 데이터 모델 변경 금지. `EquipmentSet`은 4 슬롯만 유지.
+- `game/Equipment.kt`, `EquipmentModels.kt` 변경 금지.
+
+성공 기준:
+- reference 이미지처럼 “장비 인벤토리 게임 화면”으로 읽힘.
+- 장착 슬롯/스탯/아이템 grid의 계층이 명확함.
+- bottom nav와 겹치지 않음.
+
+### P0-4. Shop/Gacha 화면에서 draw/gacha 카드가 뒤로 가려지는 z-order/하단 겹침 문제 해결
+
+현재 문제:
+- Shop/Gacha 화면에서 뽑기 카드/아이템 프리뷰가 큰 패널 뒤 또는 bottom nav 뒤로 가려짐.
+- 하단 카드들이 panel/nav에 잘려 보여서 실제 뽑기 영역이 읽히지 않음.
+
+수정 방향:
+- `GachaScreen.kt`의 z-index, Box 계층, padding, bottom spacing 수정.
+- 카드 프리뷰/뽑기 아이템 carousel이 크림색 패널 내부에서 명확히 보이게 배치.
+- bottom nav 위로 충분한 bottom padding 확보.
+- 필요하면 패널 높이를 줄이고, chest/card 영역을 위로 올림.
+
+성공 기준:
+- 뽑기 카드/프리뷰 3장이 패널 뒤나 nav 뒤에 가려지지 않음.
+- chest 이미지와 draw CTA가 시각적으로 중심에 위치.
+- Home 버튼/상단 리소스와 충돌 없음.
+
+---
+
+## 5. 남은 작업 (Antigravity가 해야 할 것)
 
 ### 작업 A: 이모지 폴백 아이콘 PNG 교체
 
@@ -169,7 +250,7 @@ RunMapScreen은 `bg_map_parchment.png` 사용 확인.
 
 ---
 
-## 5. 절대 하면 안 되는 것 (Guardrails)
+## 6. 절대 하면 안 되는 것 (Guardrails)
 
 1. **게임 로직 변경 금지** — `game/` 폴더 내 파일 수정 없음 (Combat.kt, Yahtzee.kt, Run.kt, Rewards.kt, Equipment.kt, Dice.kt 등)
 2. **네비게이션 라우트 변경 금지** — `NavGraph.kt`의 라우트 구조 유지
@@ -181,7 +262,7 @@ RunMapScreen은 `bg_map_parchment.png` 사용 확인.
 
 ---
 
-## 6. 빌드 및 검증
+## 7. 빌드 및 검증
 
 빌드 명령:
 ```bash
@@ -198,7 +279,7 @@ JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home" ./gradle
 
 ---
 
-## 7. Antigravity용 프롬프트
+## 8. Antigravity용 프롬프트
 
 아래 텍스트를 그대로 Antigravity에 복사해서 붙여넣으세요:
 
@@ -224,6 +305,33 @@ READ THESE FILES FIRST (in order):
 Then read each screen file under app/src/main/java/com/yacoo/rpg/ui/screens/.
 
 YOUR TASKS (do all of them):
+
+PRIORITY FIXES FROM LATEST SCREENSHOTS (do these first):
+
+P0-1 — Bottom nav + home indicator integration:
+- Current issue: bottom navigation looks like a separate floating dark pill, visually disconnected from the iOS home indicator / swipe area.
+- Fix Shell.kt / YacooBottomNav so the nav panel visually extends down into the safe-area/home-indicator region while the interactive nav content sits slightly higher to avoid the center protruding tab being clipped.
+- Preserve WindowInsets.safeDrawing. Do not remove safe-area handling.
+- Success: bottom nav feels attached to the bottom of the screen, not like an independent card; center protruding tab remains visible; no home indicator collision.
+
+P0-2 — Combat hand attacks compact grid:
+- Current issue: Hand Attacks are shown as a one-column vertical list, so Chance/Pair/Two Pair/etc. do not all fit and bottom nav covers items.
+- In CombatScreen.kt, convert the Hand Attacks area into a compact 2-column or 3-column grid.
+- Each item should be a small rounded pill/card with hand name + multiplier.
+- All 9 attack hands must be visible above bottom nav: Chance, Pair, Two Pair, Three of a Kind, Small Straight, Full House, Four of a Kind, Large Straight, Yahtzee.
+- Do not change combat/Yahtzee logic.
+
+P0-3 — Gear screen Habby-style inventory layout:
+- Current issue: Gear screen does not yet read like a Habby-style equipment inventory screen.
+- Use the provided reference direction: top character/paperdoll, equipped slots around it, stat bars under it, tab/button strip, and a lower grid-like inventory section.
+- Keep the current data model: only WEAPON, ARMOR, CHARM, BOOTS exist. Do not add real bag/unequip/synthesis logic.
+- Placeholder/locked grid slots are allowed if clearly visual-only.
+- Ensure bottom nav does not overlap the inventory grid.
+
+P0-4 — Shop/Gacha z-order and clipping fix:
+- Current issue: Draw/gacha preview cards are hidden behind the panel or bottom nav.
+- In GachaScreen.kt, fix z-order, Box hierarchy, padding, and bottom spacing so chest + preview cards + draw CTA are visible inside the cream panel.
+- Ensure preview cards are not clipped by the panel or covered by bottom navigation.
 
 TASK A — Replace emoji fallback icons with PNG assets:
 - In GameIcons.kt, the GameIcon() composable loads PNGs for some roles but falls back to emoji for others (SCRAP, ATTACK, DEFEND, DICE, HEAL, REWARD, SETTINGS, CLOSE, BACK, RESET, CONFIRM, DEFEAT, LOCK, STAR, ARROW_UP).

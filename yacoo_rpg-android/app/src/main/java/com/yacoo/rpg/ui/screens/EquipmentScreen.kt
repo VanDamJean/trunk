@@ -39,11 +39,21 @@ fun EquipmentScreen(
                 .fillMaxSize()
                 .padding(horizontal = 14.dp, vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(top = 80.dp, bottom = 120.dp) // Adjust for top HUD and bottom nav
+            contentPadding = PaddingValues(top = 10.dp, bottom = 120.dp) // Reset top padding
         ) {
-        item {
-            EquipmentHeader(labels = labels)
-        }
+            item {
+                TopStatsBar(
+                    stage = items.firstOrNull()?.level ?: 1, // approximate
+                    coins = coins,
+                    gems = 0,
+                    power = getHeroStats(equipment).power,
+                    language = language
+                )
+            }
+
+            item {
+                EquipmentHeader(labels = labels)
+            }
 
         item {
             HeroEquipmentSummary(
@@ -109,16 +119,16 @@ fun EquipmentScreen(
                                             color = ColorTextOnDark
                                         )
 
+                                        val badgeShape = RoundedCornerShape(topStart = 6.dp, bottomEnd = 16.dp)
                                         Box(
                                             modifier = Modifier
                                                 .align(Alignment.BottomEnd)
-                                                .padding(4.dp)
-                                                .clip(RoundedCornerShape(5.dp))
-                                                .background(if (index < items.size) ColorPrimaryTop else ColorSecondaryBottom)
-                                                .padding(horizontal = 4.dp, vertical = 1.dp)
+                                                .background(equipRarity(visualLevel).color)
+                                                .border(2.dp, ColorInk, badgeShape)
+                                                .padding(horizontal = 6.dp, vertical = 2.dp)
                                         ) {
                                             Text(
-                                                text = if (index < items.size) "E" else "+${index % 3 + 1}",
+                                                text = if (index < items.size) "E" else "Lv.${visualLevel}",
                                                 fontSize = 10.sp,
                                                 fontWeight = FontWeight.Black,
                                                 color = ColorInk
@@ -216,20 +226,41 @@ private fun HeroEquipmentSummary(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Showcase Layout: Left Character | Right Slots Grid
+            // Showcase Layout: Left Column (WEAPON, BOOTS) | Center Character | Right Column (ARMOR, CHARM)
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Left: Large Hero Showcase
+                // Left Column: WEAPON, BOOTS
+                Column(
+                    modifier = Modifier.weight(0.28f),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    EquippedSlotCard(
+                        slot = EquipmentSlot.WEAPON, item = equipment.weapon,
+                        isSelected = selectedSlot == EquipmentSlot.WEAPON,
+                        showUpgradeIndicator = canUpgrade(equipment.weapon, coins),
+                        onClick = { onSlotClick(EquipmentSlot.WEAPON) },
+                        modifier = Modifier.fillMaxWidth().aspectRatio(1f)
+                    )
+                    EquippedSlotCard(
+                        slot = EquipmentSlot.BOOTS, item = equipment.boots,
+                        isSelected = selectedSlot == EquipmentSlot.BOOTS,
+                        showUpgradeIndicator = canUpgrade(equipment.boots, coins),
+                        onClick = { onSlotClick(EquipmentSlot.BOOTS) },
+                        modifier = Modifier.fillMaxWidth().aspectRatio(1f)
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                // Center: Character Paperdoll
                 Box(
                     modifier = Modifier
-                        .weight(0.45f)
-                        .aspectRatio(0.7f)
-                        .clip(RoundedCornerShape(20.dp))
-                        .background(ColorCard.copy(alpha = 0.5f))
-                        .border(2.dp, ColorInk.copy(alpha = 0.15f), RoundedCornerShape(20.dp)),
+                        .weight(0.44f)
+                        .aspectRatio(0.8f),
                     contentAlignment = Alignment.BottomCenter
                 ) {
                     HeroPaperdollCanvas(
@@ -238,52 +269,29 @@ private fun HeroEquipmentSummary(
                         size = 140.dp
                     )
                 }
-                
-                Spacer(modifier = Modifier.width(12.dp))
-                
-                // Right: Slots Grid
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                // Right Column: ARMOR, CHARM
                 Column(
-                    modifier = Modifier.weight(0.55f),
-                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                    modifier = Modifier.weight(0.28f),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        EquippedSlotCard(
-                            slot = EquipmentSlot.WEAPON, item = equipment.weapon,
-                            isSelected = selectedSlot == EquipmentSlot.WEAPON,
-                            showUpgradeIndicator = canUpgrade(equipment.weapon, coins),
-                            onClick = { onSlotClick(EquipmentSlot.WEAPON) },
-                            modifier = Modifier.weight(1f).aspectRatio(1f)
-                        )
-                        EquippedSlotCard(
-                            slot = EquipmentSlot.ARMOR, item = equipment.armor,
-                            isSelected = selectedSlot == EquipmentSlot.ARMOR,
-                            showUpgradeIndicator = canUpgrade(equipment.armor, coins),
-                            onClick = { onSlotClick(EquipmentSlot.ARMOR) },
-                            modifier = Modifier.weight(1f).aspectRatio(1f)
-                        )
-                    }
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        EquippedSlotCard(
-                            slot = EquipmentSlot.CHARM, item = equipment.charm,
-                            isSelected = selectedSlot == EquipmentSlot.CHARM,
-                            showUpgradeIndicator = canUpgrade(equipment.charm, coins),
-                            onClick = { onSlotClick(EquipmentSlot.CHARM) },
-                            modifier = Modifier.weight(1f).aspectRatio(1f)
-                        )
-                        EquippedSlotCard(
-                            slot = EquipmentSlot.BOOTS, item = equipment.boots,
-                            isSelected = selectedSlot == EquipmentSlot.BOOTS,
-                            showUpgradeIndicator = canUpgrade(equipment.boots, coins),
-                            onClick = { onSlotClick(EquipmentSlot.BOOTS) },
-                            modifier = Modifier.weight(1f).aspectRatio(1f)
-                        )
-                    }
+                    EquippedSlotCard(
+                        slot = EquipmentSlot.ARMOR, item = equipment.armor,
+                        isSelected = selectedSlot == EquipmentSlot.ARMOR,
+                        showUpgradeIndicator = canUpgrade(equipment.armor, coins),
+                        onClick = { onSlotClick(EquipmentSlot.ARMOR) },
+                        modifier = Modifier.fillMaxWidth().aspectRatio(1f)
+                    )
+                    EquippedSlotCard(
+                        slot = EquipmentSlot.CHARM, item = equipment.charm,
+                        isSelected = selectedSlot == EquipmentSlot.CHARM,
+                        showUpgradeIndicator = canUpgrade(equipment.charm, coins),
+                        onClick = { onSlotClick(EquipmentSlot.CHARM) },
+                        modifier = Modifier.fillMaxWidth().aspectRatio(1f)
+                    )
                 }
             }
             

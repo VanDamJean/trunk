@@ -78,7 +78,12 @@ fun RewardPickScreen(
                 ) {
                     choices.forEachIndexed { idx, reward ->
                         key(idx) {
-                            RewardCard(reward = reward, labels = labels, onPick = { onPickReward(reward) })
+                            RewardCard(
+                                reward = reward, 
+                                labels = labels, 
+                                onPick = { onPickReward(reward) },
+                                modifier = Modifier.staggerSlideIn(delayMs = idx * 100)
+                            )
                         }
                     }
                 }
@@ -88,19 +93,21 @@ fun RewardPickScreen(
 }
 
 @Composable
-private fun RewardCard(reward: RewardChoice, labels: RewardPickLabels, onPick: () -> Unit) {
+private fun RewardCard(reward: RewardChoice, labels: RewardPickLabels, onPick: () -> Unit, modifier: Modifier = Modifier) {
     val cardShape = RoundedCornerShape(20.dp)
     
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 6.dp, end = 6.dp)
-            .cartoonShadow(shadowOffset = 5.dp, color = ColorInk, shape = cardShape)
-            .cartoonBorder(strokeWidth = 3.dp, color = ColorInk, shape = cardShape)
+            .padding(bottom = 8.dp, end = 8.dp)
+            .bounceIn()
+            .floatBobbing(amount = 4.dp, durationMs = 3000)
+            .cartoonShadow(shadowOffset = 6.dp, color = ColorInk, shape = cardShape)
+            .cartoonBorder(strokeWidth = 3.dp, color = ColorSecondaryTop, shape = cardShape)
             .clip(cardShape)
-            .background(ColorParchmentLight)
+            .background(ColorChrome)
             .clickable(role = Role.Button, onClick = onPick)
-            .padding(14.dp)
+            .padding(16.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -110,20 +117,20 @@ private fun RewardCard(reward: RewardChoice, labels: RewardPickLabels, onPick: (
             val iconBgShape = RoundedCornerShape(12.dp)
             Box(
                 modifier = Modifier
-                    .size(56.dp)
+                    .size(60.dp)
                     .cartoonBorder(2.dp, ColorInk, iconBgShape)
                     .clip(iconBgShape)
                     .background(ColorItemPurpleLight),
                 contentAlignment = Alignment.Center
             ) {
-                GameIcon(rewardIcon(reward.kind), fontSize = 36f)
+                GameIcon(rewardIcon(reward.kind), fontSize = 40f)
             }
             
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     rewardLabel(reward, labels),
                     style      = GameTypography.statValue,
-                    color      = ColorInkStrong,
+                    color      = Color(0xFFFFFDF9),
                     fontWeight = FontWeight.Black
                 )
                 Text(

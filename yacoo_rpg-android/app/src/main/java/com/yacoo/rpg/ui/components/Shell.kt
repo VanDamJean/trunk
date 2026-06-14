@@ -2,6 +2,7 @@ package com.yacoo.rpg.ui.components
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -39,11 +40,12 @@ fun TopStatsBar(
 ) {
     val labels = shellLabels(language)
     
-    // Floating pill-shaped top bar
+    // Floating pill-shaped top bar with status bar (notch) padding
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 12.dp)
+            .statusBarsPadding()
+            .padding(horizontal = 14.dp, vertical = 8.dp)
     ) {
         Row(
             modifier = Modifier
@@ -57,10 +59,10 @@ fun TopStatsBar(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                StatPill(label = labels.gold, value = "$coins", icon = GameIconRole.GOLD)
-                StatPill(label = labels.gem, value = "$gems", icon = GameIconRole.GEM)
+                StatPill(label = labels.gold, value = "$coins", icon = GameIconRole.GOLD, iconBg = Color(0xFFFFD43F))
+                StatPill(label = labels.gem, value = "$gems", icon = GameIconRole.GEM, iconBg = ColorGemPurple)
                 if (energy != null) {
-                    StatPill(label = labels.energy, value = "$energy", icon = GameIconRole.ENERGY)
+                    StatPill(label = labels.energy, value = "$energy", icon = GameIconRole.ENERGY, iconBg = ColorStaminaCyan)
                 }
             }
         }
@@ -69,29 +71,40 @@ fun TopStatsBar(
 
 @Composable
 fun PlayerPill(stage: Int, stageLabel: String = "Stage", modifier: Modifier = Modifier) {
-    val shape = RoundedCornerShape(10.dp)
+    val shape = RoundedCornerShape(16.dp)
     Row(
         modifier = modifier
-            .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = shape)
+            .cartoonShadow(shadowOffset = 4.dp, color = ColorInk, shape = shape)
+            .cartoonBorder(strokeWidth = 3.dp, color = ColorInk, shape = shape)
             .clip(shape)
-            .background(Brush.verticalGradient(listOf(ColorPrimaryTop, ColorPrimaryBottom)))
-            .padding(horizontal = 8.dp, vertical = 4.dp),
-        horizontalArrangement = Arrangement.spacedBy(6.dp),
+            .background(Brush.verticalGradient(listOf(ColorSecondaryTop, ColorSecondaryBottom)))
+            .padding(horizontal = 10.dp, vertical = 6.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
             modifier = Modifier
-                .size(24.dp)
+                .size(28.dp)
                 .clip(CircleShape)
                 .background(Color(0xFFFFFDF9))
-                .cartoonBorder(strokeWidth = 1.5.dp, color = ColorInk, shape = CircleShape),
+                .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = CircleShape),
             contentAlignment = Alignment.Center
         ) {
-            GameIcon(icon = GameIconRole.PLAYER_AVATAR, fontSize = 14f)
+            GameIcon(icon = GameIconRole.PLAYER_AVATAR, fontSize = 20f)
         }
         Column {
-            Text("Yacoo", color = ColorTextOnPrimary, fontSize = 10.sp, fontWeight = FontWeight.Bold)
-            Text("$stageLabel $stage", color = ColorTextOnPrimary, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold)
+            Text(
+                text = "Yacoo",
+                color = ColorInk,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Black
+            )
+            Text(
+                text = "$stageLabel $stage",
+                color = ColorInk,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Black
+            )
         }
     }
 }
@@ -101,26 +114,35 @@ fun StatPill(
     label: String,
     value: String,
     icon: GameIconRole,
+    iconBg: Color = ColorPrimaryBottom,
     modifier: Modifier = Modifier
 ) {
     val shape = RoundedCornerShape(percent = 50)
     Row(
         modifier = modifier
             .cartoonShadow(shadowOffset = 3.dp, color = ColorInk, shape = shape)
-            .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = shape)
+            .cartoonBorder(strokeWidth = 2.5.dp, color = ColorInk, shape = shape)
             .clip(shape)
-            .background(ColorHudBg) // Use theme HUD background instead of hardcoded
-            .padding(start = 6.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
+            .background(ColorChrome)
+            .padding(start = 4.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
         horizontalArrangement = Arrangement.spacedBy(6.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        GameIcon(icon = icon, fontSize = 16f)
+        Box(
+            modifier = Modifier
+                .size(22.dp)
+                .clip(CircleShape)
+                .background(iconBg)
+                .border(1.5.dp, ColorInk, CircleShape),
+            contentAlignment = Alignment.Center
+        ) {
+            GameIcon(icon = icon, fontSize = 13f)
+        }
         Text(
             text = value,
             color = Color(0xFFFFFDF9),
             fontSize = 13.sp,
-            fontWeight = FontWeight.Black,
-            modifier = Modifier.cartoonShadowText() // Ensure text is readable over background
+            fontWeight = FontWeight.Black
         )
     }
 }
@@ -145,21 +167,22 @@ fun YacooBottomNav(
     modifier: Modifier = Modifier
 ) {
     val labels = shellLabels(language)
-    val shape = RoundedCornerShape(32.dp)
+    val shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp, bottomStart = 0.dp, bottomEnd = 0.dp)
     val centerIndex = NAV_ITEMS.size / 2 // Index 2 = EQUIPMENT (center)
     
-    // Floating distinct dark panel for bottom nav
+    val bottomPadding = WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom).asPaddingValues().calculateBottomPadding()
+
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 12.dp),
+            .background(Color.Transparent),
         contentAlignment = Alignment.BottomCenter
     ) {
         // Background bar (sits behind everything)
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(72.dp)
+                .height(72.dp + bottomPadding)
                 .cartoonShadow(shadowOffset = 5.dp, color = ColorInk, shape = shape)
                 .cartoonBorder(strokeWidth = 3.dp, color = ColorInk, shape = shape)
                 .clip(shape)
@@ -173,7 +196,9 @@ fun YacooBottomNav(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 8.dp),
+                .padding(bottom = bottomPadding)
+                .height(72.dp)
+                .padding(horizontal = 16.dp),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.Bottom
         ) {
@@ -300,21 +325,6 @@ fun YacooShell(
             modifier = Modifier.fillMaxSize(),
             content = content
         )
-
-        // Floating Top HUD
-        TopStatsBar(
-            stage = stage,
-            coins = coins,
-            gems = gems,
-            power = power,
-            energy = energy,
-            language = language,
-            modifier = Modifier
-                .align(Alignment.TopCenter)
-                .windowInsetsPadding(
-                    WindowInsets.safeDrawing.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)
-                )
-        )
         
         // Floating Bottom Nav
         YacooBottomNav(
@@ -324,7 +334,7 @@ fun YacooShell(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .windowInsetsPadding(
-                    WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom + WindowInsetsSides.Horizontal)
+                    WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal)
                 )
         )
     }
@@ -386,14 +396,16 @@ fun PrimaryButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    height: androidx.compose.ui.unit.Dp = 48.dp
 ) {
     GameButton(
         text = text,
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        variant = GameButtonVariant.PRIMARY
+        variant = GameButtonVariant.PRIMARY,
+        height = height
     )
 }
 
@@ -402,13 +414,14 @@ fun SecondaryButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    height: androidx.compose.ui.unit.Dp = 48.dp
 ) {
     val shape = RoundedCornerShape(12.dp)
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(48.dp)
+            .height(height)
             .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = shape)
             .clip(shape)
             .background(Color(0xFFFFFDF9))

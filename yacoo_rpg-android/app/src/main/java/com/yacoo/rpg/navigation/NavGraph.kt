@@ -25,6 +25,8 @@ fun YacooNavGraph(viewModel: GameViewModel) {
     val hero  = getHeroStats(meta.equipment)
     val stage = run?.chapter ?: meta.bestChapter
 
+    val soundManager = com.yacoo.rpg.ui.components.rememberSoundManager()
+
     LaunchedEffect(gameScreen) {
         val route = gameScreen.route()
         if (navController.currentDestination?.route != route) {
@@ -42,7 +44,10 @@ fun YacooNavGraph(viewModel: GameViewModel) {
         coins      = meta.coins,
         power      = hero.power,
         language   = language,
-        onNavigate = { screen -> viewModel.navigate(screen) }
+        onNavigate = { screen ->
+            soundManager.playClick()
+            viewModel.navigate(screen)
+        }
     ) {
         NavHost(
             navController = navController, 
@@ -56,9 +61,18 @@ fun YacooNavGraph(viewModel: GameViewModel) {
                     heroStats     = hero,
                     language      = language,
                     onLanguageChange = { next -> viewModel.setLanguage(next) },
-                    onStartCombat = { viewModel.startCombat() },
-                    onNavigate    = { s -> viewModel.navigate(s) },
-                    onReset       = { viewModel.reset() }
+                    onStartCombat = {
+                        soundManager.playClick()
+                        viewModel.startCombat()
+                    },
+                    onNavigate    = { s ->
+                        soundManager.playClick()
+                        viewModel.navigate(s)
+                    },
+                    onReset       = {
+                        soundManager.playClick()
+                        viewModel.reset()
+                    }
                 )
             }
             composable(Screen.COMBAT.route()) {
@@ -67,7 +81,15 @@ fun YacooNavGraph(viewModel: GameViewModel) {
                     equipment = meta.equipment,
                     run       = run,
                     language  = language,
-                    onFinish  = { outcome, hand, hp -> viewModel.finishCombat(outcome, hand, hp) }
+                    soundManager = soundManager,
+                    onFinish  = { outcome, hand, hp ->
+                        if (outcome == CombatOutcome.WIN) {
+                            soundManager.playVictory()
+                        } else {
+                            soundManager.playDefeat()
+                        }
+                        viewModel.finishCombat(outcome, hand, hp)
+                    }
                 )
             }
             composable(Screen.EQUIPMENT.route()) {
@@ -75,14 +97,20 @@ fun YacooNavGraph(viewModel: GameViewModel) {
                     equipment = meta.equipment,
                     coins = meta.coins,
                     language = language,
-                    onClose = { viewModel.navigate(Screen.HOME) }
+                    onClose = {
+                        soundManager.playClick()
+                        viewModel.navigate(Screen.HOME)
+                    }
                 )
             }
             composable(Screen.UPGRADE.route()) {
                 UpgradeScreen(
                     meta      = meta,
                     language  = language,
-                    onUpgrade = { slot -> viewModel.upgrade(slot) }
+                    onUpgrade = { slot ->
+                        soundManager.playUpgrade()
+                        viewModel.upgrade(slot)
+                    }
                 )
             }
             composable(Screen.GACHA.route()) {
@@ -90,14 +118,24 @@ fun YacooNavGraph(viewModel: GameViewModel) {
                     coins = meta.coins,
                     gems = 0,
                     language = language,
-                    onBack = { viewModel.navigate(Screen.HOME) }
+                    onBack = {
+                        soundManager.playClick()
+                        viewModel.navigate(Screen.HOME)
+                    },
+                    onDraw = { isWeapon ->
+                        soundManager.playUpgrade()
+                        viewModel.drawChest(isWeapon)
+                    }
                 )
             }
             composable(Screen.RESULT.route()) {
                 ResultScreen(
                     result        = meta.lastCombatResult,
                     language      = language,
-                    onClaimReward = { viewModel.claimReward() }
+                    onClaimReward = {
+                        soundManager.playClick()
+                        viewModel.claimReward()
+                    }
                 )
             }
             composable(Screen.RUN_MAP.route()) {

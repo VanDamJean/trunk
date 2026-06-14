@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -47,15 +48,25 @@ fun UpgradeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 14.dp, vertical = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(top = 80.dp, bottom = 120.dp)
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            contentPadding = PaddingValues(top = 10.dp, bottom = 120.dp)
         ) {
+            item {
+                TopStatsBar(
+                    stage = meta.bestChapter,
+                    coins = meta.coins,
+                    gems = 0,
+                    power = getHeroStats(meta.equipment).power,
+                    language = language
+                )
+            }
+
             item {
                 Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text(
                         text = labels.title,
                         style = GameTypography.screenTitle,
-                        color = Color(0xFFFFFDF9),
+                        color = ColorTextOnDark,
                         fontWeight = FontWeight.Black,
                         fontSize = 32.sp
                     )
@@ -143,109 +154,105 @@ private fun UpgradeCard(
     val atCap     = item.level >= Constants.EquipmentRules.LEVEL_CAP
     val itemRarity = equipRarity(item.level)
 
-    val cardShape = RoundedCornerShape(18.dp)
+    val cardShape = RoundedCornerShape(14.dp)
 
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 5.dp, end = 5.dp)
-            .cartoonShadow(shadowOffset = 4.dp, color = ColorInk, shape = cardShape)
-            .cartoonBorder(strokeWidth = 3.dp, color = ColorInk, shape = cardShape)
+            .padding(bottom = 3.dp, end = 3.dp)
+            .cartoonShadow(shadowOffset = 2.dp, color = ColorInk, shape = cardShape)
+            .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = cardShape)
             .clip(cardShape)
             .background(ColorSurfacePanel)
-            .padding(14.dp)
+            .padding(8.dp)
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+            // Left: Outlined item icon container
+            PurpleItemCard(
+                modifier = Modifier.size(40.dp),
+                rarity = itemRarity
             ) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    // Outlined item icon container using PurpleItemCard for a rich feel
-                    PurpleItemCard(
-                        modifier = Modifier.size(56.dp),
-                        rarity = itemRarity
-                    ) {
-                        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                            GameIcon(
-                                icon = when(item.slot) { 
-                                    EquipmentSlot.WEAPON -> GameIconRole.WEAPON
-                                    EquipmentSlot.ARMOR -> GameIconRole.ARMOR
-                                    EquipmentSlot.CHARM -> GameIconRole.CHARM
-                                    EquipmentSlot.BOOTS -> GameIconRole.BOOTS 
-                                }, 
-                                fontSize = 30f
-                            )
-                        }
-                    }
-                    Column {
-                        Text(
-                            text = item.name, 
-                            style = GameTypography.statValue, 
-                            color = itemRarity.color,
-                            fontWeight = FontWeight.Black
-                        )
-                        Text(
-                            text = "${labels.level} ${item.level} / ${Constants.EquipmentRules.LEVEL_CAP}", 
-                            style = GameTypography.caption, 
-                            color = ColorTextSecondary,
-                            fontWeight = FontWeight.Black
-                        )
-                    }
-                }
-                if (atCap) {
-                    val maxShape = RoundedCornerShape(6.dp)
-                    Text(
-                        text = labels.max, 
-                        modifier = Modifier
-                            .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = maxShape)
-                            .clip(maxShape)
-                            .background(ColorPrimaryBottom)
-                            .padding(horizontal = 8.dp, vertical = 2.dp),
-                        fontWeight = FontWeight.Black, 
-                        color = ColorInk, 
-                        fontSize = 12.sp
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    GameIcon(
+                        icon = when(item.slot) { 
+                            EquipmentSlot.WEAPON -> GameIconRole.WEAPON
+                            EquipmentSlot.ARMOR -> GameIconRole.ARMOR
+                            EquipmentSlot.CHARM -> GameIconRole.CHARM
+                            EquipmentSlot.BOOTS -> GameIconRole.BOOTS 
+                        }, 
+                        fontSize = 20f
                     )
                 }
             }
 
-            // Stat bonus description
-            val statShape = RoundedCornerShape(12.dp)
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = statShape)
-                    .clip(statShape)
-                    .background(ColorChrome)
-                    .padding(12.dp)
+            // Center: Info (Name, Level, Stat, Progress)
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(3.dp)
             ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    Text(
+                        text = item.name, 
+                        style = GameTypography.statValue, 
+                        color = itemRarity.color,
+                        fontWeight = FontWeight.Black,
+                        fontSize = 13.sp
+                    )
+                    Text(
+                        text = "Lv.${item.level}/${Constants.EquipmentRules.LEVEL_CAP}", 
+                        style = GameTypography.caption, 
+                        color = ColorTextSecondary,
+                        fontWeight = FontWeight.Black,
+                        fontSize = 10.sp
+                    )
+                }
+
                 Text(
                     text = upgradeBonusLabel(item, labels), 
-                    fontSize = 14.sp,
+                    fontSize = 11.sp,
                     fontWeight = FontWeight.Black,
-                    color = ColorCard
+                    color = ColorInkSoft
+                )
+
+                // Level Progress Bar (Compact)
+                ChunkyProgressBar(
+                    progress = item.level.toFloat() / Constants.EquipmentRules.LEVEL_CAP,
+                    colorStart = ColorPrimaryTop,
+                    colorEnd = ColorPrimaryBottom,
+                    modifier = Modifier.height(10.dp),
+                    height = 10.dp
                 )
             }
 
-            // Level Progress Bar
-            ChunkyProgressBar(
-                progress = item.level.toFloat() / Constants.EquipmentRules.LEVEL_CAP,
-                colorStart = ColorPrimaryTop,
-                colorEnd = ColorPrimaryBottom
-            )
-
-            if (!atCap) {
+            // Right: Upgrade Button or Max Badge
+            if (atCap) {
+                val maxShape = RoundedCornerShape(6.dp)
+                Text(
+                    text = labels.max, 
+                    modifier = Modifier
+                        .cartoonBorder(strokeWidth = 1.5.dp, color = ColorInk, shape = maxShape)
+                        .clip(maxShape)
+                        .background(ColorPrimaryBottom)
+                        .padding(horizontal = 8.dp, vertical = 4.dp),
+                    fontWeight = FontWeight.Black, 
+                    color = ColorInk, 
+                    fontSize = 11.sp
+                )
+            } else {
                 GameButton(
-                    text = if (canUp) "${labels.upgrade} — $cost ${GameIconRole.GOLD.fallback}" else "${labels.need} $cost ${labels.coins}",
+                    text = if (canUp) "$cost ${GameIconRole.GOLD.fallback}" else "${labels.need}\n$cost",
                     onClick = onUpgrade,
                     variant = if (canUp) GameButtonVariant.PRIMARY else GameButtonVariant.SECONDARY,
-                    enabled = canUp
+                    enabled = canUp,
+                    modifier = Modifier.width(90.dp).height(38.dp),
+                    height = 38.dp
                 )
             }
         }
@@ -316,7 +323,16 @@ private fun RankUpSuccessPanel(
             .padding(horizontal = 18.dp),
         contentAlignment = Alignment.Center
     ) {
-        SunburstBackground(modifier = Modifier.size(320.dp))
+        Box(contentAlignment = Alignment.Center) {
+            SunburstBackground(modifier = Modifier.size(320.dp))
+            GameIcon(
+                icon = GameIconRole.ARROW_UP,
+                fontSize = 240f,
+                modifier = Modifier
+                    .alpha(0.6f)
+                    .pulseGlow()
+            )
+        }
 
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -407,7 +423,7 @@ private fun RankUpStatRow(row: UpgradeStatDelta) {
             .fillMaxWidth()
             .cartoonBorder(2.dp, ColorPanelBrownLight, shape)
             .clip(shape)
-            .background(Color(0xFF22172E))
+            .background(ColorChrome)
             .padding(horizontal = 10.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)

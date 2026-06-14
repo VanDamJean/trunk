@@ -144,6 +144,15 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         persistMeta(updated)
     }
 
+    // ── Gacha ─────────────────────────────────────────────────────────
+
+    fun drawChest(isWeapon: Boolean): String {
+        val res = drawChestMeta(_meta.value, isWeapon)
+        _meta.value = res.first
+        persistMeta(res.first)
+        return res.second
+    }
+
     // ── Reset ─────────────────────────────────────────────────────────
 
     fun reset() {

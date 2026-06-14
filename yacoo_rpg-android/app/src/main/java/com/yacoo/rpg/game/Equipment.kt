@@ -38,6 +38,22 @@ fun upgradeEquipment(meta: MetaSave, slot: EquipmentSlot): MetaSave {
     )
 }
 
+fun drawChest(meta: MetaSave, isWeapon: Boolean, rng: Rng = Math::random): Pair<MetaSave, String> {
+    if (meta.coins < 100) return Pair(meta, "")
+    val slot = if (isWeapon) {
+        if (rng() < 0.7) EquipmentSlot.WEAPON else EquipmentSlot.CHARM
+    } else {
+        if (rng() < 0.7) EquipmentSlot.ARMOR else EquipmentSlot.BOOTS
+    }
+    val item = meta.equipment[slot]
+    val nextLevel = minOf(EquipmentRules.LEVEL_CAP, item.level + 1)
+    val updatedMeta = meta.copy(
+        coins = meta.coins - 100,
+        equipment = meta.equipment.with(slot, item.copy(level = nextLevel))
+    )
+    return Pair(updatedMeta, "${item.name} (Lv.$nextLevel)")
+}
+
 fun getHeroStats(equipment: EquipmentSet): HeroStats {
     val maxHp   = HeroBase.HP     + equipment.armor.level  * EquipmentRules.ARMOR_HP_PER_LEVEL
     val attack  = HeroBase.ATTACK + equipment.weapon.level * EquipmentRules.WEAPON_ATTACK_PER_LEVEL

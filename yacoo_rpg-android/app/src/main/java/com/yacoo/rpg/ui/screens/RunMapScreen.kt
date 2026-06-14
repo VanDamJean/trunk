@@ -237,21 +237,16 @@ fun RunMapScreen(
                         }
 
                         if (index < nodes.size - 1) {
-                            Column(
+                            Box(
                                 modifier = Modifier
-                                    .padding(start = 26.dp)
-                                    .height(24.dp),
-                                verticalArrangement = Arrangement.SpaceEvenly
-                            ) {
-                                repeat(3) {
-                                    Box(
-                                        modifier = Modifier
-                                            .width(4.dp)
-                                            .height(4.dp)
-                                            .background(if (isCleared) ColorPrimaryTop else ColorMuted, CircleShape)
-                                    )
-                                }
-                            }
+                                    .padding(start = 25.dp)
+                                    .height(30.dp)
+                                    .width(6.dp)
+                                    .cartoonBorder(1.5.dp, ColorInk, RoundedCornerShape(3.dp))
+                                    .clip(RoundedCornerShape(3.dp))
+                                    .background(if (isCleared) ColorPrimaryTop else ColorInkSoft)
+                                    .then(if (isCleared) Modifier.pulseGlow() else Modifier)
+                            )
                         }
                     }
                 }
@@ -293,7 +288,7 @@ fun RunMapScreen(
 }
 
 private fun nodeIcon(type: NodeType): GameIconRole = when (type) {
-    NodeType.BATTLE   -> GameIconRole.BATTLE
+    NodeType.BATTLE   -> GameIconRole.ATTACK
     NodeType.ELITE    -> GameIconRole.DEFEAT
     NodeType.TREASURE -> GameIconRole.TREASURE
     NodeType.REST     -> GameIconRole.HEAL

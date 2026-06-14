@@ -6,6 +6,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -22,7 +23,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
+import com.yacoo.rpg.R
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -48,6 +52,7 @@ fun CombatScreen(
     run: RunState? = null,
     language: AppLanguage = AppLanguage.KOREAN,
     onFinish: (CombatOutcome, YahtzeeHand?, Int) -> Unit,
+    soundManager: com.yacoo.rpg.ui.components.SoundManager? = null,
     enemyTurnDelayMs: Long = Constants.CombatTiming.ENEMY_TURN_DELAY_MS,
     modifier: Modifier = Modifier
 ) {
@@ -104,6 +109,7 @@ fun CombatScreen(
     fun startRolling(prev: List<DieValue>, heldMask: List<Boolean>) {
         rollPhase = RollPhase.ROLLING
         haptic.thump()
+        soundManager?.playDiceRoll()
         scope.launch {
             var elapsed = 0L
             while (elapsed < ROLL_ANIM_MS) {
@@ -133,6 +139,7 @@ fun CombatScreen(
         showDamage(damage, isHero = false)
         if (hand != null) lastHand = hand
         haptic.hit()
+        soundManager?.playAttackHit()
         if (next <= 0) {
             turnPhase  = TurnPhase.OVER
             stagePhase = StagePhase.VICTORY
@@ -157,6 +164,7 @@ fun CombatScreen(
         heroHp = nextHeroHp
         showDamage(enemyStrike, isHero = true)
         haptic.hit()
+        soundManager?.playAttackHit()
         if (nextHeroHp <= 0) {
             turnPhase = TurnPhase.OVER
             feedback  = "${enemy.name} ${enemyStrike} DMG. Defeat."
@@ -183,12 +191,26 @@ fun CombatScreen(
     )
 
     Box(
-        modifier = modifier.fillMaxSize() // Transparent to show Shell's AdventureBackground
+        modifier = modifier.fillMaxSize()
     ) {
+        Image(
+            painter = painterResource(id = R.drawable.bg_combat_arena),
+            contentDescription = "Combat Arena Background",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
         Column(
-            modifier = Modifier.fillMaxSize().padding(top = 80.dp), // Padding for TopStatsBar
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            TopStatsBar(
+                stage = stage,
+                coins = run?.scrap ?: 0,
+                gems = 0,
+                power = hero.power,
+                language = language
+            )
+            Spacer(modifier = Modifier.height(4.dp))
             // Turn Indicator (floating above combat)
             Box(
                 modifier = Modifier
@@ -211,7 +233,7 @@ fun CombatScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
+                    .weight(0.4f)
                     .padding(horizontal = 16.dp)
             ) {
                 // Hero Side (Left)
@@ -221,8 +243,8 @@ fun CombatScreen(
                         .offset(x = heroX.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Box(modifier = Modifier.size(160.dp), contentAlignment = Alignment.Center) {
-                        HeroPaperdollCanvas(equipment = equipment, size = 120.dp)
+                    Box(modifier = Modifier.size(70.dp), contentAlignment = Alignment.Center) {
+                        HeroPaperdollCanvas(equipment = equipment, size = 54.dp)
                         
                         // Floating damage for hero
                         Column {
@@ -235,18 +257,18 @@ fun CombatScreen(
                                     text = "-${floatingDamage?.first ?: 0}",
                                     style = GameTypography.screenTitle,
                                     color = ColorDangerBottom,
-                                    fontSize = 36.sp,
-                                    modifier = Modifier.offset(y = (-80).dp).bounceIn()
+                                    fontSize = 30.sp,
+                                    modifier = Modifier.offset(y = (-50).dp).bounceIn()
                                 )
                             }
                         }
                     }
-                    Spacer(Modifier.height(8.dp))
-                    ChunkyProgressBar(
-                        progress = heroHp.toFloat() / hero.maxHp.coerceAtLeast(1),
-                        colorStart = ColorHpFillStart,
-                        colorEnd = ColorHpFillStart,
-                        modifier = Modifier.width(120.dp).height(16.dp)
+                    Spacer(Modifier.height(4.dp))
+                    HpBar(
+                        current = heroHp,
+                        max = hero.maxHp,
+                        color = ColorHpFillStart,
+                        modifier = Modifier.width(80.dp)
                     )
                 }
 
@@ -255,10 +277,10 @@ fun CombatScreen(
                     modifier = Modifier.align(Alignment.CenterEnd),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Box(modifier = Modifier.size(160.dp), contentAlignment = Alignment.Center) {
+                    Box(modifier = Modifier.size(70.dp), contentAlignment = Alignment.Center) {
                         Box(modifier = Modifier.scale(monsterScale)) {
                             val nodeType = run?.map?.nodes?.getOrNull(run.nodeIndex)?.type
-                            MonsterCanvas(nodeType = nodeType, modifier = Modifier.size(120.dp))
+                            MonsterCanvas(nodeType = nodeType, modifier = Modifier.size(54.dp))
                         }
                         
                         // Floating damage for monster
@@ -272,18 +294,18 @@ fun CombatScreen(
                                     text = "-${floatingDamage?.first ?: 0}",
                                     style = GameTypography.screenTitle,
                                     color = Color(0xFFFFD43F), // Yellow critical hit color
-                                    fontSize = 42.sp, // Slightly larger for impact
-                                    modifier = Modifier.offset(y = (-80).dp).bounceIn()
+                                    fontSize = 34.sp, // Slightly larger for impact
+                                    modifier = Modifier.offset(y = (-50).dp).bounceIn()
                                 )
                             }
                         }
                     }
-                    Spacer(Modifier.height(8.dp))
-                    ChunkyProgressBar(
-                        progress = enemyHp.toFloat() / enemy.maxHp.coerceAtLeast(1),
-                        colorStart = ColorDangerTop,
-                        colorEnd = ColorDangerBottom,
-                        modifier = Modifier.width(120.dp).height(16.dp)
+                    Spacer(Modifier.height(4.dp))
+                    HpBar(
+                        current = enemyHp,
+                        max = enemy.maxHp,
+                        color = ColorDangerTop,
+                        modifier = Modifier.width(80.dp)
                     )
                     Text(
                         text = enemy.name,
@@ -298,7 +320,7 @@ fun CombatScreen(
                     Box(
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
-                            .offset(y = (-40).dp)
+                            .offset(y = (-20).dp)
                             .cartoonBorder(2.dp, ColorInk, RoundedCornerShape(12.dp))
                             .background(ColorInkStrong.copy(alpha = 0.8f))
                             .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -317,17 +339,19 @@ fun CombatScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1.2f)
-                    .cartoonBorder(4.dp, ColorInk, RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp))
-                    .clip(RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp))
+                    .padding(horizontal = 12.dp, vertical = 6.dp)
+                    .weight(2.2f)
+                    .cartoonShadow(5.dp, ColorInk, RoundedCornerShape(20.dp))
+                    .cartoonBorder(2.5.dp, ColorInk, RoundedCornerShape(20.dp))
+                    .clip(RoundedCornerShape(20.dp))
                     .background(ColorSurfacePanel)
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
-                        .padding(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                        .padding(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     // Dice tray area
                     BattleLogCard(
@@ -336,16 +360,16 @@ fun CombatScreen(
                         modifier = Modifier.staggerSlideIn(delayMs = 80)
                     )
 
-                    val trayShape = RoundedCornerShape(20.dp)
+                    val trayShape = RoundedCornerShape(16.dp)
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .cartoonShadow(3.dp, ColorInk, trayShape)
-                            .cartoonBorder(3.dp, ColorInk, trayShape)
+                            .cartoonShadow(2.dp, ColorInk, trayShape)
+                            .cartoonBorder(2.dp, ColorInk, trayShape)
                             .clip(trayShape)
                             .background(Brush.verticalGradient(listOf(ColorPanelBrownLight, ColorPanelBrownDark)))
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            .padding(8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
                         repeat(diceCount) { i ->
                             AnimatedDie(
@@ -372,13 +396,13 @@ fun CombatScreen(
                                 if (isChoosing) { rollsLeft -= 1; startRolling(emptyList(), List(diceCount) { false }) }
                             },
                             enabled = isChoosing,
-                            modifier = Modifier.fillMaxWidth().height(56.dp)
+                            modifier = Modifier.fillMaxWidth().height(48.dp)
                         )
                         RollPhase.ROLLING -> PrimaryButton(
                             text = labels.rolling,
                             onClick = {},
                             enabled = false,
-                            modifier = Modifier.fillMaxWidth().height(56.dp)
+                            modifier = Modifier.fillMaxWidth().height(48.dp)
                         )
                         RollPhase.SETTLED -> SecondaryButton(
                             text    = "${labels.reroll} ($rollsLeft${labels.left})",
@@ -386,29 +410,45 @@ fun CombatScreen(
                                 if (isChoosing && rollsLeft > 0) { rollsLeft -= 1; startRolling(dice, held) }
                             },
                             enabled = isChoosing && rollsLeft > 0,
-                            modifier = Modifier.fillMaxWidth().height(56.dp)
+                            modifier = Modifier.fillMaxWidth().height(48.dp)
                         )
                     }
 
                     BrownSectionHeader(title = labels.handAttack)
                     
-                    // Hand items
-                    YahtzeeAttackCategory.entries.forEach { category ->
-                        val isValid   = category in validCategories
-                        val previewDmg = if (canAttack && isValid)
-                            calculateUltimateCategoryDamage(dice, category, equipment) else null
+                    // Hand items in 2-column grid
+                    val categories = YahtzeeAttackCategory.entries
+                    val chunked = categories.chunked(2)
+                    chunked.forEach { rowCategories ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            rowCategories.forEach { category ->
+                                val isValid   = category in validCategories
+                                val previewDmg = if (canAttack && isValid)
+                                    calculateUltimateCategoryDamage(dice, category, equipment) else null
 
-                        CombatActionCard(
-                            category   = category,
-                            isValid    = isValid,
-                            canAttack  = canAttack,
-                            previewDmg = previewDmg,
-                            onClick    = {
-                                if (canAttack && isValid) resolveAttack(
-                                    calculateUltimateCategoryDamage(dice, category, equipment), category
-                                )
+                                Box(
+                                    modifier = Modifier.weight(1f)
+                                ) {
+                                    CombatActionCard(
+                                        category   = category,
+                                        isValid    = isValid,
+                                        canAttack  = canAttack,
+                                        previewDmg = previewDmg,
+                                        onClick    = {
+                                            if (canAttack && isValid) resolveAttack(
+                                                calculateUltimateCategoryDamage(dice, category, equipment), category
+                                            )
+                                        }
+                                    )
+                                }
                             }
-                        )
+                            if (rowCategories.size < 2) {
+                                Spacer(modifier = Modifier.weight(1f))
+                            }
+                        }
                     }
 
                     // Auto basic attack
@@ -416,7 +456,7 @@ fun CombatScreen(
                         text    = "${labels.basicAttack} ($autoDamage)",
                         onClick = { if (isChoosing && rollPhase != RollPhase.ROLLING) resolveAttack(autoDamage) },
                         enabled = isChoosing && rollPhase != RollPhase.ROLLING,
-                        modifier = Modifier.fillMaxWidth().height(56.dp)
+                        modifier = Modifier.fillMaxWidth().height(48.dp)
                     )
                 }
             }
@@ -465,28 +505,40 @@ private fun CombatActionCard(
             .clip(shape)
             .background(bg)
             .then(if (enabled) Modifier.clickable(role = Role.Button, onClick = onClick) else Modifier)
-            .padding(horizontal = 16.dp, vertical = 14.dp)
+            .padding(horizontal = 12.dp, vertical = 8.dp)
     ) {
-        Row(
+        Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalArrangement = Arrangement.spacedBy(2.dp),
+            horizontalAlignment = Alignment.Start
         ) {
             Text(
                 category.label,
                 fontWeight = FontWeight.Black,
                 color      = if (isValid) ColorInkStrong else ColorInkSoft,
-                fontSize   = 14.sp
+                fontSize   = 12.sp,
+                maxLines   = 1
             )
-            Text(
-                buildString {
-                    append("x${category.multiplier}")
-                    if (previewDmg != null) append(" → $previewDmg DMG")
-                },
-                fontWeight = FontWeight.Black,
-                color      = if (isValid) ColorPrimaryBottom else ColorInkSoft,
-                fontSize   = 14.sp
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "x${category.multiplier}",
+                    fontWeight = FontWeight.Black,
+                    color      = if (isValid) ColorPrimaryBottom else ColorInkSoft,
+                    fontSize   = 11.sp
+                )
+                if (previewDmg != null) {
+                    Text(
+                        text = "$previewDmg DMG",
+                        fontWeight = FontWeight.Black,
+                        color      = ColorPrimaryBottom,
+                        fontSize   = 11.sp
+                    )
+                }
+            }
         }
     }
 }

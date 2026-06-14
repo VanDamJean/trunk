@@ -60,44 +60,20 @@ fun HomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 78.dp, bottom = 110.dp)
+                .padding(bottom = 110.dp)
                 .padding(horizontal = 12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            TopStatsBar(
+                stage = meta.bestChapter,
+                coins = meta.coins,
+                gems = 0,
+                power = heroStats.power,
+                language = language
+            )
+            Spacer(modifier = Modifier.height(4.dp))
             AdventureTicket(labels = labels, chapter = meta.bestChapter, power = heroStats.power)
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.CenterStart)
-                        .padding(start = 2.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    HomeSideButton(labels.quest, GameIconRole.TREASURE) { onNavigate(Screen.RUN_MAP) }
-                    HomeSideButton(labels.shop, GameIconRole.CHEST) { onNavigate(Screen.GACHA) }
-                    HomeSideButton(labels.gear, GameIconRole.GEAR) { onNavigate(Screen.EQUIPMENT) }
-                }
-
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .padding(end = 2.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    HomeSideButton(labels.upgrade, GameIconRole.UPGRADE) { onNavigate(Screen.UPGRADE) }
-                    HomeSideButton(labels.language, GameIconRole.SETTINGS) { isLanguageDialogOpen = true }
-                    HomeSideButton(labels.reset, GameIconRole.RESET, danger = true, onClick = onReset)
-                }
-
-                HeroLobbyStage(meta = meta, stageLabel = labels.stage)
-            }
-
+            Spacer(modifier = Modifier.height(8.dp))
             HorizontalStatsBar(
                 hp = heroStats.maxHp,
                 attack = heroStats.power,
@@ -105,19 +81,50 @@ fun HomeScreen(
                 modifier = Modifier.padding(horizontal = 8.dp)
             )
 
-            ModeShortcutRow(labels = labels, onNavigate = onNavigate)
-            RankingPreview(labels = labels, heroStats = heroStats, meta = meta)
-
-            GameButton(
-                text = labels.startCombat,
-                onClick = onStartCombat,
-                variant = GameButtonVariant.SECONDARY,
+            Box(
                 modifier = Modifier
-                    .width(268.dp)
-                    .height(70.dp)
-                    .pulseGlow()
-            )
+                    .fillMaxWidth()
+                    .weight(1f),
+                contentAlignment = Alignment.Center
+            ) {
+                HeroLobbyStage(meta = meta, stageLabel = labels.stage)
+
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.CenterStart)
+                        .padding(start = 2.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    FloatingSideButton(icon = GameIconRole.TREASURE) { onNavigate(Screen.RUN_MAP) }
+                    FloatingSideButton(icon = GameIconRole.CHEST) { onNavigate(Screen.GACHA) }
+                    FloatingSideButton(icon = GameIconRole.GEAR) { onNavigate(Screen.EQUIPMENT) }
+                }
+
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .padding(end = 2.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    FloatingSideButton(icon = GameIconRole.UPGRADE) { onNavigate(Screen.UPGRADE) }
+                    FloatingSideButton(icon = GameIconRole.SETTINGS) { isLanguageDialogOpen = true }
+                    FloatingSideButton(icon = GameIconRole.RESET) { onReset() }
+                }
+            }
         }
+
+        GameButton(
+            text = labels.startCombat,
+            onClick = onStartCombat,
+            variant = GameButtonVariant.SECONDARY,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 120.dp)
+                .width(280.dp)
+                .height(80.dp)
+                .bounceIn()
+                .pulseGlow()
+        )
     }
 }
 
@@ -180,7 +187,7 @@ private fun AdventureTicket(labels: HomeLabels, chapter: Int, power: Int) {
 private fun HeroLobbyStage(meta: MetaSave, stageLabel: String) {
     Box(
         modifier = Modifier
-            .size(width = 230.dp, height = 250.dp)
+            .size(width = 280.dp, height = 300.dp)
             .floatBobbing(amount = 8.dp, durationMs = 2400),
         contentAlignment = Alignment.Center
     ) {
@@ -188,8 +195,8 @@ private fun HeroLobbyStage(meta: MetaSave, stageLabel: String) {
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .offset(y = 12.dp)
-                .width(150.dp)
-                .height(28.dp)
+                .width(190.dp)
+                .height(35.dp)
                 .clip(CircleShape)
                 .background(Color(0x33000000))
         )
@@ -205,7 +212,7 @@ private fun HeroLobbyStage(meta: MetaSave, stageLabel: String) {
         ) {
             Text("$stageLabel ${meta.bestChapter}", color = ColorInk, fontSize = 13.sp, fontWeight = FontWeight.Black)
         }
-        HeroPaperdollCanvas(equipment = meta.equipment, size = 205.dp)
+        HeroPaperdollCanvas(equipment = meta.equipment, size = 260.dp)
     }
 }
 

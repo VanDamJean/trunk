@@ -96,22 +96,30 @@ fun GameIcon(
         GameIconRole.DRAW -> R.drawable.icon_nav_draw
         GameIconRole.TREASURE -> R.drawable.chest_treasure
         GameIconRole.CHEST -> R.drawable.chest_treasure
-        else -> null
+
+        // Newly added icons
+        GameIconRole.SCRAP -> R.drawable.icon_scrap
+        GameIconRole.ATTACK -> R.drawable.icon_attack
+        GameIconRole.DEFEND -> R.drawable.icon_defend
+        GameIconRole.DICE -> R.drawable.icon_dice
+        GameIconRole.HEAL -> R.drawable.icon_heal
+        GameIconRole.REWARD -> R.drawable.icon_reward
+        GameIconRole.SETTINGS -> R.drawable.icon_settings
+        GameIconRole.CLOSE -> R.drawable.icon_close
+        GameIconRole.BACK -> R.drawable.icon_back
+        GameIconRole.RESET -> R.drawable.icon_reset
+        GameIconRole.CONFIRM -> R.drawable.icon_confirm
+        GameIconRole.DEFEAT -> R.drawable.icon_defeat
+        GameIconRole.LOCK -> R.drawable.icon_lock
+        GameIconRole.STAR -> R.drawable.icon_star
+        GameIconRole.ARROW_UP -> R.drawable.icon_arrow_up
     }
 
-    if (drawableId != null) {
-        Image(
-            painter = painterResource(id = drawableId),
-            contentDescription = icon.name,
-            modifier = modifier.size(fontSize.dp)
-        )
-    } else {
-        Text(
-            text = icon.fallback,
-            fontSize = fontSize.sp,
-            modifier = modifier
-        )
-    }
+    Image(
+        painter = painterResource(id = drawableId),
+        contentDescription = icon.name,
+        modifier = modifier.size(fontSize.dp)
+    )
 }
 
 // ── Convenience Aliases ───────────────────────────────────────────────

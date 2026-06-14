@@ -97,12 +97,28 @@ fun ResultScreen(
                 ) {
                     RewardBanner(title = labels.stageTitle(result.stage, isWin))
                     
-                    ResultRow(labels.coins,  "+${result.coinsEarned} ${GameIconRole.GOLD.fallback}", modifier = Modifier.staggerSlideIn(delayMs = 100))
+                    // Glowing Central Score
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier
+                            .padding(vertical = 12.dp)
+                            .staggerSlideIn(delayMs = 100)
+                            .pulseGlow()
+                    ) {
+                        GameIcon(icon = GameIconRole.GOLD, fontSize = 48f)
+                        Text(
+                            text = "+${result.coinsEarned}",
+                            color = ColorPrimaryTop,
+                            fontSize = 42.sp,
+                            fontWeight = FontWeight.Black
+                        )
+                    }
                     
                     result.handUsed?.let { ResultRow(labels.hand, it.label, modifier = Modifier.staggerSlideIn(delayMs = 200)) }
                     
                     result.duplicateItemName?.let {
-                        ResultRow(labels.bonus, "+20 ${GameIconRole.GOLD.fallback} (${labels.duplicate} $it)", modifier = Modifier.staggerSlideIn(delayMs = 300))
+                        ResultRow(labels.bonus, "+20 (${labels.duplicate} $it)", modifier = Modifier.staggerSlideIn(delayMs = 300))
                     }
                 }
             }
@@ -132,7 +148,7 @@ private fun ResultRow(label: String, value: String, modifier: Modifier = Modifie
             .fillMaxWidth()
             .cartoonBorder(2.dp, ColorPanelBrownLight, shape)
             .clip(shape)
-            .background(Color(0xFF22172E))
+            .background(ColorChrome)
             .padding(horizontal = 16.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
