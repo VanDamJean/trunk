@@ -27,6 +27,20 @@ class YahtzeeTest {
         assertEquals(1, result[2])
     }
 
+    @Test fun `createDiceRollPlan precomputes 5 target faces and sum`() {
+        val plan = createDiceRollPlan(diceCount = 5, rng = { 0.5 })
+        assertEquals(listOf(4, 4, 4, 4, 4), plan.targetFaces)
+        assertEquals(20, plan.sum)
+    }
+
+    @Test fun `createDiceRollPlan keeps held dice while planning targets`() {
+        val previous = listOf(6, 5, 4, 3, 2)
+        val held = listOf(true, false, true, false, false)
+        val plan = createDiceRollPlan(previous = previous, held = held, diceCount = 5, rng = { 0.0 })
+        assertEquals(listOf(6, 1, 4, 1, 1), plan.targetFaces)
+        assertEquals(13, plan.sum)
+    }
+
     @Test fun `evaluateHand detects yahtzee`() {
         val result = evaluateHand(listOf(6, 6, 6, 6, 6))
         assertEquals(YahtzeeAttackCategory.YAHTZEE, result.hand)

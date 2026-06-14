@@ -39,6 +39,7 @@ fun UpgradeScreen(
     val items = getEquipmentItems(meta.equipment)
     val labels = upgradeLabels(language)
     val scope = rememberCoroutineScope()
+    val bottomContentClearance = bottomNavContentClearance()
     
     var showSuccessSlot by remember { mutableStateOf<EquipmentSlot?>(null) }
     var previousLevel by remember { mutableIntStateOf(1) }
@@ -49,7 +50,7 @@ fun UpgradeScreen(
                 .fillMaxSize()
                 .padding(horizontal = 14.dp, vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
-            contentPadding = PaddingValues(top = 10.dp, bottom = 120.dp)
+            contentPadding = PaddingValues(top = 10.dp, bottom = bottomContentClearance)
         ) {
             item {
                 TopStatsBar(
@@ -83,7 +84,7 @@ fun UpgradeScreen(
                             .padding(horizontal = 12.dp, vertical = 6.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        GameIcon(icon = GameIconRole.GOLD, fontSize = 16f)
+                        GameIcon(icon = GameIconRole.GOLD, fontSize = 28f)
                         Spacer(Modifier.width(6.dp))
                         Text(
                             text = "${meta.coins} ${labels.coins}",
@@ -184,7 +185,7 @@ private fun UpgradeCard(
                             EquipmentSlot.CHARM -> GameIconRole.CHARM
                             EquipmentSlot.BOOTS -> GameIconRole.BOOTS 
                         }, 
-                        fontSize = 20f
+                        fontSize = 36f
                     )
                 }
             }
@@ -361,7 +362,7 @@ private fun RankUpSuccessPanel(
                     level = newLevel
                 ) {
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        GameIcon(slotIconUpgrade(slot), fontSize = 64f)
+                         GameIcon(slotIconUpgrade(slot), fontSize = 104f)
                     }
                 }
             }
@@ -428,7 +429,7 @@ private fun RankUpStatRow(row: UpgradeStatDelta) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        GameIcon(row.icon, fontSize = 28f)
+        GameIcon(row.icon, fontSize = 46f)
         Text(row.label, color = ColorSecondaryTop, fontSize = 16.sp, fontWeight = FontWeight.Black, modifier = Modifier.width(74.dp))
         Text(row.oldValue, color = ColorTextOnDark, fontSize = 20.sp, fontWeight = FontWeight.Black, modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
         Text("»", color = ColorSecondaryTop, fontSize = 26.sp, fontWeight = FontWeight.Black)

@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.geometry.Offset
 import com.yacoo.rpg.ui.theme.*
 import com.yacoo.rpg.game.*
 import com.yacoo.rpg.R
@@ -354,7 +355,7 @@ fun ItemSlotCard(
                     .border(1.5.dp, ColorInk, RoundedCornerShape(8.dp)),
                 contentAlignment = Alignment.Center
             ) {
-                GameIcon(icon = icon, fontSize = 24f)
+                GameIcon(icon = icon, fontSize = 42f)
             }
             Column(modifier = Modifier.weight(1f)) {
                 Text(
@@ -438,6 +439,25 @@ fun GameTab(
 
 // ── Overhauled components matching reference mockups ────────────────
 
+private fun getRarityGradient(rarity: GameRarity): Brush {
+    val (start, end) = when (rarity) {
+        GameRarity.COMMON -> Pair(Color(0xFFB8B5C0), Color(0xFF7A768A))
+        GameRarity.UNCOMMON -> Pair(Color(0xFF76D74B), Color(0xFF3B8E1D))
+        GameRarity.RARE -> Pair(Color(0xFF4BA5FF), Color(0xFF1475CD))
+        GameRarity.EPIC -> Pair(Color(0xFFD08DFF), Color(0xFF7A2FD9))
+        GameRarity.LEGENDARY -> Pair(Color(0xFFFFB74D), Color(0xFFE67E17))
+    }
+    return Brush.verticalGradient(listOf(start, end))
+}
+
+private fun getRarityBannerColor(rarity: GameRarity): Color = when (rarity) {
+    GameRarity.COMMON -> Color(0xFF5A5766)
+    GameRarity.UNCOMMON -> Color(0xFF235A0F)
+    GameRarity.RARE -> Color(0xFF0F5085)
+    GameRarity.EPIC -> Color(0xFF531F9B)
+    GameRarity.LEGENDARY -> Color(0xFF9E530C)
+}
+
 @Composable
 fun EquippedSlotCard(
     slot: EquipmentSlot,
@@ -445,69 +465,115 @@ fun EquippedSlotCard(
     isSelected: Boolean,
     showUpgradeIndicator: Boolean,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    iconSize: Float = 32f,
+    shape: RoundedCornerShape = RoundedCornerShape(12.dp)
 ) {
     val itemRarity = equipRarity(item.level)
-    val shape = RoundedCornerShape(16.dp)
+    val gradient = getRarityGradient(itemRarity)
+    val bannerColor = getRarityBannerColor(itemRarity)
     
     val borderThickness = if (isSelected) 3.dp else 2.dp
-    val borderColor = if (isSelected) ColorSecondaryBottom else itemRarity.color
-    val heldOffset = if (isSelected) (-3).dp else 0.dp
-    val shadowOffset = if (isSelected) 2.dp else 4.dp
+    val borderColor = if (isSelected) ColorPrimaryTop else ColorInk
+    val heldOffset = if (isSelected) (-2).dp else 0.dp
+    val shadowOffset = if (isSelected) 2.dp else 3.dp
     
     Box(
         modifier = modifier
-            .padding(bottom = 4.dp, end = 4.dp)
+            .padding(bottom = 3.dp, end = 3.dp)
             .offset(y = heldOffset)
             .cartoonShadow(shadowOffset = shadowOffset, color = ColorInk, shape = shape)
             .cartoonBorder(strokeWidth = borderThickness, color = borderColor, shape = shape)
             .clip(shape)
-            .background(ColorChrome)
+            .background(gradient)
             .clickable(role = Role.Button, onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
-        GameIcon(
-            icon = when(slot) {
-                EquipmentSlot.WEAPON -> GameIconRole.WEAPON
-                EquipmentSlot.ARMOR -> GameIconRole.ARMOR
-                EquipmentSlot.CHARM -> GameIconRole.CHARM
-                EquipmentSlot.BOOTS -> GameIconRole.BOOTS
-            },
-            fontSize = 32f
-        )
-        
-        val badgeShape = RoundedCornerShape(topStart = 6.dp, bottomEnd = 16.dp)
+        // Full width level banner at top
         Box(
             modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .background(itemRarity.color)
-                .border(2.dp, ColorInk, badgeShape)
-                .padding(horizontal = 6.dp, vertical = 2.dp)
+                .align(Alignment.TopCenter)
+                .fillMaxWidth()
+                .height(15.dp)
+                .background(bannerColor),
+            contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "Lv.${item.level}",
-                fontSize = 10.sp,
+                text = "LV.${item.level}",
+                fontSize = 7.5.sp,
                 fontWeight = FontWeight.Black,
-                color = ColorInk
+                color = ColorTextPrimary
+            )
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .height(1.5.dp)
+                    .background(ColorInk)
             )
         }
         
+        // Inner inset container for the item icon
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 18.dp, bottom = 4.dp, start = 4.dp, end = 4.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .background(Color.White.copy(alpha = 0.22f))
+                .border(1.dp, ColorInk.copy(alpha = 0.15f), RoundedCornerShape(8.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            GameIcon(
+                icon = when(slot) {
+                    EquipmentSlot.WEAPON -> GameIconRole.WEAPON
+                    EquipmentSlot.ARMOR -> GameIconRole.ARMOR
+                    EquipmentSlot.CHARM -> GameIconRole.CHARM
+                    EquipmentSlot.BOOTS -> GameIconRole.BOOTS
+                },
+                fontSize = iconSize
+            )
+        }
+        
+        // S Badge (for level >= 4)
+        if (item.level >= 4) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .offset(x = 2.dp, y = (-2).dp)
+            ) {
+                Text(
+                    text = "S",
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Black,
+                    color = ColorPrimaryTop,
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        shadow = androidx.compose.ui.graphics.Shadow(
+                            color = ColorInk,
+                            offset = Offset(1f, 1f),
+                            blurRadius = 0f
+                        )
+                    )
+                )
+            }
+        }
+        
+        // Upgrade arrow indicator at bottom-right
         if (showUpgradeIndicator) {
             Box(
                 modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .offset(x = 4.dp, y = (-4).dp)
-                    .size(16.dp)
+                    .align(Alignment.BottomEnd)
+                    .offset(x = 1.dp, y = 1.dp)
+                    .size(13.dp)
                     .clip(CircleShape)
-                    .background(ColorPrimaryTop)
-                    .border(1.2.dp, ColorInk, CircleShape),
+                    .background(Color(0xFF4CA52E))
+                    .border(1.dp, ColorInk, CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "↑",
-                    fontSize = 9.sp,
+                    text = "▲",
+                    fontSize = 7.sp,
                     fontWeight = FontWeight.Black,
-                    color = ColorInk
+                    color = Color.White
                 )
             }
         }
@@ -531,7 +597,7 @@ fun CombatPowerBadge(
         horizontalArrangement = Arrangement.spacedBy(6.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        GameIcon(icon = GameIconRole.POWER, fontSize = 16f)
+        GameIcon(icon = GameIconRole.POWER, fontSize = 28f)
         Text(
             text = "POWER: $power",
             fontSize = 12.sp,
@@ -579,7 +645,7 @@ private fun StatBarItem(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        GameIcon(icon = icon, fontSize = 14f, tint = tint)
+        GameIcon(icon = icon, fontSize = 26f, tint = tint)
         Text(
             text = value,
             color = Color(0xFFFFFDF9),
@@ -596,42 +662,141 @@ fun PurpleItemCard(
     modifier: Modifier = Modifier,
     rarity: GameRarity = GameRarity.COMMON,
     level: Int? = null,
+    slot: EquipmentSlot? = null,
+    isEquipped: Boolean = false,
+    showUpgradeIndicator: Boolean = false,
     onClick: (() -> Unit)? = null,
     content: @Composable BoxScope.() -> Unit
 ) {
-    val shape = RoundedCornerShape(16.dp)
+    val shape = RoundedCornerShape(12.dp)
+    val gradient = getRarityGradient(rarity)
+    val bannerColor = getRarityBannerColor(rarity)
     
     Box(
         modifier = modifier
-            .padding(bottom = 6.dp, end = 6.dp)
-            .cartoonShadow(shadowOffset = 5.dp, color = ColorInk, shape = shape)
-            .cartoonBorder(strokeWidth = 3.dp, color = ColorInk, shape = shape)
+            .padding(bottom = 4.dp, end = 4.dp)
+            .cartoonShadow(shadowOffset = 3.dp, color = ColorInk, shape = shape)
+            .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = shape)
             .clip(shape)
-            .background(Brush.verticalGradient(listOf(ColorItemPurple, ColorItemPurpleDark)))
+            .background(gradient)
             .then(if (onClick != null) Modifier.clickable(role = Role.Button, onClick = { onClick() }) else Modifier)
     ) {
+        // Inner Inset Box for Content/Icon
+        val topPadding = if (level != null || slot != null) 16.dp else 4.dp
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(2.dp)
-                .clip(shape)
-                .border(2.dp, rarity.color, shape) // Inner rarity glow
-        )
-        content()
+                .padding(top = topPadding, bottom = 4.dp, start = 4.dp, end = 4.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .background(Color.White.copy(alpha = 0.22f))
+                .border(1.dp, ColorInk.copy(alpha = 0.15f), RoundedCornerShape(8.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            content()
+        }
         
-        if (level != null) {
+        // Top-Left Slot Type Badge
+        if (slot != null) {
             Box(
                 modifier = Modifier
                     .align(Alignment.TopStart)
-                    .background(Color(0xFFFFFDF9), RoundedCornerShape(bottomEnd = 8.dp))
-                    .border(2.dp, ColorInk, RoundedCornerShape(bottomEnd = 8.dp))
-                    .padding(horizontal = 6.dp, vertical = 2.dp)
+                    .offset(x = (-1).dp, y = (-1).dp)
+                    .size(15.dp)
+                    .clip(RoundedCornerShape(bottomEnd = 6.dp))
+                    .background(ColorInkSoft)
+                    .border(1.dp, ColorInk, RoundedCornerShape(bottomEnd = 6.dp)),
+                contentAlignment = Alignment.Center
+            ) {
+                GameIcon(
+                    icon = when(slot) {
+                        EquipmentSlot.WEAPON -> GameIconRole.WEAPON
+                        EquipmentSlot.ARMOR -> GameIconRole.ARMOR
+                        EquipmentSlot.CHARM -> GameIconRole.CHARM
+                        EquipmentSlot.BOOTS -> GameIconRole.BOOTS
+                    },
+                    fontSize = 10f,
+                    tint = ColorTextPrimary
+                )
+            }
+        }
+        
+        // Top-Right Level Badge
+        if (level != null) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .offset(x = 1.dp, y = (-1).dp)
+                    .clip(RoundedCornerShape(bottomStart = 6.dp))
+                    .background(bannerColor)
+                    .border(1.dp, ColorInk, RoundedCornerShape(bottomStart = 6.dp))
+                    .padding(horizontal = 4.dp, vertical = 1.dp)
             ) {
                 Text(
                     text = "LV.$level",
-                    fontSize = 10.sp,
+                    fontSize = 7.sp,
                     fontWeight = FontWeight.Black,
-                    color = ColorInk
+                    color = ColorTextPrimary
+                )
+            }
+        }
+        
+        // S Badge (if Epic/Legendary)
+        if (rarity == GameRarity.EPIC || rarity == GameRarity.LEGENDARY) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .offset(x = 2.dp, y = (-2).dp)
+            ) {
+                Text(
+                    text = "S",
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Black,
+                    color = ColorPrimaryTop,
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        shadow = androidx.compose.ui.graphics.Shadow(
+                            color = ColorInk,
+                            offset = Offset(1f, 1f),
+                            blurRadius = 0f
+                        )
+                    )
+                )
+            }
+        }
+        
+        // Equipped / Upgrade Indicator at bottom-right
+        if (isEquipped) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .offset(x = 1.dp, y = 1.dp)
+                    .clip(RoundedCornerShape(topStart = 6.dp))
+                    .background(Color(0xFF4CA52E))
+                    .border(1.dp, ColorInk, RoundedCornerShape(topStart = 6.dp))
+                    .padding(horizontal = 4.dp, vertical = 1.dp)
+            ) {
+                Text(
+                    text = "E",
+                    fontSize = 7.sp,
+                    fontWeight = FontWeight.Black,
+                    color = ColorTextPrimary
+                )
+            }
+        } else if (showUpgradeIndicator) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .offset(x = 1.dp, y = 1.dp)
+                    .size(13.dp)
+                    .clip(CircleShape)
+                    .background(Color(0xFF4CA52E))
+                    .border(1.dp, ColorInk, CircleShape),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "▲",
+                    fontSize = 7.sp,
+                    fontWeight = FontWeight.Black,
+                    color = Color.White
                 )
             }
         }
@@ -723,7 +888,7 @@ fun UpgradeSuccessPanel(
                  EquipmentSlot.ARMOR -> GameIconRole.ARMOR
                  EquipmentSlot.CHARM -> GameIconRole.CHARM
                  EquipmentSlot.BOOTS -> GameIconRole.BOOTS
-             }, fontSize = 60f)
+             }, fontSize = 104f)
         }
         
         Spacer(modifier = Modifier.height(24.dp))
@@ -851,7 +1016,7 @@ private fun ResourceChip(
                 .border(2.dp, ColorInk, CircleShape),
             contentAlignment = Alignment.Center
         ) {
-            GameIcon(icon = icon, fontSize = 14f)
+            GameIcon(icon = icon, fontSize = 26f)
         }
         Text(
             text = value,
@@ -916,10 +1081,17 @@ fun SunburstBackground(modifier: Modifier = Modifier) {
 
 @Composable
 fun AdventureBackground(modifier: Modifier = Modifier) {
-    Image(
-        painter = painterResource(id = R.drawable.bg_home_adventure),
-        contentDescription = "Adventure Background",
-        contentScale = ContentScale.Crop,
-        modifier = modifier.fillMaxSize()
-    )
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(ColorScreenBg)
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.bg_home_dark_forest),
+            contentDescription = "Adventure Background",
+            contentScale = ContentScale.Crop,
+            alpha = 0.4f, // Dim the bright background elements/moon
+            modifier = Modifier.fillMaxSize()
+        )
+    }
 }

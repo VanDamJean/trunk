@@ -12,11 +12,11 @@ import com.yacoo.rpg.R
 // ── Quicksand Round Font Family (Capybara Go style) ──────────────────
 
 val QuicksandFamily = FontFamily(
-    Font(R.font.quicksand_regular, FontWeight.Normal),
-    Font(R.font.quicksand_semibold, FontWeight.SemiBold),
-    Font(R.font.quicksand_semibold, FontWeight.Bold),
-    Font(R.font.quicksand_bold, FontWeight.ExtraBold),
-    Font(R.font.quicksand_bold, FontWeight.Black)
+    Font(R.font.jua_regular, FontWeight.Normal),
+    Font(R.font.jua_regular, FontWeight.SemiBold),
+    Font(R.font.jua_regular, FontWeight.Bold),
+    Font(R.font.jua_regular, FontWeight.ExtraBold),
+    Font(R.font.jua_regular, FontWeight.Black)
 )
 
 // ── Material3 Typography (preserved for M3 components) ───────────────

@@ -43,11 +43,15 @@ fun ResultScreen(
     val labels = resultLabels(language)
     val isWin   = result.outcome == CombatOutcome.WIN
     val headline = if (isWin) labels.victory else labels.defeat
+    val bottomContentClearance = bottomNavContentClearance()
     
     // We use DarkOverlayPanel to darken the background
     DarkOverlayPanel(modifier = modifier) {
         Column(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 24.dp)
+                .padding(bottom = bottomContentClearance),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(32.dp)
         ) {

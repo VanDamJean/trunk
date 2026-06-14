@@ -1,28 +1,23 @@
 package com.yacoo.rpg.ui.screens
 
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.ui.text.style.TextAlign
 import com.yacoo.rpg.game.AppLanguage
 import com.yacoo.rpg.ui.components.*
 import com.yacoo.rpg.ui.theme.*
@@ -36,143 +31,175 @@ fun GachaScreen(
     onDraw: (Boolean) -> String, // true for weapon chest, false for armor chest
     modifier: Modifier = Modifier
 ) {
-    var selectedTab by remember { mutableStateOf(0) }
     var drawResultText by remember { mutableStateOf<String?>(null) }
     val labels = gachaLabels(language)
-    val tabs = listOf(labels.weapon, labels.armor)
 
-    // Mystic Background
-    DarkOverlayPanel(modifier = modifier) {
-        SunburstBackground(modifier = Modifier.fillMaxSize())
-
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(ColorOverlayDim),
+        contentAlignment = Alignment.Center
+    ) {
+        // Main Supply-Pack Popup Box
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 14.dp, vertical = 12.dp)
-                .padding(top = 10.dp, bottom = 120.dp)
-                .verticalScroll(rememberScrollState()),
+                .width(320.dp)
+                .cartoonShadow(5.dp, ColorInk, RoundedCornerShape(20.dp))
+                .cartoonBorder(3.dp, ColorOutlineSubtle, RoundedCornerShape(20.dp))
+                .clip(RoundedCornerShape(20.dp))
+                .background(Color(0xFF211A3A))
+                .padding(bottom = 20.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            TopStatsBar(
-                stage = 1,
-                coins = coins,
-                gems = gems,
-                power = 100, // placeholder
-                language = language
-            )
-
-            // Header Row
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column {
-                    Text(
-                        text = labels.title, 
-                        style = GameTypography.screenTitle, 
-                        color = Color(0xFFFFFDF9),
-                        fontWeight = FontWeight.Black,
-                        fontSize = 32.sp
-                    )
-                    Text(
-                        text = labels.subtitle, 
-                        style = GameTypography.caption, 
-                        color = Color(0xFFC78CFF),
-                        fontWeight = FontWeight.Black
-                    )
-                }
-                
-                // 3D Close/Back Button
-                val backShape = RoundedCornerShape(12.dp)
-                Box(
-                    modifier = Modifier
-                        .padding(bottom = 3.dp, end = 3.dp)
-                        .cartoonShadow(shadowOffset = 3.dp, color = ColorInk, shape = backShape)
-                        .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = backShape)
-                        .clip(backShape)
-                        .background(ColorSecondaryBottom)
-                        .clickable { onBack() }
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = labels.home,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Black,
-                        color = ColorInk
-                    )
-                }
-            }
-
-            // Resources Row (Top HUD)
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                ResourceChip(labels.gold, coins, labels.soon, bgColor = Color(0xFFFFD43F), modifier = Modifier.weight(1f))
-                ResourceChip(labels.gem, gems, labels.soon, bgColor = Color(0xFFE261FF), modifier = Modifier.weight(1f))
-            }
-
-            PromoStrip(labels = labels)
-
-            // Custom 3D Tab Row
-            val tabRowShape = RoundedCornerShape(16.dp)
-            Row(
+            // Ribbon Title Banner at top of the popup
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .cartoonShadow(3.dp, ColorInk, tabRowShape)
-                    .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = tabRowShape)
-                    .clip(tabRowShape)
-                    .background(ColorInkSoft)
-                    .padding(6.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
+                    .height(54.dp)
+                    .background(
+                        Brush.verticalGradient(
+                            listOf(ColorDangerTop, ColorDangerBottom)
+                        )
+                    )
+                    .border(2.dp, Color(0xFF8A211B)),
+                contentAlignment = Alignment.Center
             ) {
-                tabs.forEachIndexed { index, title ->
-                    GameTab(
-                        text = title,
-                        selected = selectedTab == index,
-                        onClick = { selectedTab = index },
-                        modifier = Modifier.weight(1f)
+                Text(
+                    text = if (language == AppLanguage.KOREAN) "모험가 보급 상자" else "Adventure Supply Pack",
+                    color = ColorTextOnDark,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Black,
+                    textAlign = TextAlign.Center
+                )
+            }
+
+            // Chest Illustration
+            Box(
+                modifier = Modifier
+                    .size(110.dp)
+                    .bounceIn()
+                    .floatBobbing(amount = 6.dp)
+                    .pulseGlow(),
+                contentAlignment = Alignment.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(100.dp)
+                        .cartoonBorder(2.5.dp, ColorInk, RoundedCornerShape(16.dp))
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(Brush.radialGradient(listOf(Color(0xFFFFD96F), Color(0xFFFFAE00))))
+                ) {
+                    GameIcon(
+                        icon = GameIconRole.CHEST,
+                        fontSize = 80f,
+                        modifier = Modifier.align(Alignment.Center)
                     )
                 }
             }
 
-            // Draw Action Panel
-            DrawPanel(
-                kind = tabs[selectedTab], 
-                labels = labels, 
-                isWeapon = selectedTab == 0,
-                coins = coins,
-                onDraw = { isWeapon, count ->
+            // Subtitle info
+            Text(
+                text = labels.subtitle,
+                color = ColorTextSecondary,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
+            )
+
+            // Product Cards Columns
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                // Two small cards side-by-side
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    // Weapon Chest Draw 1x
+                    ProductCard(
+                        title = labels.weapon,
+                        price = 100,
+                        coins = coins,
+                        icon = GameIconRole.WEAPON,
+                        badge = "x1",
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        val res = onDraw(true)
+                        if (res.isNotEmpty()) drawResultText = res
+                    }
+
+                    // Armor Chest Draw 1x
+                    ProductCard(
+                        title = labels.armor,
+                        price = 100,
+                        coins = coins,
+                        icon = GameIconRole.ARMOR,
+                        badge = "x1",
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        val res = onDraw(false)
+                        if (res.isNotEmpty()) drawResultText = res
+                    }
+                }
+
+                // One large card for Draw 10x
+                LargeProductCard(
+                    title = if (language == AppLanguage.KOREAN) "고급 10회 소환" else "Premium Draw 10x",
+                    price = 1000,
+                    coins = coins,
+                    icon = GameIconRole.CHEST,
+                    badge = "x10"
+                ) {
                     val results = mutableListOf<String>()
-                    for (i in 0 until count) {
-                        val result = onDraw(isWeapon)
-                        if (result.isNotEmpty()) {
-                            results.add(result)
-                        }
+                    for (i in 0 until 10) {
+                        val res = onDraw(true)
+                        if (res.isNotEmpty()) results.add(res)
                     }
                     if (results.isNotEmpty()) {
                         drawResultText = results.joinToString("\n")
                     }
-                },
-                modifier = Modifier.wrapContentHeight()
-            )
+                }
+            }
+
+            // Close "X" Button
+            Box(
+                modifier = Modifier
+                    .size(40.dp)
+                    .cartoonBorder(2.dp, ColorInk, RoundedCornerShape(10.dp))
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(ColorDangerBottom)
+                    .clickable { onBack() },
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    "X",
+                    color = ColorTextOnDark,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Black
+                )
+            }
         }
 
-        // Draw Result Modal Dialog
+        // Congrats Result Overlay Modal
         drawResultText?.let { result ->
-            DarkOverlayPanel(
-                modifier = Modifier.clickable { drawResultText = null }
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(ColorOverlayDim.copy(alpha = 0.95f))
+                    .clickable { drawResultText = null },
+                contentAlignment = Alignment.Center
             ) {
                 Column(
                     modifier = Modifier
                         .width(280.dp)
-                        .cartoonShadow(6.dp, ColorInk, RoundedCornerShape(20.dp))
-                        .cartoonBorder(4.dp, ColorInk, RoundedCornerShape(20.dp))
+                        .cartoonShadow(5.dp, ColorInk, RoundedCornerShape(20.dp))
+                        .cartoonBorder(3.dp, ColorOutlineSubtle, RoundedCornerShape(20.dp))
                         .clip(RoundedCornerShape(20.dp))
-                        .background(ColorSurfacePanel)
+                        .background(Color(0xFF1C1635))
                         .padding(20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -181,25 +208,25 @@ fun GachaScreen(
                     
                     Box(
                         modifier = Modifier
-                            .size(100.dp)
+                            .size(116.dp)
                             .clip(RoundedCornerShape(16.dp))
                             .background(Brush.verticalGradient(listOf(ColorSecondaryTop, ColorSecondaryBottom)))
-                            .border(3.dp, ColorInk, RoundedCornerShape(16.dp))
+                            .border(2.5.dp, ColorInk, RoundedCornerShape(16.dp))
                             .pulseGlow(),
                         contentAlignment = Alignment.Center
                     ) {
                         GameIcon(
-                            icon = if (selectedTab == 0) GameIconRole.WEAPON else GameIconRole.ARMOR,
-                            fontSize = 64f
+                            icon = GameIconRole.CHEST,
+                            fontSize = 94f
                         )
                     }
                     
                     Text(
                         text = result,
-                        style = GameTypography.statValue,
-                        color = ColorInk,
+                        color = ColorTextPrimary,
                         fontWeight = FontWeight.Black,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        fontSize = 15.sp
                     )
                     
                     SecondaryButton(
@@ -214,213 +241,141 @@ fun GachaScreen(
 }
 
 @Composable
-private fun PromoStrip(labels: GachaLabels) {
-    val shape = RoundedCornerShape(16.dp)
+private fun ProductCard(
+    title: String,
+    price: Int,
+    coins: Int,
+    icon: GameIconRole,
+    badge: String,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
+    val enabled = coins >= price
+    val shape = RoundedCornerShape(12.dp)
+    Column(
+        modifier = modifier
+            .cartoonBorder(1.5.dp, ColorInk, shape)
+            .clip(shape)
+            .background(Color(0xFF2D214A))
+            .padding(10.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Box(contentAlignment = Alignment.Center, modifier = Modifier.size(66.dp)) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(CircleShape)
+                    .background(Color(0xFF1C1635))
+            )
+            GameIcon(icon = icon, fontSize = 50f)
+            Text(
+                badge,
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .background(ColorPrimaryBottom, RoundedCornerShape(4.dp))
+                    .padding(horizontal = 4.dp, vertical = 2.dp),
+                color = ColorTextOnPrimary,
+                fontSize = 8.sp,
+                fontWeight = FontWeight.Black
+            )
+        }
+        
+        Text(
+            title,
+            color = ColorTextPrimary,
+            fontSize = 10.sp,
+            fontWeight = FontWeight.Black,
+            maxLines = 1,
+            textAlign = TextAlign.Center
+        )
+
+        PriceButton(price = price, enabled = enabled, onClick = onClick)
+    }
+}
+
+@Composable
+private fun LargeProductCard(
+    title: String,
+    price: Int,
+    coins: Int,
+    icon: GameIconRole,
+    badge: String,
+    onClick: () -> Unit
+) {
+    val enabled = coins >= price
+    val shape = RoundedCornerShape(12.dp)
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .cartoonShadow(3.dp, ColorInk, shape)
-            .cartoonBorder(2.dp, ColorInk, shape)
+            .cartoonBorder(1.5.dp, ColorInk, shape)
             .clip(shape)
-            .background(Brush.horizontalGradient(listOf(ColorDangerTop, ColorSecondaryBottom)))
-            .padding(horizontal = 12.dp, vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
-    ) {
-        GameIcon(GameIconRole.STAR, fontSize = 24f)
-        Column(modifier = Modifier.weight(1f)) {
-            Text(labels.limited, color = ColorTextOnDark, fontSize = 14.sp, fontWeight = FontWeight.Black)
-            Text(labels.limitedDesc, color = Color(0xFFFFF3D3), fontSize = 10.sp, fontWeight = FontWeight.Black)
-        }
-        Box(
-            modifier = Modifier
-                .cartoonBorder(1.5.dp, ColorInk, RoundedCornerShape(9.dp))
-                .clip(RoundedCornerShape(9.dp))
-                .background(ColorCard)
-                .padding(horizontal = 8.dp, vertical = 4.dp)
-        ) {
-            Text(labels.soon, color = ColorInk, fontSize = 10.sp, fontWeight = FontWeight.Black)
-        }
-    }
-}
-
-
-@Composable
-private fun ResourceChip(label: String, value: Int?, emptyText: String, bgColor: Color, modifier: Modifier = Modifier) {
-    val shape = RoundedCornerShape(12.dp)
-    Box(
-        modifier = modifier
-            .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = shape)
-            .clip(shape)
-            .background(ColorChrome)
-            .padding(horizontal = 10.dp, vertical = 8.dp),
-        contentAlignment = Alignment.Center
+            .background(Color(0xFF2D214A))
+            .padding(12.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            Box(
-                modifier = Modifier.size(16.dp).clip(androidx.compose.foundation.shape.CircleShape).background(bgColor).border(1.dp, ColorInk, androidx.compose.foundation.shape.CircleShape)
-            )
-            Text(
-                text = value?.toString() ?: emptyText, 
-                fontSize = 14.sp, 
-                fontWeight = FontWeight.Black, 
-                color = Color(0xFFFFFDF9)
-            )
-        }
-    }
-}
-
-@Composable
-private fun DrawPanel(
-    kind: String,
-    labels: GachaLabels,
-    isWeapon: Boolean,
-    coins: Int,
-    onDraw: (Boolean, Int) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val panelShape = RoundedCornerShape(24.dp)
-    
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(bottom = 6.dp, end = 6.dp)
-            .cartoonShadow(shadowOffset = 6.dp, color = ColorInk, shape = panelShape)
-            .cartoonBorder(strokeWidth = 3.dp, color = ColorInk, shape = panelShape)
-            .clip(panelShape)
-            .background(ColorSurfacePanel)
-            .padding(20.dp)
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            
-            // Pity Bar
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        labels.pityProgress,
-                        style = GameTypography.caption,
-                        color = ColorInkSoft,
-                        fontWeight = FontWeight.Black
-                    )
-                    Text(
-                        "0/10",
-                        style = GameTypography.caption,
-                        color = ColorPrimaryBottom,
-                        fontWeight = FontWeight.Black
-                    )
-                }
-                ChunkyProgressBar(progress = 0f, colorStart = ColorPrimaryTop, colorEnd = ColorPrimaryBottom)
-            }
-
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                // Mystic Treasure Chest
+            Box(contentAlignment = Alignment.Center, modifier = Modifier.size(60.dp)) {
                 Box(
                     modifier = Modifier
-                        .size(160.dp)
-                        .bounceIn()
-                        .floatBobbing(amount = 8.dp)
-                        .pulseGlow(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(140.dp)
-                            .cartoonShadow(6.dp, ColorInk, RoundedCornerShape(20.dp))
-                            .cartoonBorder(4.dp, ColorInk, RoundedCornerShape(20.dp))
-                            .clip(RoundedCornerShape(20.dp))
-                            .background(Brush.radialGradient(listOf(Color(0xFFFFF3D3), Color(0xFFFF9500))))
-                    ) {
-                        GameIcon(
-                            icon = GameIconRole.CHEST,
-                            fontSize = 90f,
-                            modifier = Modifier.align(Alignment.Center)
-                        )
-                        GameIcon(
-                            icon = if (isWeapon) GameIconRole.WEAPON else GameIconRole.ARMOR,
-                            fontSize = 32f,
-                            modifier = Modifier.align(Alignment.BottomEnd).padding(8.dp)
-                        )
-                    }
-                }
-                
-                RewardBanner(title = "$kind ${labels.draw}")
-                
+                        .fillMaxSize()
+                        .clip(CircleShape)
+                        .background(Color(0xFF1C1635))
+                )
+                GameIcon(icon = icon, fontSize = 44f)
                 Text(
-                    text = labels.placeholder,
-                    style = GameTypography.bodyText,
-                    color = ColorTextSecondary,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Black,
-                    fontSize = 11.sp,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    MiniRewardPreview(GameIconRole.WEAPON, "S", RarityEpic, Modifier.weight(1f))
-                    MiniRewardPreview(GameIconRole.ARMOR, "A", RarityRare, Modifier.weight(1f))
-                    MiniRewardPreview(GameIconRole.CHARM, "SS", RarityLegendary, Modifier.weight(1f))
-                }
-            }
-            
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                SecondaryButton(
-                    labels.drawOne,
-                    onClick = { onDraw(isWeapon, 1) }, 
-                    enabled = coins >= 100,
-                    modifier = Modifier.weight(1f).height(54.dp).bounceIn().pulseGlow(),
-                    height = 54.dp
-                )
-                PrimaryButton(
-                    labels.drawTen,
-                    onClick = { onDraw(isWeapon, 10) }, 
-                    enabled = coins >= 1000,
-                    modifier = Modifier.weight(1f).height(54.dp).bounceIn().pulseGlow(),
-                    height = 54.dp
+                    badge,
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .background(ColorPrimaryBottom, RoundedCornerShape(4.dp))
+                        .padding(horizontal = 4.dp, vertical = 2.dp),
+                    color = ColorTextOnPrimary,
+                    fontSize = 8.sp,
+                    fontWeight = FontWeight.Black
                 )
             }
+            Text(
+                title,
+                color = ColorTextPrimary,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Black
+            )
         }
+
+        PriceButton(price = price, enabled = enabled, onClick = onClick, modifier = Modifier.width(90.dp))
     }
 }
 
 @Composable
-private fun MiniRewardPreview(icon: GameIconRole, grade: String, color: Color, modifier: Modifier = Modifier) {
-    val shape = RoundedCornerShape(12.dp)
-    Box(
+private fun PriceButton(
+    price: Int,
+    enabled: Boolean,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
+    val shape = RoundedCornerShape(8.dp)
+    val bg = if (enabled) ColorPrimaryBottom else ColorDisabled
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center,
         modifier = modifier
-            .aspectRatio(1f)
-            .cartoonShadow(3.dp, ColorInk, shape)
-            .cartoonBorder(2.dp, ColorInk, shape)
+            .fillMaxWidth()
+            .height(32.dp)
+            .cartoonBorder(1.5.dp, ColorInk, shape)
             .clip(shape)
-            .background(color.copy(alpha = 0.85f)),
-        contentAlignment = Alignment.Center
+            .background(bg)
+            .clickable(enabled = enabled) { onClick() }
+            .padding(horizontal = 4.dp)
     ) {
-        GameIcon(icon, fontSize = 34f)
+        GameIcon(GameIconRole.GOLD, fontSize = 18f)
+        Spacer(modifier = Modifier.width(2.dp))
         Text(
-            grade,
-            modifier = Modifier.align(Alignment.TopStart).background(ColorCard, RoundedCornerShape(bottomEnd = 8.dp)).padding(horizontal = 5.dp),
-            color = ColorInk,
+            text = "$price",
+            color = if (enabled) ColorTextOnPrimary else ColorTextSecondary,
             fontSize = 10.sp,
             fontWeight = FontWeight.Black
         )
@@ -450,7 +405,7 @@ private data class GachaLabels(
 private fun gachaLabels(language: AppLanguage): GachaLabels = when (language) {
     AppLanguage.KOREAN -> GachaLabels(
         title = "상점",
-        subtitle = "신비한 보물상자",
+        subtitle = "신비한 보급품 상자들을 획득하세요!",
         home = "홈",
         gold = "골드",
         gem = "보석",
@@ -469,7 +424,7 @@ private fun gachaLabels(language: AppLanguage): GachaLabels = when (language) {
     )
     AppLanguage.ENGLISH -> GachaLabels(
         title = "Shop",
-        subtitle = "Mystic Treasure",
+        subtitle = "Acquire mystic supply packs!",
         home = "Home",
         gold = "Gold",
         gem = "Gem",
@@ -486,16 +441,4 @@ private fun gachaLabels(language: AppLanguage): GachaLabels = when (language) {
         drawOne = "Draw x1",
         drawTen = "Draw x10"
     )
-}
-
-@Preview(showBackground = true, widthDp = 375, heightDp = 812)
-@Composable
-private fun GachaScreenPreview() {
-    GachaScreen(coins = 1200, gems = 0, onBack = {}, onDraw = { _ -> "" })
-}
-
-@Preview(showBackground = true, widthDp = 375, heightDp = 812, name = "Gacha Korean")
-@Composable
-private fun GachaScreenKoreanPreview() {
-    GachaScreen(coins = 13_500, gems = 1352, language = AppLanguage.KOREAN, onBack = {}, onDraw = { _ -> "" })
 }

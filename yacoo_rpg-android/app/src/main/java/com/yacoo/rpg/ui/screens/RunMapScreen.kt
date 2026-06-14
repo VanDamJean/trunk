@@ -39,11 +39,13 @@ fun RunMapScreen(
     val labels = runMapLabels(language)
     val nodes    = run.map.nodes
     val current  = run.nodeIndex
+    val bottomContentClearance = bottomNavContentClearance()
 
     DarkOverlayPanel(modifier = modifier) {
         // Modal Container
         Box(
             modifier = Modifier
+                .padding(bottom = bottomContentClearance)
                 .fillMaxWidth(0.9f)
                 .fillMaxHeight(0.8f)
                 .cartoonShadow(8.dp, ColorInk, RoundedCornerShape(24.dp))
@@ -64,7 +66,8 @@ fun RunMapScreen(
                     .fillMaxSize()
                     .padding(horizontal = 16.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                contentPadding = PaddingValues(bottom = 16.dp)
             ) {
                 item {
                     val headerShape = RoundedCornerShape(20.dp)

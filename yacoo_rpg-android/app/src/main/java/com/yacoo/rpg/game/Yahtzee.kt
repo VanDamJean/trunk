@@ -7,17 +7,49 @@ fun rollDie(rng: Rng = Math::random): DieValue {
     return raw.coerceIn(1, 6)
 }
 
+data class DiceRollPlan(
+    val targetFaces: List<DieValue>,
+    val sum: Int
+)
+
+/**
+ * Unity DiceRoller port concept.
+ *
+ * The old UI-only flow generated the final dice after the rolling animation.
+ * The Unity project does the opposite: it decides targetFaces first, animates a
+ * physical-looking throw, then settles the dice onto those exact target faces.
+ *
+ * Keep this function as the authoritative roll-result planner. UI code may show
+ * random preview faces while rolling, but the settled result must come from this
+ * plan so animation and gameplay never diverge.
+ */
+fun createDiceRollPlan(
+    previous: List<DieValue> = emptyList(),
+    held: List<Boolean> = emptyList(),
+    diceCount: Int = CombatTiming.DICE_COUNT,
+    rng: Rng = Math::random
+): DiceRollPlan {
+    require(diceCount > 0) { "diceCount must be positive" }
+    val targetFaces = List(diceCount) { i ->
+        if (held.getOrNull(i) == true && previous.getOrNull(i) != null) {
+            requireDieValue(previous[i])
+        } else {
+            rollDie(rng)
+        }
+    }
+    return DiceRollPlan(targetFaces = targetFaces, sum = targetFaces.sum())
+}
+
 fun rollDice(
     previous: List<DieValue> = emptyList(),
     held: List<Boolean> = emptyList(),
     rng: Rng = Math::random
-): List<DieValue> = List(CombatTiming.DICE_COUNT) { i ->
-    if (held.getOrNull(i) == true && previous.getOrNull(i) != null) {
-        previous[i]
-    } else {
-        rollDie(rng)
-    }
-}
+): List<DieValue> = createDiceRollPlan(
+    previous = previous,
+    held = held,
+    diceCount = CombatTiming.DICE_COUNT,
+    rng = rng
+).targetFaces
 
 private fun countsFor(dice: List<DieValue>): Map<DieValue, Int> =
     dice.groupingBy { it }.eachCount()

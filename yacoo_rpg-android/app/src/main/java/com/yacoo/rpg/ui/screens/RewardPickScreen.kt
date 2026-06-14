@@ -30,12 +30,14 @@ fun RewardPickScreen(
 ) {
     val labels = rewardPickLabels(language)
     val choices = run.pendingReward ?: emptyList()
+    val bottomContentClearance = bottomNavContentClearance()
 
     DarkOverlayPanel(modifier = modifier) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 24.dp, vertical = 40.dp),
+                .padding(horizontal = 24.dp)
+                .padding(top = 40.dp, bottom = bottomContentClearance),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

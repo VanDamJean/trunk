@@ -47,6 +47,11 @@ fun YacooNavGraph(viewModel: GameViewModel) {
         onNavigate = { screen ->
             soundManager.playClick()
             viewModel.navigate(screen)
+        },
+        onLanguageChange = { next -> viewModel.setLanguage(next) },
+        onReset = {
+            soundManager.playClick()
+            viewModel.reset()
         }
     ) {
         NavHost(
@@ -82,6 +87,10 @@ fun YacooNavGraph(viewModel: GameViewModel) {
                     run       = run,
                     language  = language,
                     soundManager = soundManager,
+                    onExitCombat = {
+                        soundManager.playClick()
+                        viewModel.navigate(if (run != null) Screen.RUN_MAP else Screen.HOME)
+                    },
                     onFinish  = { outcome, hand, hp ->
                         if (outcome == CombatOutcome.WIN) {
                             soundManager.playVictory()

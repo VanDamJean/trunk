@@ -27,12 +27,14 @@ fun RunResultScreen(
     modifier: Modifier = Modifier
 ) {
     val labels = runResultLabels(language)
+    val bottomContentClearance = bottomNavContentClearance()
     
     DarkOverlayPanel(modifier = modifier) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 24.dp, vertical = 40.dp),
+                .padding(horizontal = 24.dp)
+                .padding(top = 40.dp, bottom = bottomContentClearance),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {

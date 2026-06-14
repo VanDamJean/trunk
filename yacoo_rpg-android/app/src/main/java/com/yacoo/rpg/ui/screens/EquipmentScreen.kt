@@ -29,73 +29,78 @@ fun EquipmentScreen(
     onClose: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-    var selectedSlot by remember { mutableStateOf<EquipmentSlot?>(EquipmentSlot.entries.first()) }
+    var selectedSlot by remember { mutableStateOf<EquipmentSlot?>(null) }
     val items = getEquipmentItems(equipment)
     val labels = equipmentLabels(language)
+    val bottomContentClearance = bottomNavContentClearance()
 
     DarkOverlayPanel(modifier = modifier) {
-        LazyColumn(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 14.dp, vertical = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(top = 10.dp, bottom = 120.dp) // Reset top padding
+                .padding(horizontal = 10.dp, vertical = 6.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            item {
-                TopStatsBar(
-                    stage = items.firstOrNull()?.level ?: 1, // approximate
-                    coins = coins,
-                    gems = 0,
-                    power = getHeroStats(equipment).power,
-                    language = language
-                )
-            }
+            TopStatsBar(
+                stage = items.firstOrNull()?.level ?: 1, // approximate
+                coins = coins,
+                gems = 0,
+                power = getHeroStats(equipment).power,
+                language = language
+            )
 
-            item {
-                EquipmentHeader(labels = labels)
-            }
+            EquipmentHeader(labels = labels, onClose = onClose)
 
-        item {
-            HeroEquipmentSummary(
+            // Equipped slots directly on screen background
+            EquippedShowcaseArea(
                 equipment = equipment,
                 coins = coins,
                 selectedSlot = selectedSlot,
                 onSlotClick = { slot -> selectedSlot = slot }
             )
-        }
 
-        selectedSlot?.let { slot ->
-            item {
-                EquipmentDetailPanel(item = equipment[slot], labels = labels)
-            }
-        }
+            // Circular action sub-buttons row
+            CircularSubButtonsRow(language = language)
 
-        item {
-            BrownSectionHeader(title = labels.inventory)
-        }
+            // Full-width brown section title
+            FullWidthSectionHeader(title = labels.inventory)
 
-        item {
-            val visualItems = List(24) { index -> items[index % items.size] }
-            val rowCount = (visualItems.size + 3) / 4
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                for (r in 0 until rowCount) {
+            // Sort (cyan) & Forge (gold) buttons row
+            SortAndForgeButtonsRow(language = language, onClose = onClose)
+
+            val visualItems = remember(items) { List(25) { index -> items[index % items.size] } }
+            val rowCount = (visualItems.size + 4) / 5
+            LazyColumn(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(bottom = bottomContentClearance)
+            ) {
+                items(rowCount) { r ->
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        for (c in 0 until 4) {
-                            val index = r * 4 + c
+                        for (c in 0 until 5) {
+                            val index = r * 5 + c
                             if (index < visualItems.size) {
                                 val item = visualItems[index]
-                                val visualLevel = item.level + (index / 4) + (index % 2)
+                                val visualLevel = item.level + (index / 5) + (index % 2)
+                                val isEquipped = index < items.size
                                 PurpleItemCard(
-                                    modifier = Modifier.weight(1f).aspectRatio(1f).staggerSlideIn(delayMs = index * 50),
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .aspectRatio(1f)
+                                        .staggerSlideIn(delayMs = index * 50),
                                     rarity = equipRarity(visualLevel),
                                     level = visualLevel,
+                                    slot = item.slot,
+                                    isEquipped = isEquipped,
                                     onClick = { selectedSlot = item.slot }
                                 ) {
                                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                                        GameIcon(icon = slotIconEquip(item.slot), fontSize = 32f)
+                                        GameIcon(icon = slotIconEquip(item.slot), fontSize = 36f)
                                         
                                         // Selected highlight
                                         if (selectedSlot == item.slot) {
@@ -106,34 +111,6 @@ fun EquipmentScreen(
                                                     .pulseGlow()
                                             )
                                         }
-                                        Text(
-                                            text = item.slot.name.take(1),
-                                            modifier = Modifier
-                                                .align(Alignment.TopEnd)
-                                                .padding(4.dp)
-                                                .clip(RoundedCornerShape(5.dp))
-                                                .background(ColorChrome)
-                                                .padding(horizontal = 4.dp, vertical = 1.dp),
-                                            fontSize = 8.sp,
-                                            fontWeight = FontWeight.Black,
-                                            color = ColorTextOnDark
-                                        )
-
-                                        val badgeShape = RoundedCornerShape(topStart = 6.dp, bottomEnd = 16.dp)
-                                        Box(
-                                            modifier = Modifier
-                                                .align(Alignment.BottomEnd)
-                                                .background(equipRarity(visualLevel).color)
-                                                .border(2.dp, ColorInk, badgeShape)
-                                                .padding(horizontal = 6.dp, vertical = 2.dp)
-                                        ) {
-                                            Text(
-                                                text = if (index < items.size) "E" else "Lv.${visualLevel}",
-                                                fontSize = 10.sp,
-                                                fontWeight = FontWeight.Black,
-                                                color = ColorInk
-                                            )
-                                        }
                                     }
                                 }
                             } else {
@@ -142,7 +119,6 @@ fun EquipmentScreen(
                                     modifier = Modifier
                                         .weight(1f)
                                         .aspectRatio(1f)
-                                        .staggerSlideIn(delayMs = index * 50)
                                         .clip(RoundedCornerShape(16.dp))
                                         .background(ColorInkSoft.copy(alpha = 0.3f))
                                         .border(2.dp, ColorInkSoft, RoundedCornerShape(16.dp))
@@ -153,49 +129,64 @@ fun EquipmentScreen(
                 }
             }
         }
-        
-        item {
-            // Close button
+
+        // Popup overlay for selected item details
+        selectedSlot?.let { slot ->
             Box(
-                modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.6f))
+                    .clickable { selectedSlot = null },
                 contentAlignment = Alignment.Center
             ) {
-                GameButton(
-                    text = labels.close,
-                    onClick = onClose,
-                    variant = GameButtonVariant.SECONDARY,
-                    modifier = Modifier.width(200.dp)
-                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .clickable(enabled = false, onClick = {})
+                ) {
+                    EquipmentDetailPanel(item = equipment[slot], labels = labels)
+                }
             }
         }
-        
-        item {
-            Spacer(modifier = Modifier.height(40.dp))
-        }
-    }
     }
 }
 
 @Composable
-private fun EquipmentHeader(labels: EquipmentLabels) {
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+private fun EquipmentHeader(labels: EquipmentLabels, onClose: () -> Unit) {
+    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.Bottom
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
                 Text(
                     labels.title,
                     fontWeight = FontWeight.Black,
-                    fontSize = 32.sp,
+                    fontSize = 24.sp,
                     color = Color(0xFFFFFDF9)
                 )
                 Text(
                     labels.subtitle,
                     fontWeight = FontWeight.Black,
-                    fontSize = 13.sp,
+                    fontSize = 11.sp,
                     color = ColorSecondaryTop
+                )
+            }
+
+            // X close button on the top-right
+            Box(
+                modifier = Modifier
+                    .size(36.dp)
+                    .cartoonBorder(strokeWidth = 3.dp, color = ColorInk, shape = RoundedCornerShape(12.dp))
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(ColorDangerBottom)
+                    .clickable { onClose() },
+                contentAlignment = Alignment.Center
+            ) {
+                GameIcon(
+                    icon = GameIcons.close,
+                    fontSize = 20f
                 )
             }
         }
@@ -203,108 +194,249 @@ private fun EquipmentHeader(labels: EquipmentLabels) {
 }
 
 @Composable
-private fun HeroEquipmentSummary(
+private fun EquippedShowcaseArea(
     equipment: EquipmentSet,
     coins: Int,
     selectedSlot: EquipmentSlot?,
     onSlotClick: (EquipmentSlot) -> Unit
 ) {
-    val summaryShape = RoundedCornerShape(24.dp)
     val heroStats = remember(equipment) { getHeroStats(equipment) }
-    
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Left Column: WEAPON, Placeholder, BOOTS
+            Column(
+                modifier = Modifier.weight(0.13f),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                EquippedSlotCard(
+                    slot = EquipmentSlot.WEAPON, item = equipment.weapon,
+                    isSelected = selectedSlot == EquipmentSlot.WEAPON,
+                    showUpgradeIndicator = canUpgrade(equipment.weapon, coins),
+                    onClick = { onSlotClick(EquipmentSlot.WEAPON) },
+                    modifier = Modifier.fillMaxWidth().aspectRatio(1f),
+                    iconSize = 28f
+                )
+                EmptyShowcaseSlot()
+                EquippedSlotCard(
+                    slot = EquipmentSlot.BOOTS, item = equipment.boots,
+                    isSelected = selectedSlot == EquipmentSlot.BOOTS,
+                    showUpgradeIndicator = canUpgrade(equipment.boots, coins),
+                    onClick = { onSlotClick(EquipmentSlot.BOOTS) },
+                    modifier = Modifier.fillMaxWidth().aspectRatio(1f),
+                    iconSize = 28f
+                )
+            }
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            // Center: Character Paperdoll
+            Box(
+                modifier = Modifier
+                    .weight(0.52f)
+                    .aspectRatio(1.2f),
+                contentAlignment = Alignment.BottomCenter
+            ) {
+                HeroPaperdollCanvas(
+                    equipment = equipment,
+                    highlightSlot = selectedSlot,
+                    size = 130.dp
+                )
+            }
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            // Right Column: ARMOR, Placeholder, CHARM
+            Column(
+                modifier = Modifier.weight(0.13f),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                EquippedSlotCard(
+                    slot = EquipmentSlot.ARMOR, item = equipment.armor,
+                    isSelected = selectedSlot == EquipmentSlot.ARMOR,
+                    showUpgradeIndicator = canUpgrade(equipment.armor, coins),
+                    onClick = { onSlotClick(EquipmentSlot.ARMOR) },
+                    modifier = Modifier.fillMaxWidth().aspectRatio(1f),
+                    iconSize = 28f
+                )
+                EmptyShowcaseSlot()
+                EquippedSlotCard(
+                    slot = EquipmentSlot.CHARM, item = equipment.charm,
+                    isSelected = selectedSlot == EquipmentSlot.CHARM,
+                    showUpgradeIndicator = canUpgrade(equipment.charm, coins),
+                    onClick = { onSlotClick(EquipmentSlot.CHARM) },
+                    modifier = Modifier.fillMaxWidth().aspectRatio(1f),
+                    iconSize = 28f
+                )
+            }
+        }
+        
+        // Stats Panel
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
+            CombatPowerBadge(power = heroStats.power)
+            HorizontalStatsBar(
+                hp = heroStats.maxHp,
+                attack = heroStats.attack,
+                defense = heroStats.defense
+            )
+        }
+    }
+}
+
+@Composable
+private fun EmptyShowcaseSlot() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 6.dp, end = 6.dp)
-            .cartoonShadow(shadowOffset = 5.dp, color = ColorInk, shape = summaryShape)
-            .cartoonBorder(strokeWidth = 3.dp, color = ColorInk, shape = summaryShape)
-            .clip(summaryShape)
-            .background(ColorSurfacePanel)
-            .padding(16.dp)
+            .aspectRatio(1f)
+            .padding(bottom = 2.dp, end = 2.dp)
+            .cartoonShadow(shadowOffset = 1.dp, color = ColorInk, shape = RoundedCornerShape(12.dp))
+            .cartoonBorder(strokeWidth = 2.dp, color = ColorInkSoft, shape = RoundedCornerShape(12.dp))
+            .clip(RoundedCornerShape(12.dp))
+            .background(ColorInkSoft.copy(alpha = 0.2f)),
+        contentAlignment = Alignment.Center
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+        GameIcon(icon = GameIconRole.LOCK, fontSize = 14f)
+    }
+}
+
+@Composable
+private fun CircularSubButtonsRow(language: AppLanguage) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        CircularSubButton(icon = GameIconRole.PLAYER_AVATAR, label = if (language == AppLanguage.KOREAN) "펫" else "Pet")
+        CircularSubButton(icon = GameIconRole.TREASURE, label = if (language == AppLanguage.KOREAN) "소장품" else "Collectible")
+        CircularSubButton(icon = GameIconRole.BOSS, label = if (language == AppLanguage.KOREAN) "탈것" else "Mount")
+        CircularSubButton(icon = GameIconRole.SCRAP, label = if (language == AppLanguage.KOREAN) "아티팩트" else "Artifact")
+    }
+}
+
+@Composable
+private fun CircularSubButton(
+    icon: GameIconRole,
+    label: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(2.dp),
+        modifier = modifier
+    ) {
+        Box(
+            modifier = Modifier
+                .size(34.dp)
+                .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = RoundedCornerShape(17.dp))
+                .clip(RoundedCornerShape(17.dp))
+                .background(ColorSurfacePanel),
+            contentAlignment = Alignment.Center
         ) {
-            // Showcase Layout: Left Column (WEAPON, BOOTS) | Center Character | Right Column (ARMOR, CHARM)
+            GameIcon(icon = icon, fontSize = 18f)
+        }
+        Text(
+            text = label,
+            fontSize = 9.sp,
+            fontWeight = FontWeight.Black,
+            color = ColorTextPrimary
+        )
+    }
+}
+
+@Composable
+private fun FullWidthSectionHeader(
+    title: String,
+    modifier: Modifier = Modifier
+) {
+    val shape = RoundedCornerShape(6.dp)
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = shape)
+            .clip(shape)
+            .background(Brush.verticalGradient(listOf(ColorPanelBrownLight, ColorPanelBrownDark)))
+            .padding(horizontal = 8.dp, vertical = 3.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        GameIcon(icon = GameIconRole.ARMOR, fontSize = 14f)
+        Spacer(modifier = Modifier.width(6.dp))
+        Text(
+            text = title,
+            fontWeight = FontWeight.Black,
+            fontSize = 13.sp,
+            color = ColorTextOnDark
+        )
+    }
+}
+
+@Composable
+private fun SortAndForgeButtonsRow(
+    language: AppLanguage,
+    onClose: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // "등급순" Button (Cyan color)
+        Box(
+            modifier = Modifier
+                .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = RoundedCornerShape(6.dp))
+                .clip(RoundedCornerShape(6.dp))
+                .background(ColorSecondaryBottom) // cyan/purple
+                .clickable { /* sort logic placeholder */ }
+                .padding(horizontal = 12.dp, vertical = 4.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = if (language == AppLanguage.KOREAN) "등급순" else "By Grade",
+                fontWeight = FontWeight.Black,
+                fontSize = 11.sp,
+                color = ColorInk
+            )
+        }
+
+        // "공방" Button (Gold color with red dot notification)
+        Box(
+            modifier = Modifier
+                .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = RoundedCornerShape(6.dp))
+                .clip(RoundedCornerShape(6.dp))
+                .background(ColorPrimaryBottom) // gold
+                .clickable { /* forge logic placeholder */ }
+                .padding(horizontal = 12.dp, vertical = 4.dp),
+            contentAlignment = Alignment.Center
+        ) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(3.dp)
             ) {
-                // Left Column: WEAPON, BOOTS
-                Column(
-                    modifier = Modifier.weight(0.28f),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    EquippedSlotCard(
-                        slot = EquipmentSlot.WEAPON, item = equipment.weapon,
-                        isSelected = selectedSlot == EquipmentSlot.WEAPON,
-                        showUpgradeIndicator = canUpgrade(equipment.weapon, coins),
-                        onClick = { onSlotClick(EquipmentSlot.WEAPON) },
-                        modifier = Modifier.fillMaxWidth().aspectRatio(1f)
-                    )
-                    EquippedSlotCard(
-                        slot = EquipmentSlot.BOOTS, item = equipment.boots,
-                        isSelected = selectedSlot == EquipmentSlot.BOOTS,
-                        showUpgradeIndicator = canUpgrade(equipment.boots, coins),
-                        onClick = { onSlotClick(EquipmentSlot.BOOTS) },
-                        modifier = Modifier.fillMaxWidth().aspectRatio(1f)
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(8.dp))
-
-                // Center: Character Paperdoll
+                Text(
+                    text = if (language == AppLanguage.KOREAN) "공방" else "Forge",
+                    fontWeight = FontWeight.Black,
+                    fontSize = 11.sp,
+                    color = ColorInk
+                )
                 Box(
                     modifier = Modifier
-                        .weight(0.44f)
-                        .aspectRatio(0.8f),
-                    contentAlignment = Alignment.BottomCenter
-                ) {
-                    HeroPaperdollCanvas(
-                        equipment = equipment,
-                        highlightSlot = selectedSlot,
-                        size = 140.dp
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(8.dp))
-
-                // Right Column: ARMOR, CHARM
-                Column(
-                    modifier = Modifier.weight(0.28f),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    EquippedSlotCard(
-                        slot = EquipmentSlot.ARMOR, item = equipment.armor,
-                        isSelected = selectedSlot == EquipmentSlot.ARMOR,
-                        showUpgradeIndicator = canUpgrade(equipment.armor, coins),
-                        onClick = { onSlotClick(EquipmentSlot.ARMOR) },
-                        modifier = Modifier.fillMaxWidth().aspectRatio(1f)
-                    )
-                    EquippedSlotCard(
-                        slot = EquipmentSlot.CHARM, item = equipment.charm,
-                        isSelected = selectedSlot == EquipmentSlot.CHARM,
-                        showUpgradeIndicator = canUpgrade(equipment.charm, coins),
-                        onClick = { onSlotClick(EquipmentSlot.CHARM) },
-                        modifier = Modifier.fillMaxWidth().aspectRatio(1f)
-                    )
-                }
-            }
-            
-            // Stats Panel
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-                CombatPowerBadge(power = heroStats.power)
-                HorizontalStatsBar(
-                    hp = heroStats.maxHp,
-                    attack = heroStats.attack,
-                    defense = heroStats.defense
+                        .size(5.dp)
+                        .clip(RoundedCornerShape(2.5.dp))
+                        .background(ColorDangerBottom)
                 )
             }
         }
@@ -313,93 +445,87 @@ private fun HeroEquipmentSummary(
 
 @Composable
 private fun EquipmentDetailPanel(item: EquipmentItem, labels: EquipmentLabels) {
-    val panelShape = RoundedCornerShape(20.dp)
+    val panelShape = RoundedCornerShape(16.dp)
     val itemRarity = equipRarity(item.level)
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 5.dp, end = 5.dp)
-            .cartoonShadow(shadowOffset = 4.dp, color = ColorInk, shape = panelShape)
-            .cartoonBorder(strokeWidth = 3.dp, color = ColorInk, shape = panelShape)
+            .padding(bottom = 4.dp, end = 4.dp)
+            .cartoonShadow(shadowOffset = 3.dp, color = ColorInk, shape = panelShape)
+            .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = panelShape)
             .clip(panelShape)
             .background(ColorChrome)
-            .padding(14.dp)
+            .padding(horizontal = 10.dp, vertical = 6.dp)
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically
+            // 1. Item Card (Small size: 44.dp)
+            PurpleItemCard(
+                modifier = Modifier.size(44.dp),
+                rarity = itemRarity
             ) {
-                // Large item icon box using PurpleItemCard
-                PurpleItemCard(
-                    modifier = Modifier.size(64.dp),
-                    rarity = itemRarity
-                ) {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                         GameIcon(
-                            icon = slotIconEquip(item.slot),
-                            fontSize = 36f
-                        )
-                    }
-                }
-                
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        item.name,
-                        fontWeight = FontWeight.Black,
-                        fontSize = 20.sp,
-                        color = itemRarity.color
-                    )
-                    Text(
-                        "${labels.equipped} • ${equipmentSlotLabel(item.slot, labels)} ${labels.slot}",
-                        fontWeight = FontWeight.Black,
-                        fontSize = 12.sp,
-                        color = ColorTextSecondary
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    GameIcon(
+                        icon = slotIconEquip(item.slot),
+                        fontSize = 32f
                     )
                 }
-                
-                // Lv Capsule
-                val lvShape = RoundedCornerShape(8.dp)
+            }
+            
+            // 2. Name & Slot (vertical stack)
+            Column(modifier = Modifier.weight(0.4f)) {
                 Text(
-                    "Lv ${item.level}",
-                    modifier = Modifier
-                        .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = lvShape)
-                        .clip(lvShape)
-                        .background(ColorPrimaryBottom)
-                        .padding(horizontal = 12.dp, vertical = 6.dp),
+                    text = item.name,
                     fontWeight = FontWeight.Black,
-                    fontSize = 12.sp,
-                    color = ColorInk
+                    fontSize = 14.sp,
+                    color = itemRarity.color,
+                    maxLines = 1
+                )
+                Text(
+                    text = "${labels.equipped} • ${equipmentSlotLabel(item.slot, labels)}",
+                    fontWeight = FontWeight.Black,
+                    fontSize = 10.sp,
+                    color = ColorTextSecondary,
+                    maxLines = 1
                 )
             }
-
-            // Stat list
-            val innerShape = RoundedCornerShape(12.dp)
+            
+            // 3. Equip Bonus details (horizontal layout or small stack)
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = innerShape)
-                    .clip(innerShape)
-                    .background(ColorInkSoft.copy(alpha = 0.5f))
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(6.dp)
+                modifier = Modifier.weight(0.4f),
+                horizontalAlignment = Alignment.Start
             ) {
                 Text(
-                    labels.bonus,
+                    text = labels.bonus,
                     fontWeight = FontWeight.Black,
-                    fontSize = 12.sp,
+                    fontSize = 10.sp,
                     color = ColorSecondaryTop
                 )
                 Text(
-                    equipmentBonusLabel(item),
+                    text = equipmentBonusLabel(item),
                     fontWeight = FontWeight.Black,
-                    fontSize = 16.sp,
-                    color = ColorCard
+                    fontSize = 12.sp,
+                    color = ColorTextPrimary
                 )
             }
+            
+            // 4. Lv Capsule
+            val lvShape = RoundedCornerShape(6.dp)
+            Text(
+                "Lv ${item.level}",
+                modifier = Modifier
+                    .cartoonBorder(strokeWidth = 2.dp, color = ColorInk, shape = lvShape)
+                    .clip(lvShape)
+                    .background(ColorPrimaryBottom)
+                    .padding(horizontal = 6.dp, vertical = 2.dp),
+                fontWeight = FontWeight.Black,
+                fontSize = 10.sp,
+                color = ColorInk
+            )
         }
     }
 }
