@@ -48,17 +48,12 @@ val ColorHpFillStart = Color(0xFFFF6533)
 val ColorHpFillEnd   = Color(0xFFD7392F)
 val ColorHpTrack     = Color(0xFF090612)
 
-// -- Dice Held --
-val ColorHeld        = Color(0xFF4D3A78)
-val ColorHeldBorder  = Color(0xFFB75CFF)
-
 val ColorRedDot      = Color(0xFFFF3B3B)
 
 // ── Background / Surface Tokens ──────────────────────────────────────
 val ColorScreenBg       = Color(0xFF0B0B18)   // Deep dark navy
 val ColorScreenBgAlt    = Color(0xFF090612)   // Black/lowest level
 val ColorChrome         = Color(0xFF121025)   // Semi-dark panel
-val ColorSurfaceCard    = Color(0xFF1C1635)   // Slate purple card background
 val ColorSurfaceElevated = Color(0xFF2D214A)
 val ColorSurfacePanel   = Color(0xFF211A3A)   // Standard dark panel
 val ColorOverlayDim     = Color(0xDD090612)   // Dark overlay
