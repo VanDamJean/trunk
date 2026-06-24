@@ -73,7 +73,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 val updated = advanceNode(run).copy(pendingReward = rewards)
                 _run.value = updated
                 persist { it.copy(runInProgress = updated) }
-                _screen.value = Screen.REWARD_PICK
+                _screen.value = Screen.RUN_MAP
             }
             NodeType.REST -> {
                 val healAmount = (run.maxHp * 0.3).toInt().coerceAtLeast(1)

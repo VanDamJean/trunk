@@ -30,55 +30,48 @@ fun RewardPickScreen(
 ) {
     val labels = rewardPickLabels(language)
     val choices = run.pendingReward ?: emptyList()
-    val bottomContentClearance = bottomNavContentClearance()
 
-    DarkOverlayPanel(modifier = modifier) {
+    // Deep dim overlay
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color(0xEE090612)) // Very dark overlay
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 24.dp)
-                .padding(top = 40.dp, bottom = bottomContentClearance),
+                .padding(horizontal = 24.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                SunburstBackground(modifier = Modifier.size(240.dp))
-                
-                Column(
-                    modifier = Modifier.floatBobbing(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    GameIcon(GameIconRole.REWARD, fontSize = 80f)
-                    Text(
-                        labels.title,
-                        style      = GameTypography.screenTitle,
-                        color      = Color(0xFFFFD43F), // Gold Color
-                        fontSize   = 40.sp,
-                        modifier   = Modifier.pulseGlow()
-                    )
-                    Text(
-                        labels.subtitle,
-                        style = GameTypography.bodyText,
-                        color = Color(0xFFFFFDF9),
-                        fontWeight = FontWeight.Black
-                    )
-                }
-            }
+            // Neon Glow Title Area
+            Text(
+                text = labels.title,
+                style = GameTypography.screenTitle,
+                color = Color(0xFFB75CFF), // Neon Purple
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Black,
+                modifier = Modifier.pulseGlow()
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                text = labels.subtitle,
+                style = GameTypography.bodyText,
+                color = Color.White,
+                fontWeight = FontWeight.Bold
+            )
 
-            Spacer(Modifier.height(20.dp))
+            Spacer(Modifier.height(32.dp))
 
             if (choices.isEmpty()) {
-                Text(labels.empty, color = Color(0xFFFFFDF9), style = GameTypography.bodyText)
+                Text(labels.empty, color = Color.White, style = GameTypography.bodyText)
             } else {
+                // 3 Card Density Layout
                 Column(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
-                    choices.forEachIndexed { idx, reward ->
+                    choices.take(3).forEachIndexed { idx, reward ->
                         key(idx) {
                             RewardCard(
                                 reward = reward, 
@@ -96,66 +89,63 @@ fun RewardPickScreen(
 
 @Composable
 private fun RewardCard(reward: RewardChoice, labels: RewardPickLabels, onPick: () -> Unit, modifier: Modifier = Modifier) {
-    val cardShape = RoundedCornerShape(20.dp)
+    val cardShape = RoundedCornerShape(16.dp)
+    
+    // Obsidian / Dark Metal Base
+    val cardBg = Color(0xFF16151A)
+    
+    val neonColor = when(reward.kind) {
+        RewardKind.HEAL -> Color(0xFF88D84A) // Neon Green
+        RewardKind.DICE, RewardKind.REROLL -> Color(0xFF45E8FF) // Neon Cyan
+        RewardKind.SCRAP -> Color(0xFFFFD43F) // Neon Gold
+        else -> Color(0xFFB75CFF)
+    }
     
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 8.dp, end = 8.dp)
-            .bounceIn()
-            .floatBobbing(amount = 4.dp, durationMs = 3000)
-            .cartoonShadow(shadowOffset = 6.dp, color = ColorInk, shape = cardShape)
-            .cartoonBorder(strokeWidth = 3.dp, color = ColorSecondaryTop, shape = cardShape)
+            .cartoonBorder(strokeWidth = 3.dp, color = neonColor, shape = cardShape) // Neon glowing border
             .clip(cardShape)
-            .background(ColorChrome)
+            .background(cardBg)
             .clickable(role = Role.Button, onClick = onPick)
-            .padding(16.dp)
+            .padding(20.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(20.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val iconBgShape = RoundedCornerShape(12.dp)
+            // Large Neon Glowing Icon (No solid background)
             Box(
-                modifier = Modifier
-                    .size(60.dp)
-                    .cartoonBorder(2.dp, ColorInk, iconBgShape)
-                    .clip(iconBgShape)
-                    .background(ColorItemPurpleLight),
+                modifier = Modifier.size(60.dp),
                 contentAlignment = Alignment.Center
             ) {
-                GameIcon(rewardIcon(reward.kind), fontSize = 40f)
+                GameIcon(rewardIcon(reward.kind), fontSize = 60f, tint = neonColor)
             }
             
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     rewardLabel(reward, labels),
-                    style      = GameTypography.statValue,
-                    color      = Color(0xFFFFFDF9),
+                    style = GameTypography.statValue,
+                    color = neonColor, // Title matches neon color
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.Black
                 )
+                Spacer(Modifier.height(4.dp))
                 Text(
                     rewardDescription(reward.kind, labels),
                     style = GameTypography.caption,
-                    color = ColorTextSecondary,
-                    fontWeight = FontWeight.Black
+                    color = Color.White.copy(alpha = 0.7f),
+                    fontWeight = FontWeight.Bold
                 )
-            }
-            
-            Box(
-                modifier = Modifier
-                    .cartoonBorder(2.dp, ColorInk, RoundedCornerShape(8.dp))
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(ColorSecondaryBottom)
-                    .padding(horizontal = 12.dp, vertical = 6.dp)
-            ) {
-                Text(
-                    labels.pick, 
-                    fontWeight = FontWeight.Black, 
-                    color = ColorInk, 
-                    fontSize = 12.sp
-                )
+                
+                Spacer(Modifier.height(8.dp))
+                // Neon Star/Value indicators
+                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    repeat(if (reward.kind == RewardKind.HEAL) 1 else reward.amount) {
+                        Text("✦", color = neonColor, fontSize = 16.sp)
+                    }
+                }
             }
         }
     }
@@ -165,12 +155,10 @@ private data class RewardPickLabels(
     val title: String,
     val subtitle: String,
     val empty: String,
-    val pick: String,
     val heal: String,
     val scrap: String,
     val dice: String,
     val reroll: String,
-    val reward: String,
     val healDesc: String,
     val scrapDesc: String,
     val diceDesc: String,
@@ -178,8 +166,8 @@ private data class RewardPickLabels(
 )
 
 private fun rewardPickLabels(language: AppLanguage): RewardPickLabels = when (language) {
-    AppLanguage.KOREAN -> RewardPickLabels("보상 선택", "하나를 선택하세요", "보상 없음", "선택", "회복", "스크랩", "주사위", "리롤", "보상", "현재 HP를 회복합니다", "강화 재료를 획득합니다", "주사위 개수가 영구적으로 증가합니다", "리롤 횟수가 영구적으로 증가합니다")
-    AppLanguage.ENGLISH -> RewardPickLabels("Choose Reward", "Pick one reward", "No rewards", "Pick", "Heal", "Scrap", "Dice", "Reroll", "Reward", "Recover current HP", "Gain upgrade materials", "Increase dice count for this run", "Increase rerolls for this run")
+    AppLanguage.KOREAN -> RewardPickLabels("보상 선택", "하나를 선택하세요", "보상 없음", "회복", "스크랩", "주사위", "리롤", "현재 HP를 회복합니다", "강화 재료를 획득합니다", "주사위 개수가 영구적으로 증가합니다", "리롤 횟수가 영구적으로 증가합니다")
+    AppLanguage.ENGLISH -> RewardPickLabels("Choose Reward", "Pick one reward", "No rewards", "Heal", "Scrap", "Dice", "Reroll", "Recover current HP", "Gain upgrade materials", "Increase dice count for this run", "Increase rerolls for this run")
 }
 
 private fun rewardIcon(kind: RewardKind): GameIconRole = when (kind) {

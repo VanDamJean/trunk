@@ -34,6 +34,7 @@ fun RunMapScreen(
     run: RunState,
     language: AppLanguage = AppLanguage.KOREAN,
     onStartNode: () -> Unit,
+    onPickReward: (RewardChoice) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val labels = runMapLabels(language)
@@ -287,6 +288,15 @@ fun RunMapScreen(
                 }
             }
         }
+
+        if (run.pendingReward != null) {
+            RewardPickScreen(
+                run = run,
+                language = language,
+                onPickReward = onPickReward,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
     }
 }
 
@@ -318,7 +328,8 @@ private fun nodeLabel(type: NodeType, labels: RunMapLabels): String = when (type
 private fun RunMapScreenPreview() {
     RunMapScreen(
         run = createRun(createDefaultMeta()) { 0.5 },
-        onStartNode = {}
+        onStartNode = {},
+        onPickReward = {}
     )
 }
 
@@ -328,6 +339,7 @@ private fun RunMapScreenEnglishPreview() {
     RunMapScreen(
         run = createRun(createDefaultMeta()) { 0.9 }.copy(nodeIndex = 2),
         language = AppLanguage.ENGLISH,
-        onStartNode = {}
+        onStartNode = {},
+        onPickReward = {}
     )
 }

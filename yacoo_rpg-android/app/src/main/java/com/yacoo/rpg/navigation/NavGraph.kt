@@ -91,6 +91,10 @@ fun YacooNavGraph(viewModel: GameViewModel) {
                         soundManager.playClick()
                         viewModel.navigate(if (run != null) Screen.RUN_MAP else Screen.HOME)
                     },
+                    onPickReward = { reward ->
+                        soundManager.playClick()
+                        viewModel.pickReward(reward)
+                    },
                     onFinish  = { outcome, hand, hp ->
                         if (outcome == CombatOutcome.WIN) {
                             soundManager.playVictory()
@@ -152,16 +156,11 @@ fun YacooNavGraph(viewModel: GameViewModel) {
                     RunMapScreen(
                         run          = run!!,
                         language     = language,
-                        onStartNode  = { viewModel.startNode() }
-                    )
-                }
-            }
-            composable(Screen.REWARD_PICK.route()) {
-                if (run != null && run!!.pendingReward != null) {
-                    RewardPickScreen(
-                        run          = run!!,
-                        language     = language,
-                        onPickReward = { reward -> viewModel.pickReward(reward) }
+                        onStartNode  = { viewModel.startNode() },
+                        onPickReward = { reward ->
+                            soundManager.playClick()
+                            viewModel.pickReward(reward)
+                        }
                     )
                 }
             }

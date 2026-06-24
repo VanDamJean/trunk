@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
@@ -45,7 +46,7 @@ fun DiePips(value: DieValue, pipColor: Color = ColorInk, modifier: Modifier = Mo
             val cy = margin + cellH * row + cellH / 2f
             
             // Special rule: 1 pip is larger and highlighted red (classic dice vibe)
-            val finalColor = if (value == 1) ColorDangerBottom else pipColor
+            val finalColor = if (value == 1) Color(0xFFD54132) else pipColor
             val finalRadius = if (value == 1) baseRadius * 1.5f else baseRadius
 
             drawCircle(
@@ -106,9 +107,9 @@ fun AnimatedDie(
 
     // High contrast styling based on active/inactive state
     val bg = when {
-        held    -> ColorHeld
-        rolling -> ColorHeld.copy(alpha = 0.8f)
-        else    -> ColorSurfaceCard
+        held    -> Color(0xFFD69B53)
+        rolling -> Color(0xFFFFF4CC).copy(alpha = 0.8f)
+        else    -> Color(0xFFFFF4CC)
     }
     
     // Custom cartoon outline colors: Held is secondary border, normal is black border
@@ -130,10 +131,10 @@ fun AnimatedDie(
             .scale(currentScale)
             .rotate(currentRotate)
             .offset(y = heldOffset)
-            .cartoonShadow(shadowOffset = 5.dp, color = ColorInk, shape = shape)
+            .cartoonShadow(shadowOffset = 5.dp, color = Color(0x66000000), shape = shape)
             .cartoonBorder(strokeWidth = strokeWidth, color = borderColor, shape = shape)
             .clip(shape)
-            .background(bg)
+            .background(Brush.verticalGradient(listOf(bg, bg.copy(alpha = 0.8f))))
             .clickable(role = Role.Button, enabled = enabled, onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
