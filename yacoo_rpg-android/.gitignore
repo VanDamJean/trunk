@@ -1,0 +1,54 @@
+# ============================================================================
+# Yacoo RPG Android — Project-local .gitignore
+# ----------------------------------------------------------------------------
+# Git root is the parent workspace (/Users/a1/Desktop/manus), which already
+# ignores many OS/Android/IDE artifacts globally. This file adds project-
+# specific rules and intentionally re-declares a few key patterns so the
+# project stays clean even if the parent .gitignore changes.
+#
+# NOTE on already-tracked files:
+#   .gitignore only affects UNTRACKED files. Files already committed under
+#   .omo/ (evidence/legacy .txt, notepads, drafts, backups) remain tracked.
+#   This file prevents NEW runtime/byproducts from showing in `git status`.
+#   To untrack them, a separate `git rm --cached` step is required (not done).
+# ============================================================================
+
+# --- OS ---
+.DS_Store
+.DS_Store?
+._*
+.Trashes
+
+# --- Android / Gradle build artifacts ---
+.gradle/
+build/
+app/build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# --- Kotlin compiler cache ---
+.kotlin/
+
+# --- Android Studio / IntelliJ ---
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# --- Local SDK config (machine-specific) ---
+local.properties
+
+# --- Heap dumps ---
+*.hprof
+
+# --- Playwright MCP runtime (browser automation logs/snapshots) ---
+.playwright-mcp/
+
+# --- OpenCode / OhMyOpenCode runtime byproducts (NEW files only) ---
+# Active plan pointer (regenerated per session)
+.omo/boulder.json
+# Session continuation state (per-machine)
+.omo/run-continuation/*.json
+# Auto-collected task evidence (new ones only; legacy tracked ones stay)
+.omo/evidence/*.txt
