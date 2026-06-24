@@ -1,36 +1,26 @@
 package com.yacoo.rpg.ui.screens
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role
-import com.yacoo.rpg.R
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.yacoo.rpg.R
 import com.yacoo.rpg.game.*
 import com.yacoo.rpg.ui.components.*
 import com.yacoo.rpg.ui.theme.*
@@ -53,6 +43,7 @@ fun CombatScreen(
     run: RunState? = null,
     language: AppLanguage = AppLanguage.KOREAN,
     onFinish: (CombatOutcome, YahtzeeHand?, Int) -> Unit,
+    onPickReward: (RewardChoice) -> Unit = {},
     onExitCombat: () -> Unit = {},
     soundManager: com.yacoo.rpg.ui.components.SoundManager? = null,
     enemyTurnDelayMs: Long = Constants.CombatTiming.ENEMY_TURN_DELAY_MS,
@@ -87,8 +78,7 @@ fun CombatScreen(
     var turnCount   by remember(stage, run) { mutableIntStateOf(1) }
     var lastHand    by remember(stage, run) { mutableStateOf<YahtzeeHand?>(null) }
     
-    // For floating damage numbers
-    var floatingDamage by remember { mutableStateOf<Pair<Int, Boolean>?>(null) } // Damage amount, isHeroTarget
+    var floatingDamage by remember { mutableStateOf<Pair<Int, Boolean>?>(null) }
 
     val scope = rememberCoroutineScope()
 
@@ -113,11 +103,7 @@ fun CombatScreen(
     }
 
     fun startRolling(prev: List<DieValue>, heldMask: List<Boolean>) {
-        val rollPlan = createDiceRollPlan(
-            previous = prev,
-            held = heldMask,
-            diceCount = diceCount
-        )
+        val rollPlan = createDiceRollPlan(previous = prev, held = heldMask, diceCount = diceCount)
         rollPhase = RollPhase.ROLLING
         haptic.thump()
         soundManager?.playDiceRoll()
@@ -204,55 +190,40 @@ fun CombatScreen(
     )
 
     Box(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color(0xFF05040A))
     ) {
         Image(
-            painter = painterResource(id = R.drawable.bg_combat_arena),
-            contentDescription = "Combat Arena Background",
+            painter = painterResource(R.drawable.bg_home_dark_forest),
+            contentDescription = null,
+            modifier = Modifier.matchParentSize(),
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
+            alpha = 0.46f
         )
+        CombatScreenBackdrop(modifier = Modifier.matchParentSize())
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = combatBottomPadding),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(bottom = combatBottomPadding)
         ) {
-            TopStatsBar(
-                stage = stage,
-                coins = run?.scrap ?: 0,
-                gems = 0,
-                power = hero.power,
-                language = language
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.End
-            ) {
-                CombatExitButton(label = labels.exit, onClick = onExitCombat)
-            }
-            Spacer(modifier = Modifier.height(6.dp))
-            // Turn Indicator (floating above combat)
             Box(
                 modifier = Modifier
-                    .padding(bottom = 16.dp)
-                    .cartoonShadow(3.dp, ColorInk, RoundedCornerShape(12.dp))
-                    .cartoonBorder(2.dp, ColorInk, RoundedCornerShape(12.dp))
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(if (isEnemyTurn) ColorDangerBottom else ColorSecondaryBottom)
-                    .padding(horizontal = 16.dp, vertical = 6.dp)
+                    .fillMaxWidth()
+                    .weight(0.11f)
+                    .statusBarsPadding()
             ) {
-                Text(
-                    text = if (isEnemyTurn) labels.enemyTurn else "${labels.turn} $turnCount",
-                    style = GameTypography.chipValue,
-                    color = ColorInk,
-                    fontWeight = FontWeight.Black
+                CompactCombatHUD(
+                    stage = stage,
+                    coins = run?.scrap ?: 0,
+                    turnCount = turnCount,
+                    isEnemyTurn = isEnemyTurn,
+                    onExit = onExitCombat
                 )
             }
 
+            // Board arena: capped so it cannot starve the dice/action console.
             val nodeType = run?.map?.nodes?.getOrNull(run.nodeIndex)?.type
             CombatArena(
                 equipment = equipment,
@@ -268,7 +239,7 @@ fun CombatScreen(
                 floatingDamage = floatingDamage,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(0.4f)
+                    .weight(0.38f)
             )
 
             CombatDiceBoard(
@@ -324,33 +295,192 @@ fun CombatScreen(
                     if (isChoosing && rollPhase != RollPhase.ROLLING) resolveAttack(autoDamage)
                 },
                 modifier = Modifier
-                    .weight(2.2f)
+                    .fillMaxWidth()
+                    .weight(0.51f)
+            )
+        }
+
+        // Overlay RewardPickScreen if there's a pending reward
+        if (run?.pendingReward != null) {
+            RewardPickScreen(
+                run = run,
+                language = language,
+                onPickReward = onPickReward,
+                modifier = Modifier.fillMaxSize()
             )
         }
     }
 }
 
 @Composable
-private fun CombatExitButton(label: String, onClick: () -> Unit) {
-    val shape = RoundedCornerShape(14.dp)
+private fun CombatScreenBackdrop(modifier: Modifier = Modifier) {
+    Canvas(modifier = modifier) {
+        drawRect(
+            brush = Brush.verticalGradient(
+                listOf(
+                    Color(0x66000000),
+                    Color(0x3312051F),
+                    Color(0xEE05040A)
+                )
+            )
+        )
+        drawRect(
+            brush = Brush.verticalGradient(
+                colors = listOf(Color.Transparent, Color(0xDD0A0612), Color(0xFF05040A)),
+                startY = size.height * 0.42f,
+                endY = size.height
+            ),
+            topLeft = androidx.compose.ui.geometry.Offset(0f, size.height * 0.42f)
+        )
+        drawCircle(
+            color = Color(0x2420C9FF),
+            radius = size.width * 0.68f,
+            center = androidx.compose.ui.geometry.Offset(size.width * 0.5f, size.height * 0.18f)
+        )
+        drawLine(
+            color = Color(0x666B4A25),
+            start = androidx.compose.ui.geometry.Offset(size.width * 0.06f, size.height * 0.505f),
+            end = androidx.compose.ui.geometry.Offset(size.width * 0.94f, size.height * 0.505f),
+            strokeWidth = 2.dp.toPx()
+        )
+        repeat(18) { i ->
+            val x = size.width * ((i * 37 % 100) / 100f)
+            val y = size.height * (0.07f + ((i * 23 % 36) / 100f))
+            drawCircle(
+                color = Color(0x77FFD86A),
+                radius = (1.2f + (i % 3) * 0.55f).dp.toPx(),
+                center = androidx.compose.ui.geometry.Offset(x, y)
+            )
+        }
+    }
+}
+
+@Composable
+private fun CompactCombatHUD(
+    stage: Int,
+    coins: Int,
+    turnCount: Int,
+    isEnemyTurn: Boolean,
+    onExit: () -> Unit
+) {
     Row(
         modifier = Modifier
-            .cartoonShadow(3.dp, ColorInk, shape)
-            .cartoonBorder(2.dp, ColorInk, shape)
-            .clip(shape)
-            .background(Color(0xFFFFFDF9))
-            .clickable(onClick = onClick)
-            .padding(horizontal = 10.dp, vertical = 7.dp),
-        horizontalArrangement = Arrangement.spacedBy(6.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .fillMaxSize()
+            .padding(horizontal = 18.dp, vertical = 7.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.Top
     ) {
-        GameIcon(icon = GameIconRole.BACK, fontSize = 18f)
-        Text(
-            text = label,
-            color = ColorInk,
-            fontSize = 12.sp,
-            fontWeight = FontWeight.Black
-        )
+        Box(
+            modifier = Modifier
+                .height(46.dp)
+                .width(46.dp)
+                .cartoonShadow(4.dp, Color(0xAA000000), RoundedCornerShape(15.dp))
+                .cartoonBorder(3.dp, Color(0xFF9B6A34), RoundedCornerShape(15.dp))
+                .clip(RoundedCornerShape(15.dp))
+                .background(Brush.verticalGradient(listOf(Color(0xFF6B3E1F), Color(0xFF241109))))
+                .clickable(onClick = onExit),
+            contentAlignment = Alignment.Center
+        ) {
+            Text("II", color = Color(0xFFFFF0D0), fontSize = 18.sp, fontWeight = FontWeight.Black)
+        }
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.weight(1f)
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Box(
+                    modifier = Modifier
+                        .padding(top = 18.dp)
+                        .height(12.dp)
+                        .width(166.dp)
+                        .cartoonBorder(1.5.dp, Color(0xFF38200E), RoundedCornerShape(percent = 50))
+                        .clip(RoundedCornerShape(percent = 50))
+                        .background(Brush.horizontalGradient(listOf(Color(0xFF5A3218), Color(0xFFD19B4A), Color(0xFF5A3218))))
+                )
+                Row(
+                    modifier = Modifier
+                        .height(39.dp)
+                        .cartoonShadow(3.dp, Color(0xAA000000), RoundedCornerShape(16.dp))
+                        .cartoonBorder(2.dp, Color(0xFFB37C3B), RoundedCornerShape(16.dp))
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(Brush.verticalGradient(listOf(Color(0xFF201626), Color(0xFF090612))))
+                        .padding(horizontal = 13.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    GameIcon(GameIconRole.STAR, fontSize = 14f, tint = Color(0xFFFFD86A))
+                    Text(
+                        text = "STAGE $stage",
+                        color = Color.White,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Black,
+                        style = androidx.compose.ui.text.TextStyle(
+                            shadow = androidx.compose.ui.graphics.Shadow(
+                                color = Color.Black,
+                                offset = androidx.compose.ui.geometry.Offset(0f, 3f),
+                                blurRadius = 3f
+                            )
+                        )
+                    )
+                    GameIcon(GameIconRole.STAR, fontSize = 14f, tint = Color(0xFFFFD86A))
+                }
+            }
+
+            Box(
+                modifier = Modifier
+                    .offset(y = (-2).dp)
+                    .height(22.dp)
+                    .width(118.dp)
+                    .cartoonBorder(1.5.dp, Color(0xFF7A5228), RoundedCornerShape(percent = 50))
+                    .clip(RoundedCornerShape(percent = 50))
+                    .background(Brush.verticalGradient(listOf(Color(0xFFDCA657), Color(0xFF6C421E)))),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = if (isEnemyTurn) "Enemy Turn" else "Turn $turnCount",
+                    color = if (isEnemyTurn) Color(0xFFFFEBE7) else Color(0xFFFFF6DC),
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Black,
+                    style = androidx.compose.ui.text.TextStyle(
+                        shadow = androidx.compose.ui.graphics.Shadow(
+                            color = Color(0x90000000),
+                            offset = androidx.compose.ui.geometry.Offset(0f, 2f),
+                            blurRadius = 2f
+                        )
+                    )
+                )
+            }
+        }
+
+        Row(
+            modifier = Modifier
+                .height(46.dp)
+                .cartoonShadow(4.dp, Color(0xAA000000), RoundedCornerShape(percent = 50))
+                .cartoonBorder(3.dp, Color(0xFF9B6A34), RoundedCornerShape(percent = 50))
+                .clip(RoundedCornerShape(percent = 50))
+                .background(Brush.verticalGradient(listOf(Color(0xFF1F1A16), Color(0xFF090706))))
+                .padding(start = 4.dp, end = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(9.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(36.dp)
+                    .cartoonBorder(2.dp, Color(0xFFFFD43F), CircleShape)
+                    .clip(CircleShape)
+                    .background(Brush.radialGradient(listOf(Color(0xFFFFF0A8), Color(0xFFD38E16)))),
+                contentAlignment = Alignment.Center
+            ) {
+                GameIcon(icon = GameIconRole.GOLD, fontSize = 22f, tint = Color(0xFF4A2B09))
+            }
+            Text(
+                text = "$coins",
+                color = Color(0xFFFFE070),
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Black
+            )
+        }
     }
 }
 
